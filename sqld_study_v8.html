@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.19.0/webfont/tabler-icons.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+#app{
+  font-family:'Noto Sans KR',sans-serif;
+  /* 아주 연한 네이비 그라데이션 - 사진처럼 거의 흰색에 가까운 연한 블루-그레이 */
+  background: linear-gradient(160deg, #eef2f8 0%, #e8eef8 30%, #dce6f4 60%, #d4e0f0 100%);
+  min-height:640px;
+  color:#1e293b;
+  position:relative;
+  overflow:hidden;
+}
+
+.page{display:none;}
+.page.active{display:block;}
+
+/* 배경 블롭 - 아주 연하게 */
+.bg-blob{
+  position:absolute;border-radius:50%;
+  filter:blur(80px);opacity:0.18;
+  pointer-events:none;z-index:0;
+}
+
+/* ─── 상단 NAV ─── */
+.top-nav{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 20px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(180,200,230,0.3);
+  box-shadow:0 2px 16px rgba(100,130,180,0.1);
+  position:relative;z-index:10;
+}
+.nav-logo{font-size:16px;font-weight:900;letter-spacing:-0.5px;flex:1;color:#1e3a6e;}
+.nav-tab{
+  font-size:12px;color:#64748b;background:none;border:none;
+  cursor:pointer;padding:6px 12px;border-radius:20px;
+  font-family:'Noto Sans KR',sans-serif;transition:all 0.15s;
+}
+.nav-tab:hover{background:rgba(59,130,246,0.08);color:#2563eb;}
+.nav-tab.active{background:rgba(59,130,246,0.1);color:#2563eb;font-weight:700;}
+
+/* ─── 하단 NAV ─── */
+.bottom-nav{
+  display:flex;
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(20px);
+  border-top:1px solid rgba(180,200,230,0.3);
+  box-shadow:0 -2px 16px rgba(100,130,180,0.1);
+  position:sticky;bottom:0;z-index:10;
+}
+.bnav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  gap:3px;padding:10px 0;cursor:pointer;border:none;
+  background:none;color:#94a3b8;font-size:10px;
+  font-family:'Noto Sans KR',sans-serif;transition:color 0.2s;
+}
+.bnav-btn i{font-size:20px;}
+.bnav-btn.active{color:#2563eb;font-weight:700;}
+
+/* ─── HOME ─── */
+.home-inner{position:relative;z-index:1;}
+.home-header{padding:1.5rem 1.25rem 0.75rem;}
+.home-title{font-size:26px;font-weight:900;letter-spacing:-0.8px;line-height:1.2;color:#1e3a6e;}
+.home-sub{font-size:12px;color:#7b9cc8;margin-top:5px;}
+
+/* 과목 구분선 */
+.subj-header{
+  display:flex;align-items:center;gap:8px;
+  padding:0.5rem 1.25rem 0.75rem;
+}
+.subj-pill{
+  font-size:11px;font-weight:700;padding:5px 14px;
+  border-radius:20px;display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,0.85);
+  border:1px solid rgba(180,200,230,0.5);
+  color:#3b5fa8;
+  box-shadow:0 2px 8px rgba(100,130,180,0.1);
+}
+.subj-line{flex:1;height:1px;background:rgba(100,140,200,0.2);}
+
+/* ─── 챕터 카드 그리드 ─── */
+.chapter-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:12px;padding:0 1.25rem 1rem;
+}
+
+/* 흰색 카드 */
+.chapter-card{
+  background:#ffffff;
+  border:1px solid rgba(220,230,245,0.8);
+  border-radius:22px;
+  padding:18px 16px 16px;
+  cursor:pointer;
+  transition:all 0.22s;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 4px 20px rgba(100,130,180,0.12), 0 1px 4px rgba(100,130,180,0.08);
+}
+.chapter-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(100,130,180,0.2), 0 2px 8px rgba(100,130,180,0.1);
+}
+
+/* 카드 배지 (개수) */
+.cc-badge{
+  position:absolute;top:16px;right:14px;
+  font-size:9px;font-weight:600;padding:3px 8px;
+  border-radius:20px;background:#f1f5f9;color:#64748b;
+}
+
+/* 아이콘 래퍼 - 사진처럼 연한 컬러 배경의 둥근 박스 */
+.cc-icon-wrap{
+  width:44px;height:44px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;
+  font-size:22px;
+}
+
+.cc-name{font-size:13px;font-weight:700;line-height:1.35;margin-bottom:3px;color:#1e293b;}
+.cc-meta{font-size:10px;color:#94a3b8;margin-bottom:40px;}
+
+/* 학습하기 버튼 - 사진처럼 회색 박스 스타일 */
+.cc-learn-btn{
+  position:absolute;bottom:14px;left:16px;right:16px;
+  display:flex;align-items:center;justify-content:center;
+  padding:8px 12px;border-radius:12px;
+  background:#f1f5f9;
+  border:1px solid #e2e8f0;
+  color:#475569;
+  font-size:11px;font-weight:600;
+  font-family:'Noto Sans KR',sans-serif;
+  cursor:pointer;transition:all 0.15s;
+  gap:4px;
+}
+.cc-learn-btn:hover{background:#e2e8f0;color:#1e293b;}
+
+/* 연필 아이콘 (우측 상단 - 사진 스타일) */
+.cc-edit{
+  position:absolute;top:14px;right:40px;
+  color:#cbd5e1;font-size:14px;
+}
+
+/* ─── 카드 학습 페이지 ─── */
+.cards-page-inner{position:relative;z-index:1;}
+.cards-topbar{display:flex;align-items:center;gap:10px;padding:12px 1.25rem;}
+
+.back-btn{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,0.85);
+  border:1px solid rgba(180,200,230,0.5);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;color:#2563eb;
+  box-shadow:0 2px 8px rgba(100,130,180,0.12);
+  transition:background 0.15s;
+}
+.back-btn:hover{background:#fff;}
+.cards-topbar-title{font-size:15px;font-weight:700;flex:1;color:#1e3a6e;}
+
+.cards-banner{
+  margin:0 1.25rem 1rem;
+  background:#ffffff;
+  border:1px solid rgba(220,230,245,0.8);
+  border-radius:24px;padding:1.25rem;
+  position:relative;overflow:hidden;min-height:100px;
+  box-shadow:0 4px 20px rgba(100,130,180,0.12);
+}
+.banner-shape1{position:absolute;border-radius:50%;opacity:0.3;}
+.banner-shape2{position:absolute;border-radius:12px;opacity:0.2;transform:rotate(20deg);}
+.banner-title{font-size:18px;font-weight:900;position:relative;z-index:1;line-height:1.3;color:#1e293b;}
+.banner-sub{font-size:11px;color:#64748b;margin-top:4px;position:relative;z-index:1;}
+
+.prog-wrap{padding:0 1.25rem 0.75rem;}
+.prog-row{display:flex;justify-content:space-between;margin-bottom:5px;}
+.prog-txt{font-size:11px;color:#7b9cc8;}
+.prog-bg{height:6px;background:rgba(100,140,200,0.12);border-radius:6px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:6px;transition:width 0.35s;}
+
+.fc-wrap{padding:0 1.25rem 0.75rem;perspective:1200px;}
+.flashcard{
+  width:100%;min-height:230px;position:relative;
+  cursor:pointer;transform-style:preserve-3d;
+  transition:transform 0.55s cubic-bezier(0.4,0,0.2,1);
+}
+.flashcard.flipped{transform:rotateY(180deg);}
+.card-face{
+  position:absolute;width:100%;min-height:230px;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:24px;padding:1.5rem;
+  display:flex;flex-direction:column;
+  background:#ffffff;
+  border:1px solid rgba(220,230,245,0.8);
+  box-shadow:0 6px 24px rgba(100,130,180,0.14);
+}
+.card-back{transform:rotateY(180deg);}
+.card-keyword{
+  font-size:28px;font-weight:900;letter-spacing:-1px;
+  font-family:'JetBrains Mono',monospace;line-height:1.1;
+  margin-bottom:10px;
+}
+.card-desc{font-size:13px;line-height:1.65;color:#475569;flex:1;}
+.card-hint{
+  font-size:11px;color:#94a3b8;
+  margin-top:auto;padding-top:0.75rem;
+  display:flex;align-items:center;gap:4px;
+}
+.ex-label{font-size:10px;font-weight:700;letter-spacing:0.08em;margin-bottom:8px;color:#94a3b8;}
+.code-block{
+  background:#f8fafc;border:1px solid #e2e8f0;
+  border-radius:12px;padding:11px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;line-height:1.7;white-space:pre;
+  overflow-x:auto;color:#1e293b;margin-bottom:8px;
+}
+.card-result{font-size:12px;color:#64748b;line-height:1.6;}
+
+.card-actions{display:flex;gap:6px;padding:0 1.25rem 0.5rem;justify-content:center;}
+.act-btn{
+  display:flex;align-items:center;justify-content:center;
+  gap:4px;padding:7px 16px;border-radius:12px;
+  border:1px solid #e2e8f0;cursor:pointer;
+  font-size:11px;font-family:'Noto Sans KR',sans-serif;font-weight:600;
+  background:#ffffff;color:#475569;
+  transition:all 0.15s;
+  box-shadow:0 2px 6px rgba(100,130,180,0.08);
+}
+.act-btn:hover{background:#f8fafc;border-color:#cbd5e1;}
+.act-btn.saved{background:#ede9fe;border-color:#c4b5f4;color:#7c3aed;}
+.act-btn i{font-size:12px;}
+
+.nav-cards{
+  display:flex;align-items:center;
+  justify-content:space-between;padding:0 1.25rem 0.75rem;
+}
+.nav-card-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:8px 16px;border-radius:14px;
+  border:1px solid #e2e8f0;
+  background:#ffffff;
+  cursor:pointer;font-size:13px;
+  font-family:'Noto Sans KR',sans-serif;font-weight:500;color:#475569;
+  box-shadow:0 2px 6px rgba(100,130,180,0.08);
+}
+.nav-card-btn:disabled{opacity:0.35;cursor:default;}
+.card-counter{font-size:13px;color:#7b9cc8;font-weight:500;}
+
+/* ─── 요약노트 ─── */
+.note-banner{
+  margin:0 1.25rem 1rem;
+  background:#ffffff;
+  border:1px solid rgba(220,230,245,0.8);
+  border-radius:24px;padding:1.25rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 4px 20px rgba(100,130,180,0.12);
+}
+.note-shape1{position:absolute;width:80px;height:80px;border-radius:50%;right:20px;top:-20px;opacity:0.2;}
+.note-shape2{position:absolute;width:40px;height:40px;border-radius:50%;right:70px;bottom:-10px;opacity:0.15;}
+.note-title{font-size:20px;font-weight:900;position:relative;z-index:1;color:#1e293b;}
+.note-sub{font-size:12px;color:#64748b;margin-top:4px;position:relative;z-index:1;}
+
+.note-empty{text-align:center;padding:3rem 1.5rem;color:#94a3b8;}
+.note-empty i{font-size:44px;margin-bottom:12px;display:block;color:#cbd5e1;}
+.note-empty p{font-size:13px;line-height:1.7;}
+
+.note-card{
+  margin:0 1.25rem 10px;
+  background:#ffffff;
+  border:1px solid rgba(220,230,245,0.8);
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 3px 14px rgba(100,130,180,0.1);
+}
+.note-card-header{padding:12px 14px;display:flex;align-items:center;gap:8px;}
+.note-kw{font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace;flex:1;color:#1e293b;}
+.note-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:#f1f5f9;color:#64748b;}
+.note-del{background:none;border:none;cursor:pointer;color:#cbd5e1;font-size:18px;padding:2px;}
+.note-del:hover{color:#f43f5e;}
+.note-divider{height:1px;background:#f1f5f9;margin:0 14px;}
+.note-body{padding:12px 14px;}
+.note-edit{
+  width:100%;border:none;background:none;
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:13px;color:#475569;line-height:1.7;
+  resize:none;outline:none;min-height:60px;
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- 아주 연한 배경 블롭 -->
+  <div class="bg-blob" style="width:280px;height:280px;background:#93c5fd;top:-100px;right:-80px;"></div>
+  <div class="bg-blob" style="width:220px;height:220px;background:#a5b4fc;bottom:150px;left:-80px;"></div>
+  <div class="bg-blob" style="width:180px;height:180px;background:#c4b5f4;bottom:80px;right:20px;opacity:0.12;"></div>
+
+  <!-- 상단 네비 -->
+  <div class="top-nav">
+    <div class="nav-logo">SQLD 📘</div>
+    <button class="nav-tab active" id="tab-home" onclick="goHome()">홈</button>
+    <button class="nav-tab" id="tab-note" onclick="goNote()">요약노트</button>
+  </div>
+
+  <!-- 홈 페이지 -->
+  <div id="page-home" class="page active">
+    <div class="home-inner">
+      <div class="home-header">
+        <div class="home-title">SQL 개발자<br>자격증 준비</div>
+        <div class="home-sub">플래시카드로 핵심 개념을 빠르게 익혀요</div>
+      </div>
+
+      <!-- 1과목 -->
+      <div class="subj-header">
+        <span class="subj-pill">
+          <i class="ti ti-database" style="font-size:13px"></i>1과목 · 데이터 모델링
+        </span>
+        <div class="subj-line"></div>
+      </div>
+      <div class="chapter-grid">
+
+        <div class="chapter-card" onclick="openChapter('modeling-basic')">
+          <span class="cc-badge">3개</span>
+          <div class="cc-icon-wrap" style="background:#ede9fe;">
+            <i class="ti ti-cube" style="color:#7c3aed;font-size:22px;"></i>
+          </div>
+          <div class="cc-name">데이터 모델링의 기본</div>
+          <div class="cc-meta">1과목 1단원</div>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('modeling-basic')">
+            <i class="ti ti-book-open" style="font-size:11px;"></i> 학습하기
+          </button>
+        </div>
+
+        <div class="chapter-card" onclick="openChapter('entity')">
+          <span class="cc-badge">3개</span>
+          <div class="cc-icon-wrap" style="background:#fef9c3;">
+            <i class="ti ti-layout-grid" style="color:#ca8a04;font-size:22px;"></i>
+          </div>
+          <div class="cc-name">엔터티와 속성</div>
+          <div class="cc-meta">1과목 2단원</div>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('entity')">
+            <i class="ti ti-book-open" style="font-size:11px;"></i> 학습하기
+          </button>
+        </div>
+
+        <div class="chapter-card" onclick="openChapter('relationship')">
+          <span class="cc-badge">3개</span>
+          <div class="cc-icon-wrap" style="background:#fce7f3;">
+            <i class="ti ti-git-merge" style="color:#be185d;font-size:22px;"></i>
+          </div>
+          <div class="cc-name">관계와 식별자</div>
+          <div class="cc-meta">1과목 3단원</div>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('relationship')">
+            <i class="ti ti-book-open" style="font-size:11px;"></i> 학습하기
+          </button>
+        </div>
+
+        <div class="chapter-card" onclick="openChapter('normalization')">
+          <span class="cc-badge">3개</span>
+          <div class="cc-icon-wrap" style="background:#dbeafe;">
+            <i class="ti ti-sitemap" style="color:#1d4ed8;font-size:22px;"></i>
+          </div>
+          <div class="cc-name">정규화와 성능</div>
+          <div class="cc-meta">1과목 4단원</div>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('normalization')">
+            <i class="ti ti-book-open" style="font-size:11px;"></i> 학습하기
+          </button>
+        </div>
+
+      </div>
+
+      <!-- 2과목 -->
+      <div class="subj-header">
+        <span class="subj-pill">
+          <i class="ti ti-code" style="font-size:13px"></i>2과목 · SQL 활용
+        </span>
+        <div class="subj-line"></div>
+      </div>
+      <div class="chapter-grid">
+
+        <div class="chapter-card" onclick="openChapter('sql-basic')">
+          <span class="cc-badge">3개</span>
+          <div class="cc-icon-wrap" style="background:#d1fae5;">
+            <i class="ti ti-terminal" style="color:#065f46;font-size:22px;"></i>
+          </div>
+          <div class="cc-name">SQL 기본</div>
+          <div class="cc-meta">2과목 1단원</div>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('sql-basic')">
+            <i class="ti ti-book-open" style="font-size:11px;"></i> 학습하기
+          </button>
+        </div>
+
+        <div class="chapter-card" onclick="openChapter('join')">
+          <span class="cc-badge">3개</span>
+          <div class="cc-icon-wrap" style="background:#fee2e2;">
+            <i class="ti ti-arrows-join" style="color:#b91c1c;font-size:22px;"></i>
+          </div>
+          <div class="cc-name">JOIN과 서브쿼리</div>
+          <div class="cc-meta">2과목 2단원</div>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('join')">
+            <i class="ti ti-book-open" style="font-size:11px;"></i> 학습하기
+          </button>
+        </div>
+
+        <div class="chapter-card" onclick="openChapter('group-func')">
+          <span class="cc-badge">3개</span>
+          <div class="cc-icon-wrap" style="background:#fef3c7;">
+            <i class="ti ti-chart-bar" style="color:#92400e;font-size:22px;"></i>
+          </div>
+          <div class="cc-name">그룹·윈도우 함수</div>
+          <div class="cc-meta">2과목 3단원</div>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('group-func')">
+            <i class="ti ti-book-open" style="font-size:11px;"></i> 학습하기
+          </button>
+        </div>
+
+        <div class="chapter-card" onclick="openChapter('optimization')">
+          <span class="cc-badge">3개</span>
+          <div class="cc-icon-wrap" style="background:#e0f2fe;">
+            <i class="ti ti-rocket" style="color:#0369a1;font-size:22px;"></i>
+          </div>
+          <div class="cc-name">SQL 최적화 기본</div>
+          <div class="cc-meta">2과목 4단원</div>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('optimization')">
+            <i class="ti ti-book-open" style="font-size:11px;"></i> 학습하기
+          </button>
+        </div>
+
+      </div>
+      <div style="height:0.75rem"></div>
+    </div>
+  </div>
+
+  <!-- 카드 학습 페이지 -->
+  <div id="page-cards" class="page">
+    <div class="cards-page-inner">
+      <div class="cards-topbar">
+        <button class="back-btn" onclick="goHome()"><i class="ti ti-arrow-left"></i></button>
+        <div class="cards-topbar-title" id="topbar-title">단원명</div>
+      </div>
+      <div class="cards-banner" id="cards-banner">
+        <div class="banner-shape1" id="bs1" style="width:90px;height:90px;right:10px;top:-20px;"></div>
+        <div class="banner-shape2" id="bs2" style="width:44px;height:44px;right:65px;bottom:5px;"></div>
+        <div class="banner-title" id="chapter-title">단원명</div>
+        <div class="banner-sub" id="chapter-sub">카드를 탭해서 예시 확인</div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-row">
+          <span class="prog-txt">진행도</span>
+          <span class="prog-txt" id="progress-label">1 / 3</span>
+        </div>
+        <div class="prog-bg"><div class="prog-fill" id="progress-fill" style="width:33%"></div></div>
+      </div>
+      <div class="fc-wrap">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="card-face" id="card-front-face">
+            <div style="margin-bottom:auto">
+              <div class="card-keyword" id="card-keyword">ORDER BY</div>
+              <div class="card-desc" id="card-desc">결과 집합을 특정 열 기준으로 정렬하는 절</div>
+            </div>
+            <div class="card-hint"><i class="ti ti-hand-click" style="font-size:14px"></i> 탭하면 예시를 볼 수 있어요</div>
+          </div>
+          <div class="card-face card-back">
+            <div class="ex-label">예시 코드</div>
+            <div class="code-block" id="card-code"></div>
+            <div class="card-result" id="card-result"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="act-btn" id="save-btn" onclick="toggleSave()">
+          <i class="ti ti-bookmark" id="save-icon"></i>
+          <span id="save-label">저장하기</span>
+        </button>
+        <button class="act-btn" onclick="flipCard()">
+          <i class="ti ti-refresh"></i> 뒤집기
+        </button>
+      </div>
+      <div class="nav-cards">
+        <button class="nav-card-btn" id="prev-btn" onclick="prevCard()"><i class="ti ti-arrow-left"></i> 이전</button>
+        <span class="card-counter" id="card-counter">1 / 3</span>
+        <button class="nav-card-btn" id="next-btn" onclick="nextCard()">다음 <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 요약노트 페이지 -->
+  <div id="page-note" class="page">
+    <div style="padding:1rem 0;position:relative;z-index:1;">
+      <div class="note-banner">
+        <div class="note-shape1" style="background:#a5b4fc;"></div>
+        <div class="note-shape2" style="background:#6ee7b7;"></div>
+        <div class="note-title">나만의 요약노트 📝</div>
+        <div class="note-sub" id="note-sub">저장한 카드를 편집할 수 있어요</div>
+      </div>
+      <div id="note-content" style="padding-bottom:1rem;"></div>
+    </div>
+  </div>
+
+  <!-- 하단 네비 -->
+  <div class="bottom-nav">
+    <button class="bnav-btn active" id="bnav-home" onclick="goHome()"><i class="ti ti-home"></i>홈</button>
+    <button class="bnav-btn" id="bnav-note" onclick="goNote()"><i class="ti ti-notebook"></i>요약노트</button>
+  </div>
+</div>
+
+<script>
+const CHAPTER_COLORS = {
+  'modeling-basic': {s1:'#c4b5f4', s2:'#f9a8d4', fill:'#7c3aed'},
+  'entity':         {s1:'#fde68a', s2:'#6ee7c0', fill:'#ca8a04'},
+  'relationship':   {s1:'#f9a8d4', s2:'#93c5fd', fill:'#be185d'},
+  'normalization':  {s1:'#93c5fd', s2:'#c4b5f4', fill:'#1d4ed8'},
+  'sql-basic':      {s1:'#6ee7c0', s2:'#fde68a', fill:'#065f46'},
+  'join':           {s1:'#fca5a5', s2:'#6ee7c0', fill:'#b91c1c'},
+  'group-func':     {s1:'#fde68a', s2:'#f9a8d4', fill:'#92400e'},
+  'optimization':   {s1:'#7dd3fc', s2:'#fde68a', fill:'#0369a1'},
+};
+
+const CHAPTERS = {
+  'modeling-basic':{title:'데이터 모델링의 기본',subject:'1과목',cards:[
+    {keyword:'데이터 모델링',desc:'현실 세계의 데이터를 추상화·단순화하여 표현하는 과정',code:'-- 개념적 → 논리적 → 물리적 순서로 진행\n-- 엔터티, 속성, 관계를 정의함',result:'목적: 업무 이해/분석, DB 설계, 시스템 개발'},
+    {keyword:'스키마',desc:'DB 구조와 제약조건의 명세로, 외부·개념·내부 3단계로 구분',code:'-- 외부 스키마: 사용자 뷰\n-- 개념 스키마: 전체 논리 구조\n-- 내부 스키마: 물리적 저장 구조',result:'데이터 독립성(논리적, 물리적)을 보장함'},
+    {keyword:'ERD',desc:'엔터티와 관계를 도식화한 Entity-Relationship Diagram',code:'사원 ──N:1── 부서\n주문 ──N:M── 상품',result:'업무 규칙과 데이터 구조를 시각적으로 표현'},
+  ]},
+  'entity':{title:'엔터티와 속성',subject:'1과목',cards:[
+    {keyword:'엔터티',desc:'업무에서 관리해야 하는 데이터의 집합으로 독립적으로 존재할 수 있는 것',code:'-- 강한 엔터티: 독립 존재 (사원, 부서)\n-- 약한 엔터티: 다른 엔터티에 종속',result:'인스턴스: 엔터티의 실제 데이터 한 건'},
+    {keyword:'속성',desc:'엔터티가 가지는 세부적인 항목 또는 특성',code:'사원 엔터티의 속성:\n  사원번호(식별자) / 사원명\n  부서코드 / 입사일자',result:'파생속성: 다른 속성으로부터 계산되는 속성'},
+    {keyword:'식별자',desc:'엔터티 내에서 각 인스턴스를 유일하게 구분할 수 있는 속성',code:'-- 주식별자: 기본키(PK)\n-- 보조식별자: 후보키\n-- 외부식별자: 외래키(FK)',result:'유일성, 최소성, 불변성, 존재성을 만족해야 함'},
+  ]},
+  'relationship':{title:'관계와 식별자',subject:'1과목',cards:[
+    {keyword:'관계',desc:'두 엔터티 사이의 업무적 연관성으로 카디널리티로 표현',code:'1:1  사원 ── 사원증\n1:N  부서 ── 사원 (여럿)\nN:M  학생 ── 강좌',result:'참여도: 필수(|) vs 선택(O) 참여'},
+    {keyword:'정규화',desc:'데이터 중복을 최소화하고 이상 현상을 제거하기 위한 과정',code:'1NF: 원자값만 포함\n2NF: 부분 함수 종속 제거\n3NF: 이행 함수 종속 제거',result:'삽입/삭제/수정 이상 현상을 예방함'},
+    {keyword:'반정규화',desc:'성능 향상을 위해 의도적으로 정규화 규칙을 위반하는 기법',code:'-- 테이블 병합, 분할\n-- 중복 컬럼 추가\n-- 파생 컬럼 추가(합계 등)',result:'조회 성능↑, 데이터 정합성 관리 필요↑'},
+  ]},
+  'normalization':{title:'정규화와 성능',subject:'1과목',cards:[
+    {keyword:'함수 종속',desc:'속성 A값이 결정되면 B값이 유일하게 결정되는 관계 (A→B)',code:'완전 함수 종속: PK 전체에 종속\n부분 함수 종속: PK 일부에 종속\n이행 함수 종속: A→B→C',result:'이상 현상의 근본 원인'},
+    {keyword:'성능 모델링',desc:'조회 성능을 고려하여 모델링 단계부터 설계하는 방법론',code:'-- 인덱스 컬럼 선정\n-- 파티셔닝 고려\n-- 클러스터링 팩터 고려',result:'정규화 → 반정규화 → 인덱스 설계 순서'},
+    {keyword:'수직/수평 분할',desc:'테이블을 행(수평) 또는 열(수직) 기준으로 분리하는 기법',code:'-- 수평: 날짜별, 지역별 파티션\n-- 수직: 자주 쓰는 컬럼만 분리',result:'대용량 테이블 성능 개선에 효과적'},
+  ]},
+  'sql-basic':{title:'SQL 기본',subject:'2과목',cards:[
+    {keyword:'SELECT',desc:'테이블에서 원하는 데이터를 조회하는 가장 기본적인 SQL 명령어',code:'SELECT 사원명, 부서코드, 급여\nFROM   사원\nWHERE  급여 >= 3000000\nORDER BY 급여 DESC;',result:'실행 순서: FROM → WHERE → SELECT → ORDER BY'},
+    {keyword:'ORDER BY',desc:'결과 집합을 특정 열 기준으로 오름차순/내림차순 정렬하는 절',code:'SELECT 이름, 점수\nFROM   성적\nORDER BY 점수 DESC,\n         이름 ASC;',result:'NULL은 Oracle 마지막, SQL Server 처음'},
+    {keyword:'GROUP BY',desc:'특정 컬럼을 기준으로 행을 그룹화하여 집계 함수와 함께 사용',code:'SELECT 부서코드, COUNT(*), AVG(급여)\nFROM   사원\nGROUP BY 부서코드\nHAVING AVG(급여) >= 3000000;',result:'HAVING: GROUP BY 결과에 조건 적용'},
+  ]},
+  'join':{title:'JOIN과 서브쿼리',subject:'2과목',cards:[
+    {keyword:'INNER JOIN',desc:'두 테이블에서 조인 조건이 일치하는 행만 반환하는 조인',code:'SELECT e.사원명, d.부서명\nFROM   사원 e\n  INNER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;',result:'양쪽 모두 값이 있는 행만 결과에 포함'},
+    {keyword:'OUTER JOIN',desc:'한쪽 테이블의 행이 없어도 결과에 포함시키는 조인',code:'SELECT e.사원명, d.부서명\nFROM   사원 e\n  LEFT OUTER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;',result:'부서 없는 사원도 조회됨 (부서명 NULL)'},
+    {keyword:'서브쿼리',desc:'SQL 문 안에 포함된 또 다른 SELECT 문',code:'SELECT 사원명,\n  (SELECT 부서명 FROM 부서\n   WHERE 부서코드=e.부서코드) AS 부서명\nFROM 사원 e;',result:'인라인뷰(FROM절), 중첩(WHERE절)도 있음'},
+  ]},
+  'group-func':{title:'그룹·윈도우 함수',subject:'2과목',cards:[
+    {keyword:'ROLLUP',desc:'소계와 합계를 자동 생성하는 그룹 함수 (계층적 집계)',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY ROLLUP(부서, 직급);',result:'부서별 소계 + 전체 합계가 자동 추가됨'},
+    {keyword:'RANK()',desc:'파티션 내 순위를 매기되 동순위 다음은 건너뛰는 윈도우 함수',code:'SELECT 사원명, 급여,\n  RANK() OVER\n    (PARTITION BY 부서코드\n     ORDER BY 급여 DESC) AS 순위\nFROM 사원;',result:'동률 2명이면 1,1,3 / DENSE_RANK는 1,1,2'},
+    {keyword:'LAG / LEAD',desc:'현재 행 기준으로 이전(LAG) 또는 이후(LEAD) 행 값을 참조',code:'SELECT 날짜, 매출,\n  LAG(매출,1) OVER (ORDER BY 날짜)\n  AS 전일매출\nFROM 일별매출;',result:'시계열 데이터 전후 비교에 자주 사용됨'},
+  ]},
+  'optimization':{title:'SQL 최적화 기본',subject:'2과목',cards:[
+    {keyword:'옵티마이저',desc:'SQL을 가장 효율적으로 실행하기 위한 실행 계획을 수립하는 엔진',code:'-- 규칙 기반(RBO): 우선순위 규칙\n-- 비용 기반(CBO): 통계 정보 기반\n   (현재 대부분 CBO 사용)',result:'실행 계획은 EXPLAIN PLAN으로 확인'},
+    {keyword:'인덱스',desc:'테이블 검색 속도를 향상시키기 위한 자료구조 (B-Tree 기반)',code:'CREATE INDEX idx_사원_부서\n  ON 사원(부서코드);',result:'조회↑, DML(삽입/수정/삭제) 성능↓'},
+    {keyword:'실행 계획',desc:'SQL 처리 시 옵티마이저가 선택한 접근 방법의 순서와 방식',code:'EXPLAIN PLAN FOR\nSELECT * FROM 사원\nWHERE 부서코드 = \'D01\';',result:'INDEX SCAN / FULL SCAN / HASH JOIN 확인'},
+  ]},
+};
+
+let currentChapter=null, currentCardIdx=0, isFlipped=false, savedCards={};
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function setNavTabs(active){
+  ['home','note'].forEach(t=>{
+    document.getElementById('tab-'+t).classList.toggle('active', active===t);
+    document.getElementById('bnav-'+t).classList.toggle('active', active===t);
+  });
+}
+function goHome(){ showPage('page-home'); setNavTabs('home'); }
+function goNote(){ showPage('page-note'); setNavTabs('note'); renderNote(); }
+
+function openChapter(id){
+  currentChapter=id; currentCardIdx=0; isFlipped=false;
+  const ch=CHAPTERS[id], col=CHAPTER_COLORS[id];
+  document.getElementById('topbar-title').textContent=ch.title;
+  document.getElementById('chapter-title').textContent=ch.title;
+  document.getElementById('chapter-sub').textContent=ch.subject+' · 카드를 탭해서 예시 확인';
+  document.getElementById('bs1').style.background=col.s1;
+  document.getElementById('bs2').style.background=col.s2;
+  document.getElementById('progress-fill').style.background=col.fill;
+  showPage('page-cards'); setNavTabs('');
+  renderCard();
+}
+
+function renderCard(){
+  const ch=CHAPTERS[currentChapter], card=ch.cards[currentCardIdx], total=ch.cards.length;
+  const col=CHAPTER_COLORS[currentChapter];
+  document.getElementById('card-keyword').textContent=card.keyword;
+  document.getElementById('card-keyword').style.color=col.fill;
+  document.getElementById('card-desc').textContent=card.desc;
+  document.getElementById('card-code').textContent=card.code;
+  document.getElementById('card-result').textContent=card.result;
+  const pct=Math.round((currentCardIdx+1)/total*100);
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-label').textContent=(currentCardIdx+1)+' / '+total;
+  document.getElementById('card-counter').textContent=(currentCardIdx+1)+' / '+total;
+  document.getElementById('prev-btn').disabled=currentCardIdx===0;
+  document.getElementById('next-btn').disabled=currentCardIdx===total-1;
+  const key=currentChapter+'_'+currentCardIdx, isSaved=!!savedCards[key];
+  document.getElementById('save-btn').className='act-btn'+(isSaved?' saved':'');
+  document.getElementById('save-label').textContent=isSaved?'저장됨':'저장하기';
+  document.getElementById('flashcard').classList.remove('flipped');
+  isFlipped=false;
+}
+
+function flipCard(){ isFlipped=!isFlipped; document.getElementById('flashcard').classList.toggle('flipped',isFlipped); }
+function prevCard(){ if(currentCardIdx>0){ currentCardIdx--; renderCard(); } }
+function nextCard(){ const ch=CHAPTERS[currentChapter]; if(currentCardIdx<ch.cards.length-1){ currentCardIdx++; renderCard(); } }
+
+function toggleSave(){
+  const key=currentChapter+'_'+currentCardIdx;
+  const card=CHAPTERS[currentChapter].cards[currentCardIdx];
+  const ch=CHAPTERS[currentChapter];
+  if(savedCards[key]){ delete savedCards[key]; }
+  else { savedCards[key]={keyword:card.keyword,desc:card.desc,code:card.code,chapter:ch.title,note:card.desc}; }
+  renderCard();
+}
+
+function renderNote(){
+  const keys=Object.keys(savedCards);
+  document.getElementById('note-sub').textContent=keys.length+'개의 카드가 저장되어 있어요';
+  const content=document.getElementById('note-content');
+  if(keys.length===0){
+    content.innerHTML='<div class="note-empty"><i class="ti ti-notes"></i><p>아직 저장한 카드가 없어요.<br>학습하면서 중요한 카드를 저장해보세요!</p></div>';
+    return;
+  }
+  content.innerHTML='';
+  keys.forEach(key=>{
+    const s=savedCards[key];
+    const div=document.createElement('div');
+    div.className='note-card';
+    div.innerHTML=`<div class="note-card-header"><span class="note-kw">${s.keyword}</span><span class="note-tag">${s.chapter}</span><button class="note-del" onclick="deleteNote('${key}')"><i class="ti ti-x"></i></button></div><div class="note-divider"></div><div class="note-body"><textarea class="note-edit" rows="3" placeholder="나만의 메모를 적어보세요..." data-key="${key}">${s.note||''}</textarea></div>`;
+    content.appendChild(div);
+  });
+  document.querySelectorAll('.note-edit').forEach(ta=>{
+    ta.style.height=ta.scrollHeight+'px';
+    ta.addEventListener('input',function(){
+      if(savedCards[this.dataset.key]) savedCards[this.dataset.key].note=this.value;
+      this.style.height='auto'; this.style.height=this.scrollHeight+'px';
+    });
+  });
+}
+
+function deleteNote(key){ delete savedCards[key]; renderNote(); }
+</script>
+</body>
+</html>
