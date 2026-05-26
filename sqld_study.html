@@ -89,16 +89,16 @@
 
 /* ─── 챕터 카드 그리드 ─── */
 .chapter-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:12px;padding:0 1.25rem 1rem;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:8px;padding:0 1.25rem 1rem;
 }
 
 /* 흰색 카드 */
 .chapter-card{
   background:#ffffff;
   border:1px solid rgba(220,230,245,0.8);
-  border-radius:22px;
-  padding:18px 16px 16px;
+  border-radius:16px;
+  padding:12px 10px 12px;
   cursor:pointer;
   transition:all 0.22s;
   position:relative;
@@ -119,27 +119,27 @@
 
 /* 아이콘 래퍼 - 사진처럼 연한 컬러 배경의 둥근 박스 */
 .cc-icon-wrap{
-  width:44px;height:44px;border-radius:14px;
+  width:32px;height:32px;border-radius:10px;
   display:flex;align-items:center;justify-content:center;
-  margin-bottom:12px;
-  font-size:22px;
+  margin-bottom:8px;
+  font-size:16px;
 }
 
-.cc-name{font-size:13px;font-weight:700;line-height:1.35;margin-bottom:3px;color:#1e293b;}
-.cc-meta{font-size:10px;color:#94a3b8;margin-bottom:40px;}
+.cc-name{font-size:11px;font-weight:700;line-height:1.3;margin-bottom:2px;color:#1e293b;}
+.cc-meta{font-size:9px;color:#94a3b8;margin-bottom:32px;}
 
 /* 학습하기 버튼 - 사진처럼 회색 박스 스타일 */
 .cc-learn-btn{
-  position:absolute;bottom:14px;left:16px;right:16px;
+  position:absolute;bottom:10px;left:10px;right:10px;
   display:flex;align-items:center;justify-content:center;
-  padding:8px 12px;border-radius:12px;
+  padding:5px 8px;border-radius:10px;
   background:#f1f5f9;
   border:1px solid #e2e8f0;
   color:#475569;
-  font-size:11px;font-weight:600;
+  font-size:10px;font-weight:600;
   font-family:'Noto Sans KR',sans-serif;
   cursor:pointer;transition:all 0.15s;
-  gap:4px;
+  gap:3px;
 }
 .cc-learn-btn:hover{background:#e2e8f0;color:#1e293b;}
 
@@ -184,9 +184,9 @@
 .prog-bg{height:6px;background:rgba(100,140,200,0.12);border-radius:6px;overflow:hidden;}
 .prog-fill{height:100%;border-radius:6px;transition:width 0.35s;}
 
-.fc-wrap{padding:0 1.25rem 0.75rem;perspective:1200px;}
+.fc-wrap{padding:0 1.25rem 0.75rem;perspective:1200px;display:flex;justify-content:center;}
 .flashcard{
-  width:100%;min-height:230px;position:relative;
+  width:50%;min-height:230px;position:relative;
   cursor:pointer;transform-style:preserve-3d;
   transition:transform 0.55s cubic-bezier(0.4,0,0.2,1);
 }
@@ -214,12 +214,25 @@
 }
 .ex-label{font-size:10px;font-weight:700;letter-spacing:0.08em;margin-bottom:8px;color:#94a3b8;}
 .code-block{
-  background:#f8fafc;border:1px solid #e2e8f0;
-  border-radius:12px;padding:11px;
+  background:#1e2433;
+  border:none;
+  border-radius:12px;
+  padding:14px 16px;
   font-family:'JetBrains Mono',monospace;
-  font-size:11px;line-height:1.7;white-space:pre;
-  overflow-x:auto;color:#1e293b;margin-bottom:8px;
+  font-size:12.5px;
+  line-height:1.85;
+  white-space:pre;
+  overflow-x:auto;
+  color:#cdd6f4;
+  margin-bottom:10px;
+  letter-spacing:0.01em;
 }
+.cm  { color:#6c7086; font-style:italic; }
+.kw  { color:#89b4fa; font-weight:600; }
+.fn  { color:#cba6f7; }
+.str { color:#a6e3a1; }
+.num { color:#fab387; }
+.op  { color:#89dceb; }
 .card-result{font-size:12px;color:#64748b;line-height:1.6;}
 
 .card-actions{display:flex;gap:6px;padding:0 1.25rem 0.5rem;justify-content:center;}
@@ -591,13 +604,32 @@ function openChapter(id){
   renderCard();
 }
 
+function highlightSQL(code){
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return esc(code)
+    // 주석 (--)
+    .replace(/(--[^\n]*)/g,'<span class="cm">$1</span>')
+    // SQL 키워드
+    .replace(/\b(SELECT|FROM|WHERE|ORDER\s+BY|GROUP\s+BY|HAVING|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER|JOIN|INNER\s+JOIN|LEFT\s+OUTER\s+JOIN|LEFT\s+JOIN|RIGHT\s+JOIN|FULL\s+JOIN|ON|AS|IN|NOT|NULL|AND|OR|IS|DISTINCT|LIMIT|UNION|ALL|PARTITION\s+BY|OVER|BY|INTO|SET|VALUES|INDEX|FOR|EXPLAIN\s+PLAN)\b/gi,
+      '<span class="kw">$1</span>')
+    // 함수
+    .replace(/\b(COUNT|SUM|AVG|MAX|MIN|RANK|DENSE_RANK|ROW_NUMBER|LAG|LEAD|ROLLUP|CUBE|GROUPING\s+SETS|COALESCE|NVL|DECODE|CASE|WHEN|THEN|ELSE|END|PLAN)\b/gi,
+      '<span class="fn">$1</span>')
+    // 문자열
+    .replace(/'([^']*)'/g,"<span class=\"str\">'$1'</span>")
+    // 숫자
+    .replace(/\b(\d+(?:\.\d+)?)\b/g,'<span class="num">$1</span>')
+    // 연산자
+    .replace(/(>=|<=|<>|!=|=|&gt;|&lt;)/g,'<span class="op">$1</span>');
+}
+
 function renderCard(){
   const ch=CHAPTERS[currentChapter], card=ch.cards[currentCardIdx], total=ch.cards.length;
   const col=CHAPTER_COLORS[currentChapter];
   document.getElementById('card-keyword').textContent=card.keyword;
   document.getElementById('card-keyword').style.color=col.fill;
   document.getElementById('card-desc').textContent=card.desc;
-  document.getElementById('card-code').textContent=card.code;
+  document.getElementById('card-code').innerHTML=highlightSQL(card.code);
   document.getElementById('card-result').textContent=card.result;
   const pct=Math.round((currentCardIdx+1)/total*100);
   document.getElementById('progress-fill').style.width=pct+'%';
