@@ -223,7 +223,7 @@ html, body {
   font-family:'JetBrains Mono',monospace;line-height:1.1;
   margin-bottom:10px;
 }
-.card-desc{font-size:13px;line-height:1.65;color:#475569;flex:1;}
+.card-desc{font-size:17px;line-height:1.65;color:#475569;flex:1;word-break:keep-all;overflow-wrap:break-word;}
 .card-hint{
   font-size:11px;color:#94a3b8;
   margin-top:auto;padding-top:0.75rem;
@@ -231,25 +231,25 @@ html, body {
 }
 .ex-label{font-size:10px;font-weight:700;letter-spacing:0.08em;margin-bottom:8px;color:#94a3b8;}
 .code-block{
-  background:#1e2433;
+  background:none;
   border:none;
-  border-radius:12px;
-  padding:14px 16px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:12.5px;
+  border-radius:0;
+  padding:0;
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:14px;
   line-height:1.85;
-  white-space:pre;
+  white-space:pre-wrap;
   overflow-x:auto;
-  color:#cdd6f4;
+  color:#334155;
   margin-bottom:10px;
-  letter-spacing:0.01em;
+  letter-spacing:0;
 }
-.cm  { color:#6c7086; font-style:italic; }
-.kw  { color:#89b4fa; font-weight:600; }
-.fn  { color:#cba6f7; }
-.str { color:#a6e3a1; }
-.num { color:#fab387; }
-.op  { color:#89dceb; }
+.cm  { color:#64748b; font-style:normal; }
+.kw  { color:#2563eb; font-weight:700; }
+.fn  { color:#7c3aed; font-weight:600; }
+.str { color:#16a34a; }
+.num { color:#ea580c; }
+.op  { color:#0369a1; }
 .card-result{font-size:12px;color:#64748b;line-height:1.6;}
 
 .card-actions{display:flex;gap:6px;padding:0 1.25rem 0.5rem;justify-content:center;}
@@ -360,9 +360,10 @@ html, body {
           <div class="cc-name">데이터 모델링의 기본</div>
           <div class="cc-meta">1과목 1단원</div>
           <div class="cc-keywords">
-            <span class="cc-kw-tag">데이터 모델링</span>
+            <span class="cc-kw-tag">모델링</span>
             <span class="cc-kw-tag">스키마</span>
             <span class="cc-kw-tag">ERD</span>
+            <span class="cc-kw-tag">DBMS</span>
           </div>
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('modeling-basic')">학습하기</button>
         </div>
@@ -374,8 +375,8 @@ html, body {
           <div class="cc-name">엔터티와 속성</div>
           <div class="cc-meta">1과목 2단원</div>
           <div class="cc-keywords">
-            <span class="cc-kw-tag">엔터티</span>
-            <span class="cc-kw-tag">속성</span>
+            <span class="cc-kw-tag">기본/중심/행위</span>
+            <span class="cc-kw-tag">속성 유형</span>
             <span class="cc-kw-tag">식별자</span>
           </div>
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('entity')">학습하기</button>
@@ -388,9 +389,9 @@ html, body {
           <div class="cc-name">관계와 식별자</div>
           <div class="cc-meta">1과목 3단원</div>
           <div class="cc-keywords">
-            <span class="cc-kw-tag">관계</span>
-            <span class="cc-kw-tag">정규화</span>
-            <span class="cc-kw-tag">반정규화</span>
+            <span class="cc-kw-tag">카디널리티</span>
+            <span class="cc-kw-tag">식별/비식별</span>
+            <span class="cc-kw-tag">NULL</span>
           </div>
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('relationship')">학습하기</button>
         </div>
@@ -402,9 +403,9 @@ html, body {
           <div class="cc-name">정규화와 성능</div>
           <div class="cc-meta">1과목 4단원</div>
           <div class="cc-keywords">
-            <span class="cc-kw-tag">함수 종속</span>
-            <span class="cc-kw-tag">성능 모델링</span>
-            <span class="cc-kw-tag">수직/수평 분할</span>
+            <span class="cc-kw-tag">1/2/3NF</span>
+            <span class="cc-kw-tag">BCNF</span>
+            <span class="cc-kw-tag">반정규화</span>
           </div>
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('normalization')">학습하기</button>
         </div>
@@ -427,9 +428,9 @@ html, body {
           <div class="cc-name">SQL 기본</div>
           <div class="cc-meta">2과목 1단원</div>
           <div class="cc-keywords">
-            <span class="cc-kw-tag">SELECT</span>
-            <span class="cc-kw-tag">ORDER BY</span>
-            <span class="cc-kw-tag">GROUP BY</span>
+            <span class="cc-kw-tag">SELECT/WHERE</span>
+            <span class="cc-kw-tag">DDL/DML/TCL</span>
+            <span class="cc-kw-tag">CASE</span>
           </div>
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('sql-basic')">학습하기</button>
         </div>
@@ -441,9 +442,9 @@ html, body {
           <div class="cc-name">JOIN과 서브쿼리</div>
           <div class="cc-meta">2과목 2단원</div>
           <div class="cc-keywords">
-            <span class="cc-kw-tag">INNER JOIN</span>
-            <span class="cc-kw-tag">OUTER JOIN</span>
+            <span class="cc-kw-tag">INNER/OUTER</span>
             <span class="cc-kw-tag">서브쿼리</span>
+            <span class="cc-kw-tag">UNION</span>
           </div>
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('join')">학습하기</button>
         </div>
@@ -455,8 +456,8 @@ html, body {
           <div class="cc-name">그룹·윈도우 함수</div>
           <div class="cc-meta">2과목 3단원</div>
           <div class="cc-keywords">
-            <span class="cc-kw-tag">ROLLUP</span>
-            <span class="cc-kw-tag">RANK()</span>
+            <span class="cc-kw-tag">ROLLUP/CUBE</span>
+            <span class="cc-kw-tag">RANK</span>
             <span class="cc-kw-tag">LAG/LEAD</span>
           </div>
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('group-func')">학습하기</button>
@@ -470,8 +471,8 @@ html, body {
           <div class="cc-meta">2과목 4단원</div>
           <div class="cc-keywords">
             <span class="cc-kw-tag">옵티마이저</span>
-            <span class="cc-kw-tag">인덱스</span>
-            <span class="cc-kw-tag">실행 계획</span>
+            <span class="cc-kw-tag">인덱스 스캔</span>
+            <span class="cc-kw-tag">조인 원리</span>
           </div>
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('optimization')">학습하기</button>
         </div>
@@ -511,7 +512,6 @@ html, body {
             <div class="card-hint"><svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg> 탭하면 예시를 볼 수 있어요</div>
           </div>
           <div class="card-face card-back">
-            <div class="ex-label">예시 코드</div>
             <div class="code-block" id="card-code"></div>
             <div class="card-result" id="card-result"></div>
           </div>
@@ -568,44 +568,83 @@ const CHAPTER_COLORS = {
 
 const CHAPTERS = {
   'modeling-basic':{title:'데이터 모델링의 기본',subject:'1과목',cards:[
-    {keyword:'데이터 모델링',desc:'현실 세계의 데이터를 추상화·단순화하여 표현하는 과정',code:'-- 개념적 → 논리적 → 물리적 순서로 진행\n-- 엔터티, 속성, 관계를 정의함',result:'목적: 업무 이해/분석, DB 설계, 시스템 개발'},
-    {keyword:'스키마',desc:'DB 구조와 제약조건의 명세로, 외부·개념·내부 3단계로 구분',code:'-- 외부 스키마: 사용자 뷰\n-- 개념 스키마: 전체 논리 구조\n-- 내부 스키마: 물리적 저장 구조',result:'데이터 독립성(논리적, 물리적)을 보장함'},
-    {keyword:'ERD',desc:'엔터티와 관계를 도식화한 Entity-Relationship Diagram',code:'사원 ──N:1── 부서\n주문 ──N:M── 상품',result:'업무 규칙과 데이터 구조를 시각적으로 표현'},
+    {keyword:'데이터 모델링',desc:'현실 세계의 데이터를 추상화·단순화하여 DB 설계에 적합하게 표현하는 과정',code:'-- 3단계 진행 순서\n-- 1) 개념적 모델링: 업무 중심 ERD 도출\n-- 2) 논리적 모델링: 정규화, 관계 정의\n-- 3) 물리적 모델링: DBMS 맞춤 설계',result:'목적 ① 업무 이해/분석  ② DB 설계  ③ 시스템 개발'},
+    {keyword:'모델링 특성',desc:'데이터 모델링의 3가지 핵심 특성: 추상화·단순화·명확화',code:'-- 추상화: 현실을 일정 형식으로 표현\n-- 단순화: 복잡한 현실을 제약 없이 이해\n-- 명확화: 애매함 제거, 명확한 표현',result:'현실 → 모델(추상) → DB(물리) 순서로 구체화'},
+    {keyword:'스키마 3단계',desc:'외부·개념·내부 스키마로 데이터 독립성을 보장하는 구조',code:'-- 외부 스키마: 사용자/응용 프로그램 뷰\n-- 개념 스키마: 전체 논리적 구조 (1개)\n-- 내부 스키마: 물리적 저장 구조',result:'논리적 독립성(개념↔외부), 물리적 독립성(개념↔내부)'},
+    {keyword:'ERD',desc:'엔터티·속성·관계를 도식화한 Entity-Relationship Diagram',code:'사원 ──N:1── 부서\n주문 ──N:M── 상품\n\n-- Peter Chen 표기법 vs IE 표기법\n-- SQLD 시험은 IE 표기법 주로 출제',result:'업무 규칙과 데이터 구조를 시각적으로 표현'},
+    {keyword:'데이터 독립성',desc:'상위 스키마 변경이 하위에 영향을 주지 않는 성질',code:'-- 논리적 독립성:\n--   개념 스키마 변경 → 외부 스키마 불변\n-- 물리적 독립성:\n--   내부 스키마 변경 → 개념 스키마 불변',result:'응용 프로그램과 DB 구조의 결합도를 낮춤'},
+    {keyword:'이상 현상',desc:'정규화 미적용 시 발생하는 삽입·삭제·수정 이상',code:'-- 삽입 이상: 불필요한 데이터도 함께 삽입\n-- 삭제 이상: 의도치 않은 데이터 삭제\n-- 수정 이상: 일부만 수정되어 불일치 발생',result:'정규화로 이상 현상 예방 가능'},
+    {keyword:'DBMS',desc:'데이터베이스를 관리하는 소프트웨어 시스템',code:'-- DDL: CREATE, ALTER, DROP, TRUNCATE\n-- DML: SELECT, INSERT, UPDATE, DELETE\n-- DCL: GRANT, REVOKE\n-- TCL: COMMIT, ROLLBACK, SAVEPOINT',result:'Oracle, MySQL, PostgreSQL, SQL Server 등'},
   ]},
   'entity':{title:'엔터티와 속성',subject:'1과목',cards:[
-    {keyword:'엔터티',desc:'업무에서 관리해야 하는 데이터의 집합으로 독립적으로 존재할 수 있는 것',code:'-- 강한 엔터티: 독립 존재 (사원, 부서)\n-- 약한 엔터티: 다른 엔터티에 종속',result:'인스턴스: 엔터티의 실제 데이터 한 건'},
-    {keyword:'속성',desc:'엔터티가 가지는 세부적인 항목 또는 특성',code:'사원 엔터티의 속성:\n  사원번호(식별자) / 사원명\n  부서코드 / 입사일자',result:'파생속성: 다른 속성으로부터 계산되는 속성'},
-    {keyword:'식별자',desc:'엔터티 내에서 각 인스턴스를 유일하게 구분할 수 있는 속성',code:'-- 주식별자: 기본키(PK)\n-- 보조식별자: 후보키\n-- 외부식별자: 외래키(FK)',result:'유일성, 최소성, 불변성, 존재성을 만족해야 함'},
+    {keyword:'기본 엔터티',desc:'업무에서 원래부터 존재하며 다른 엔터티에 종속되지 않는 독립 엔터티',code:'-- 예시: 사원, 부서, 고객, 상품\n-- 독자적으로 생성 가능\n-- 주식별자는 타 엔터티 참조 없이 자체 생성',result:'키 엔터티(Key Entity)라고도 함'},
+    {keyword:'중심 엔터티',desc:'기본 엔터티로부터 발생하며 업무의 중심 역할을 하는 엔터티',code:'-- 예시: 주문, 계약, 수강신청\n-- 기본 엔터티 없이는 존재 불가\n-- 비즈니스 로직의 핵심을 담당',result:'많은 속성을 가지며 다른 엔터티 생성의 기반이 됨'},
+    {keyword:'행위 엔터티',desc:'두 개 이상의 부모 엔터티로부터 발생하며 자주 변하는 엔터티',code:'-- 예시: 주문상세, 수강이력, 로그인이력\n-- 업무 행위로 인해 생성\n-- 상세/이력/내역 유형이 대표적',result:'데이터가 가장 많이 쌓이는 엔터티 유형'},
+    {keyword:'속성 유형',desc:'속성을 성격에 따라 기본·설계·파생 속성으로 분류',code:'-- 기본 속성: 원래 업무에서 가져온 값\n   (사원명, 생년월일)\n-- 설계 속성: 설계 과정에서 만든 값\n   (코드, 일련번호)\n-- 파생 속성: 다른 속성에서 계산\n   (나이, 합계금액)',result:'파생 속성은 가능한 최소화 권장'},
+    {keyword:'단일값·다중값 속성',desc:'속성이 하나의 값인지 여럿의 값인지에 따른 구분',code:'-- 단일값: 사원번호, 성별 (한 개의 값)\n-- 다중값: 취미, 연락처\n   → 다중값은 별도 엔터티로 분리!\n   사원 ──1:N── 사원연락처',result:'다중값 속성이 있으면 정규화 대상(1NF)'},
+    {keyword:'식별자 분류',desc:'엔터티에서 인스턴스를 유일하게 구분하는 속성의 종류',code:'-- 주식별자: 기본키(PK), 유일·불변·존재\n-- 보조식별자: 후보키(UK)\n-- 외부식별자: 외래키(FK)\n-- 복합식별자: 2개 이상 속성 조합',result:'주식별자 조건: 유일성·최소성·불변성·존재성'},
+    {keyword:'강한/약한 엔터티',desc:'다른 엔터티 존재에 종속 여부로 구분',code:'-- 강한 엔터티: 독립 존재 (사원, 부서)\n-- 약한 엔터티: 부모 엔터티 없이 존재 불가\n   예) 주문상세 (주문 없으면 존재 불가)\n   → 식별 관계로 연결됨',result:'약한 엔터티는 부모 PK를 자신의 PK로 포함'},
   ]},
   'relationship':{title:'관계와 식별자',subject:'1과목',cards:[
-    {keyword:'관계',desc:'두 엔터티 사이의 업무적 연관성으로 카디널리티로 표현',code:'1:1  사원 ── 사원증\n1:N  부서 ── 사원 (여럿)\nN:M  학생 ── 강좌',result:'참여도: 필수(|) vs 선택(O) 참여'},
-    {keyword:'정규화',desc:'데이터 중복을 최소화하고 이상 현상을 제거하기 위한 과정',code:'1NF: 원자값만 포함\n2NF: 부분 함수 종속 제거\n3NF: 이행 함수 종속 제거',result:'삽입/삭제/수정 이상 현상을 예방함'},
-    {keyword:'반정규화',desc:'성능 향상을 위해 의도적으로 정규화 규칙을 위반하는 기법',code:'-- 테이블 병합, 분할\n-- 중복 컬럼 추가\n-- 파생 컬럼 추가(합계 등)',result:'조회 성능↑, 데이터 정합성 관리 필요↑'},
+    {keyword:'관계 카디널리티',desc:'두 엔터티 사이 인스턴스의 수적 관계 표현',code:'1:1  사원 ── 사원증\n1:N  부서 ──< 사원\nN:M  학생 >──< 강좌\n\n-- N:M은 반드시 연결 엔터티로 분해!',result:'수강신청 = 학생 + 강좌를 연결하는 엔터티'},
+    {keyword:'관계 참여도',desc:'엔터티 인스턴스의 관계 참여가 필수인지 선택인지',code:'-- 필수 참여(|): 반드시 관계 존재\n   사원은 반드시 부서에 소속\n-- 선택 참여(O): 관계 없어도 됨\n   부서는 사원이 없어도 존재 가능',result:'IE 표기법: || (필수) vs |O (선택)'},
+    {keyword:'식별 관계',desc:'부모 엔터티의 PK가 자식 엔터티의 PK(FK 포함)로 전이되는 관계',code:'-- 주문(주문번호 PK)\n--   └ 주문상세(주문번호+상품코드 PK)\n-- 자식의 PK에 부모 PK 포함\n-- ERD에서 실선으로 표현',result:'부모가 없으면 자식도 존재 불가'},
+    {keyword:'비식별 관계',desc:'부모 엔터티의 PK가 자식 엔터티의 일반 속성(FK)으로만 전이되는 관계',code:'-- 사원(사원번호 PK)\n-- 급여이력(이력번호 PK, 사원번호 FK)\n-- 자식의 PK에 부모 PK 미포함\n-- ERD에서 점선으로 표현',result:'부모 없이도 자식 존재 가능 (선택 참여 시)'},
+    {keyword:'반정규화',desc:'성능 향상을 위해 의도적으로 정규화 규칙을 위반하는 기법',code:'-- 테이블 통합/분할\n-- 중복 컬럼 추가 (부서명을 사원 테이블에)\n-- 파생 컬럼 추가 (주문합계금액)\n-- 이력 테이블 추가',result:'조회 성능↑ / 데이터 정합성 관리 부담↑'},
+    {keyword:'NULL 처리',desc:'값이 없음을 나타내는 특수한 상태로 0이나 공백과 다름',code:'-- NULL과 연산하면 결과도 NULL\n   NULL + 100 = NULL\n-- NVL(컬럼, 대체값)   -- Oracle\n-- ISNULL(컬럼, 대체값) -- SQL Server\n-- COALESCE(a,b,c) -- 첫 번째 비NULL',result:'NULL 비교는 = 아닌 IS NULL / IS NOT NULL 사용'},
   ]},
   'normalization':{title:'정규화와 성능',subject:'1과목',cards:[
-    {keyword:'함수 종속',desc:'속성 A값이 결정되면 B값이 유일하게 결정되는 관계 (A→B)',code:'완전 함수 종속: PK 전체에 종속\n부분 함수 종속: PK 일부에 종속\n이행 함수 종속: A→B→C',result:'이상 현상의 근본 원인'},
-    {keyword:'성능 모델링',desc:'조회 성능을 고려하여 모델링 단계부터 설계하는 방법론',code:'-- 인덱스 컬럼 선정\n-- 파티셔닝 고려\n-- 클러스터링 팩터 고려',result:'정규화 → 반정규화 → 인덱스 설계 순서'},
-    {keyword:'수직/수평 분할',desc:'테이블을 행(수평) 또는 열(수직) 기준으로 분리하는 기법',code:'-- 수평: 날짜별, 지역별 파티션\n-- 수직: 자주 쓰는 컬럼만 분리',result:'대용량 테이블 성능 개선에 효과적'},
+    {keyword:'함수 종속',desc:'속성 A가 결정되면 B가 유일하게 결정되는 관계 (A → B)',code:'-- 완전 함수 종속: PK 전체에 종속\n   (주문번호,상품코드) → 수량\n-- 부분 함수 종속: PK 일부에만 종속\n   (주문번호,상품코드) → 주문일자\n-- 이행 함수 종속: A→B→C',result:'이상 현상의 근본 원인'},
+    {keyword:'1NF',desc:'제1정규형: 모든 속성값이 원자값(더 이상 분해 불가)이어야 함',code:'-- 위반 예: 취미 = "독서,영화,여행"\n-- 해결: 취미 테이블 별도 분리\n   사원(사원번호, 이름)\n   사원취미(사원번호, 취미) ← 분리',result:'다중값·반복 속성 제거'},
+    {keyword:'2NF',desc:'제2정규형: 1NF + 모든 비키 속성이 PK 전체에 완전 함수 종속',code:'-- 위반 예: 복합PK(주문번호,상품코드)\n--   주문일자는 주문번호에만 종속 (부분)\n-- 해결:\n   주문(주문번호, 주문일자)  ← 분리\n   주문상세(주문번호, 상품코드, 수량)',result:'부분 함수 종속 제거 (복합PK 테이블 점검 필수)'},
+    {keyword:'3NF',desc:'제3정규형: 2NF + 이행 함수 종속 제거',code:'-- 위반 예: 사원번호→부서코드→부서명\n   (이행 종속: 사원번호→부서명)\n-- 해결:\n   사원(사원번호, 이름, 부서코드)\n   부서(부서코드, 부서명)  ← 분리',result:'이행 함수 종속 제거'},
+    {keyword:'BCNF',desc:'Boyce-Codd 정규형: 3NF + 모든 결정자가 후보키여야 함',code:'-- 위반 예: 후보키 아닌 속성이 결정자\n   수강(학번, 과목, 교수)\n   교수 → 과목 (교수는 PK 아님)\n-- 해결: 강의(교수, 과목) + 수강(학번, 교수)',result:'3NF보다 엄격, 실무에서는 3NF까지 주로 적용'},
+    {keyword:'성능 모델링',desc:'조회 성능을 고려하여 모델링 단계부터 반정규화를 적용하는 설계',code:'-- 정규화 → 성능 검토 → 반정규화 결정\n-- 인덱스 컬럼 선정\n-- 파티셔닝 고려\n-- 클러스터링 팩터 고려',result:'정규화 → 반정규화 → 인덱스 설계 순서'},
+    {keyword:'수직/수평 분할',desc:'대용량 테이블을 행(수평) 또는 열(수직) 기준으로 분리하는 기법',code:'-- 수평 분할: 행 기준\n   파티션 (날짜별, 지역별)\n-- 수직 분할: 열 기준\n   자주 조회하는 컬럼 vs 대용량 컬럼 분리\n   (사원기본정보 / 사원상세정보)',result:'대용량 테이블 I/O 성능 개선에 효과적'},
   ]},
   'sql-basic':{title:'SQL 기본',subject:'2과목',cards:[
-    {keyword:'SELECT',desc:'테이블에서 원하는 데이터를 조회하는 가장 기본적인 SQL 명령어',code:'SELECT 사원명, 부서코드, 급여\nFROM   사원\nWHERE  급여 >= 3000000\nORDER BY 급여 DESC;',result:'실행 순서: FROM → WHERE → SELECT → ORDER BY'},
-    {keyword:'ORDER BY',desc:'결과 집합을 특정 열 기준으로 오름차순/내림차순 정렬하는 절',code:'SELECT 이름, 점수\nFROM   성적\nORDER BY 점수 DESC,\n         이름 ASC;',result:'NULL은 Oracle 마지막, SQL Server 처음'},
-    {keyword:'GROUP BY',desc:'특정 컬럼을 기준으로 행을 그룹화하여 집계 함수와 함께 사용',code:'SELECT 부서코드, COUNT(*), AVG(급여)\nFROM   사원\nGROUP BY 부서코드\nHAVING AVG(급여) >= 3000000;',result:'HAVING: GROUP BY 결과에 조건 적용'},
+    {keyword:'SELECT 구문',desc:'테이블에서 원하는 데이터를 조회하는 기본 SQL 명령어',code:'SELECT 사원명, 부서코드, 급여\nFROM   사원\nWHERE  급여 >= 3000000\nORDER BY 급여 DESC;',result:'실행 순서: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY'},
+    {keyword:'WHERE 조건',desc:'조회 결과를 필터링하는 절로 다양한 연산자 사용 가능',code:'-- 비교: =, >, <, >=, <=, <>(!=)\nWHERE 급여 BETWEEN 2000000 AND 4000000\nWHERE 부서코드 IN (\'D01\',\'D02\')\nWHERE 사원명 LIKE \'김%\'\nWHERE 퇴직일 IS NULL',result:'LIKE: % (0개 이상), _ (1개) 와일드카드'},
+    {keyword:'ORDER BY',desc:'결과 집합을 특정 열 기준으로 정렬하는 절',code:'SELECT 이름, 점수\nFROM   성적\nORDER BY 점수 DESC,\n         이름 ASC;\n-- 컬럼 번호도 사용 가능\nORDER BY 2 DESC, 1 ASC;',result:'NULL: Oracle은 마지막, SQL Server는 처음'},
+    {keyword:'GROUP BY / HAVING',desc:'행을 그룹화하고 그룹 조건을 필터링하는 절',code:'SELECT 부서코드,\n       COUNT(*) AS 인원수,\n       AVG(급여) AS 평균급여\nFROM   사원\nGROUP BY 부서코드\nHAVING AVG(급여) >= 3000000;',result:'WHERE는 개별 행 필터, HAVING은 그룹 필터'},
+    {keyword:'집계 함수',desc:'그룹 내 행들을 집계하는 함수들',code:'SELECT COUNT(*),      -- NULL 포함\n       COUNT(컬럼),   -- NULL 제외\n       SUM(급여),\n       AVG(급여),     -- NULL 제외 평균\n       MAX(급여),\n       MIN(급여)\nFROM 사원;',result:'COUNT(*)는 NULL 포함 / COUNT(컬럼)은 NULL 제외'},
+    {keyword:'DDL',desc:'데이터 정의어: 테이블 구조를 생성·변경·삭제하는 명령어',code:'CREATE TABLE 사원 (\n  사원번호 NUMBER PRIMARY KEY,\n  사원명   VARCHAR2(50) NOT NULL,\n  입사일   DATE\n);\nALTER TABLE 사원 ADD 부서코드 VARCHAR2(10);\nDROP TABLE 사원;\nTRUNCATE TABLE 사원; -- 데이터만 전체 삭제',result:'DDL은 AUTO COMMIT (롤백 불가)'},
+    {keyword:'DML',desc:'데이터 조작어: 데이터를 삽입·수정·삭제하는 명령어',code:'INSERT INTO 사원(사원번호, 사원명)\n  VALUES (1001, \'홍길동\');\n\nUPDATE 사원\n  SET 급여 = 급여 * 1.1\n  WHERE 부서코드 = \'D01\';\n\nDELETE FROM 사원\n  WHERE 사원번호 = 1001;',result:'DML은 COMMIT 전까지 롤백 가능'},
+    {keyword:'TCL',desc:'트랜잭션 제어어: COMMIT·ROLLBACK·SAVEPOINT',code:'-- COMMIT: 변경 내용 영구 저장\nCOMMIT;\n\n-- ROLLBACK: 마지막 COMMIT 이전으로 복원\nROLLBACK;\n\n-- SAVEPOINT: 중간 저장 지점 설정\nSAVEPOINT sp1;\nROLLBACK TO sp1;',result:'ACID: 원자성·일관성·격리성·지속성'},
+    {keyword:'CASE 표현식',desc:'조건에 따라 다른 값을 반환하는 SQL 표현식',code:'SELECT 사원명,\n  CASE WHEN 급여 >= 5000000 THEN \'고연봉\'\n       WHEN 급여 >= 3000000 THEN \'중연봉\'\n       ELSE \'저연봉\'\n  END AS 급여등급\nFROM 사원;',result:'DECODE(Oracle)와 유사하지만 표준 SQL은 CASE'},
+    {keyword:'내장 함수',desc:'문자·숫자·날짜 처리를 위한 단일행 함수',code:'-- 문자: UPPER, LOWER, SUBSTR, LENGTH\n-- 숫자: ROUND, TRUNC, MOD, ABS\n-- 날짜: SYSDATE, ADD_MONTHS, MONTHS_BETWEEN\n-- 변환: TO_CHAR, TO_DATE, TO_NUMBER\nSELECT UPPER(\'hello\'),\n       ROUND(3.456, 1) FROM DUAL;',result:'단일행 함수: 행마다 적용 / 집계 함수: 그룹에 적용'},
   ]},
   'join':{title:'JOIN과 서브쿼리',subject:'2과목',cards:[
-    {keyword:'INNER JOIN',desc:'두 테이블에서 조인 조건이 일치하는 행만 반환하는 조인',code:'SELECT e.사원명, d.부서명\nFROM   사원 e\n  INNER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;',result:'양쪽 모두 값이 있는 행만 결과에 포함'},
-    {keyword:'OUTER JOIN',desc:'한쪽 테이블의 행이 없어도 결과에 포함시키는 조인',code:'SELECT e.사원명, d.부서명\nFROM   사원 e\n  LEFT OUTER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;',result:'부서 없는 사원도 조회됨 (부서명 NULL)'},
-    {keyword:'서브쿼리',desc:'SQL 문 안에 포함된 또 다른 SELECT 문',code:'SELECT 사원명,\n  (SELECT 부서명 FROM 부서\n   WHERE 부서코드=e.부서코드) AS 부서명\nFROM 사원 e;',result:'인라인뷰(FROM절), 중첩(WHERE절)도 있음'},
+    {keyword:'INNER JOIN',desc:'두 테이블에서 조인 조건이 일치하는 행만 반환',code:'SELECT e.사원명, d.부서명\nFROM   사원 e\n  INNER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;\n-- 구식 표기 (WHERE 절 조인)\nSELECT e.사원명, d.부서명\nFROM   사원 e, 부서 d\nWHERE  e.부서코드 = d.부서코드;',result:'양쪽에 값이 있는 행만 결과에 포함'},
+    {keyword:'LEFT OUTER JOIN',desc:'왼쪽 테이블 전체 + 오른쪽 일치 행 반환 (불일치는 NULL)',code:'SELECT e.사원명, d.부서명\nFROM   사원 e\n  LEFT OUTER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;\n-- Oracle 구식: WHERE e.부서코드 = d.부서코드(+)',result:'부서 없는 사원도 조회됨 (부서명 → NULL)'},
+    {keyword:'RIGHT / FULL OUTER JOIN',desc:'오른쪽 전체 또는 양쪽 전체를 포함하는 외부 조인',code:'-- RIGHT: 오른쪽 테이블 전체 유지\nSELECT e.사원명, d.부서명\nFROM   사원 e\n  RIGHT OUTER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;\n-- FULL: 양쪽 전체 포함',result:'사원 없는 부서도 조회됨 / FULL은 양방향 NULL 허용'},
+    {keyword:'CROSS JOIN',desc:'두 테이블의 모든 행을 조합한 카티션 곱 반환',code:'SELECT 색상.색상명, 크기.크기명\nFROM   색상\n  CROSS JOIN 크기;\n-- 결과 행수 = 색상 행수 × 크기 행수\n-- 3색 × 3크기 = 9행',result:'WHERE 절 없는 구식 조인도 카티션 곱 발생'},
+    {keyword:'SELF JOIN',desc:'같은 테이블을 두 번 조인하여 계층 관계를 표현',code:'SELECT e.사원명 AS 사원,\n       m.사원명 AS 관리자\nFROM   사원 e\n  LEFT JOIN 사원 m\n    ON e.관리자번호 = m.사원번호;',result:'조직도·계층 구조 데이터 조회에 사용'},
+    {keyword:'스칼라 서브쿼리',desc:'SELECT 절에 사용하는 단일 값을 반환하는 서브쿼리',code:'SELECT 사원명,\n  (SELECT 부서명\n   FROM   부서\n   WHERE  부서코드 = e.부서코드\n  ) AS 부서명\nFROM 사원 e;',result:'반드시 1행 1열 반환해야 함, 외부 쿼리와 상관'},
+    {keyword:'중첩 서브쿼리',desc:'WHERE/HAVING 절에서 조건 값으로 사용하는 서브쿼리',code:'-- 단일행 서브쿼리 (=, >, < 등)\nSELECT 사원명 FROM 사원\nWHERE  급여 > (SELECT AVG(급여) FROM 사원);\n-- 다중행 서브쿼리 (IN, ANY, ALL)\nWHERE  부서코드 IN\n  (SELECT 부서코드 FROM 부서\n   WHERE  지역 = \'서울\');',result:'단일행↔단일행 연산자 / 다중행↔IN,ANY,ALL'},
+    {keyword:'인라인 뷰',desc:'FROM 절에 사용하는 서브쿼리로 가상 테이블 역할',code:'SELECT a.사원명, a.급여\nFROM (\n  SELECT 사원명, 급여,\n    RANK() OVER (ORDER BY 급여 DESC) AS rn\n  FROM 사원\n) a\nWHERE a.rn <= 3;',result:'TOP-N 조회에 자주 활용 / 별칭 필수'},
+    {keyword:'UNION / UNION ALL',desc:'두 SELECT 결과를 합치는 집합 연산자',code:'-- UNION: 중복 제거 (정렬 발생)\nSELECT 사원명 FROM 정규직\nUNION\nSELECT 사원명 FROM 계약직;\n\n-- UNION ALL: 중복 포함 (빠름)\nSELECT 사원명 FROM 정규직\nUNION ALL\nSELECT 사원명 FROM 계약직;',result:'INTERSECT(교집합), MINUS/EXCEPT(차집합)도 있음'},
   ]},
   'group-func':{title:'그룹·윈도우 함수',subject:'2과목',cards:[
-    {keyword:'ROLLUP',desc:'소계와 합계를 자동 생성하는 그룹 함수 (계층적 집계)',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY ROLLUP(부서, 직급);',result:'부서별 소계 + 전체 합계가 자동 추가됨'},
-    {keyword:'RANK()',desc:'파티션 내 순위를 매기되 동순위 다음은 건너뛰는 윈도우 함수',code:'SELECT 사원명, 급여,\n  RANK() OVER\n    (PARTITION BY 부서코드\n     ORDER BY 급여 DESC) AS 순위\nFROM 사원;',result:'동률 2명이면 1,1,3 / DENSE_RANK는 1,1,2'},
-    {keyword:'LAG / LEAD',desc:'현재 행 기준으로 이전(LAG) 또는 이후(LEAD) 행 값을 참조',code:'SELECT 날짜, 매출,\n  LAG(매출,1) OVER (ORDER BY 날짜)\n  AS 전일매출\nFROM 일별매출;',result:'시계열 데이터 전후 비교에 자주 사용됨'},
+    {keyword:'ROLLUP',desc:'계층적 소계·합계를 자동 생성하는 그룹 함수',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY ROLLUP(부서, 직급);\n-- 결과: 직급별 소계 + 부서별 소계 + 전체합계',result:'ROLLUP(A,B): (A,B)→(A)→() 순서로 집계'},
+    {keyword:'CUBE',desc:'모든 조합의 소계를 생성하는 그룹 함수',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY CUBE(부서, 직급);\n-- (부서,직급) + (부서) + (직급) + (전체)',result:'ROLLUP보다 더 많은 조합 생성 (2^n 조합)'},
+    {keyword:'GROUPING SETS',desc:'원하는 소계 조합만 선택적으로 생성하는 그룹 함수',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY GROUPING SETS\n  ((부서, 직급), (부서), ());',result:'필요한 소계만 지정 → ROLLUP/CUBE보다 유연'},
+    {keyword:'GROUPING()',desc:'소계 행인지 일반 행인지를 구분하는 함수',code:'SELECT 부서,\n       GROUPING(부서) AS is_subtotal,\n       SUM(급여)\nFROM   사원\nGROUP BY ROLLUP(부서);\n-- 소계 행이면 1, 아니면 0 반환',result:'NULL 소계 행과 실제 NULL 값을 구별할 때 사용'},
+    {keyword:'RANK / DENSE_RANK',desc:'순위를 매기는 윈도우 함수, 동순위 처리 방식이 다름',code:'SELECT 사원명, 급여,\n  RANK()       OVER (ORDER BY 급여 DESC) AS 순위1,\n  DENSE_RANK() OVER (ORDER BY 급여 DESC) AS 순위2,\n  ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS 순위3\nFROM 사원;',result:'동률 2명: RANK=1,1,3 / DENSE_RANK=1,1,2 / ROW_NUMBER=1,2,3'},
+    {keyword:'PARTITION BY',desc:'윈도우 함수에서 그룹을 나누는 기준 절 (GROUP BY와 다름)',code:'SELECT 사원명, 부서코드, 급여,\n  RANK() OVER\n    (PARTITION BY 부서코드\n     ORDER BY 급여 DESC) AS 부서내순위\nFROM 사원;\n-- 부서별로 독립적인 순위 부여',result:'PARTITION BY 생략 시 전체가 하나의 파티션'},
+    {keyword:'LAG / LEAD',desc:'현재 행 기준으로 이전(LAG)·이후(LEAD) 행 값을 참조',code:'SELECT 날짜, 매출,\n  LAG(매출, 1, 0) OVER\n    (ORDER BY 날짜) AS 전일매출,\n  LEAD(매출, 1, 0) OVER\n    (ORDER BY 날짜) AS 익일매출\nFROM 일별매출;',result:'LAG/LEAD(값, 오프셋, 기본값) / 시계열 분석에 활용'},
+    {keyword:'SUM·AVG (누적)',desc:'윈도우 함수로 사용하는 누적 합계·평균',code:'SELECT 날짜, 매출,\n  SUM(매출) OVER\n    (ORDER BY 날짜\n     ROWS BETWEEN UNBOUNDED PRECEDING\n     AND CURRENT ROW) AS 누적매출\nFROM 일별매출;',result:'ROWS BETWEEN: 물리적 행 범위 / RANGE: 논리적 범위'},
+    {keyword:'FIRST_VALUE / LAST_VALUE',desc:'파티션 내 첫 번째·마지막 값을 반환하는 윈도우 함수',code:'SELECT 부서코드, 사원명, 급여,\n  FIRST_VALUE(사원명)\n    OVER (PARTITION BY 부서코드\n          ORDER BY 급여 DESC) AS 최고연봉자\nFROM 사원;',result:'LAST_VALUE는 기본 프레임 주의 → ROWS BETWEEN ... UNBOUNDED FOLLOWING 명시 필요'},
   ]},
   'optimization':{title:'SQL 최적화 기본',subject:'2과목',cards:[
-    {keyword:'옵티마이저',desc:'SQL을 가장 효율적으로 실행하기 위한 실행 계획을 수립하는 엔진',code:'-- 규칙 기반(RBO): 우선순위 규칙\n-- 비용 기반(CBO): 통계 정보 기반\n   (현재 대부분 CBO 사용)',result:'실행 계획은 EXPLAIN PLAN으로 확인'},
-    {keyword:'인덱스',desc:'테이블 검색 속도를 향상시키기 위한 자료구조 (B-Tree 기반)',code:'CREATE INDEX idx_사원_부서\n  ON 사원(부서코드);',result:'조회↑, DML(삽입/수정/삭제) 성능↓'},
-    {keyword:'실행 계획',desc:'SQL 처리 시 옵티마이저가 선택한 접근 방법의 순서와 방식',code:'EXPLAIN PLAN FOR\nSELECT * FROM 사원\nWHERE 부서코드 = \'D01\';',result:'INDEX SCAN / FULL SCAN / HASH JOIN 확인'},
+    {keyword:'옵티마이저',desc:'SQL을 가장 효율적으로 실행하기 위한 실행 계획을 수립하는 엔진',code:'-- RBO (규칙 기반): 우선순위 규칙 적용\n-- CBO (비용 기반): 통계 정보로 비용 계산\n--   (현재 대부분 CBO 사용)\n-- 실행 계획 확인:\nEXPLAIN PLAN FOR SELECT ...\nSELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);',result:'CBO는 테이블 통계(행 수, 분포, 블록 수)를 기반으로 판단'},
+    {keyword:'인덱스 구조',desc:'테이블 검색 속도를 향상시키기 위한 B-Tree 기반 자료구조',code:'CREATE INDEX idx_사원_부서\n  ON 사원(부서코드);\n-- 복합 인덱스\nCREATE INDEX idx_사원_복합\n  ON 사원(부서코드, 급여 DESC);\n-- 인덱스 삭제\nDROP INDEX idx_사원_부서;',result:'조회 성능↑ / INSERT·UPDATE·DELETE 성능↓'},
+    {keyword:'인덱스 스캔 종류',desc:'인덱스를 사용하는 방식에 따른 스캔 유형 구분',code:'-- INDEX UNIQUE SCAN: PK/UK 조건 (=)\n-- INDEX RANGE SCAN: 범위 조건 (>, BETWEEN)\n-- INDEX FULL SCAN: 인덱스 전체 순차 스캔\n-- INDEX FAST FULL SCAN: 멀티블록 I/O\n-- INDEX SKIP SCAN: 복합 인덱스 선두 미사용',result:'INDEX SKIP SCAN: 선두 컬럼 없어도 가능 (Oracle)'},
+    {keyword:'인덱스 미사용 패턴',desc:'인덱스가 있어도 활용되지 않는 SQL 패턴',code:'-- 1. 인덱스 컬럼 변형\nWHERE SUBSTR(사원명,1,1) = \'홍\'\n-- 2. 부정형 조건\nWHERE 부서코드 <> \'D01\'\n-- 3. IS NOT NULL\nWHERE 퇴직일 IS NOT NULL\n-- 4. LIKE 앞쪽 와일드카드\nWHERE 사원명 LIKE \'%길동\'',result:'인덱스 컬럼은 가공 없이 그대로 사용해야 함'},
+    {keyword:'실행 계획',desc:'SQL 처리 시 옵티마이저가 선택한 접근 방법의 순서와 방식',code:'EXPLAIN PLAN FOR\nSELECT * FROM 사원\nWHERE  부서코드 = \'D01\';\n-- 주요 오퍼레이션:\n-- TABLE ACCESS FULL\n-- TABLE ACCESS BY INDEX ROWID\n-- INDEX RANGE SCAN\n-- HASH JOIN / NESTED LOOPS',result:'Cost·Rows·Bytes로 효율성 판단'},
+    {keyword:'조인 수행 원리',desc:'두 테이블을 조인할 때 사용하는 알고리즘 유형',code:'-- Nested Loop Join:\n--   외부 테이블 루프 → 내부 인덱스 조회\n--   소량 데이터·인덱스 있을 때 유리\n-- Sort Merge Join:\n--   양쪽 정렬 후 병합, 범위 조건에 유리\n-- Hash Join:\n--   해시 테이블 생성, 대용량 동등 조인에 유리',result:'SQLD 시험: Nested Loop·Hash Join 개념 위주 출제'},
+    {keyword:'힌트(Hint)',desc:'옵티마이저의 실행 계획을 강제로 지정하는 지시자',code:'-- 인덱스 강제 사용\nSELECT /*+ INDEX(e idx_사원_부서) */\n       사원명\nFROM   사원 e\nWHERE  부서코드 = \'D01\';\n-- 조인 방법 지정\nSELECT /*+ USE_NL(e d) */ ...',result:'힌트는 주석 형태 /*+ */ / 잘못된 힌트는 무시됨'},
+    {keyword:'SQL 파싱 과정',desc:'SQL이 실행되기까지의 내부 처리 단계',code:'① SQL 파싱 (구문 분석)\n   → 파스 트리 생성\n② 최적화 (Optimization)\n   → 실행 계획 수립 (옵티마이저)\n③ 로우 소스 생성\n   → 실행 가능한 코드 생성\n④ SQL 실행',result:'라이브러리 캐시 히트 시 파싱 생략 가능 (소프트 파싱)'},
   ]},
 };
 
@@ -621,7 +660,19 @@ function setNavTabs(active){
     document.getElementById('bnav-'+t).classList.toggle('active', active===t);
   });
 }
-function goHome(){ showPage('page-home'); setNavTabs('home'); }
+function goHome(){
+  showPage('page-home'); setNavTabs('home');
+  // 카드 수 배지 동적 삽입
+  document.querySelectorAll('.chapter-card[onclick]').forEach(card=>{
+    const match = card.getAttribute('onclick').match(/openChapter\('([^']+)'\)/);
+    if(!match) return;
+    const id = match[1];
+    const count = CHAPTERS[id] ? CHAPTERS[id].cards.length : 0;
+    let badge = card.querySelector('.cc-badge');
+    if(!badge){ badge = document.createElement('div'); badge.className='cc-badge'; card.appendChild(badge); }
+    badge.textContent = count+'장';
+  });
+}
 function goNote(){ showPage('page-note'); setNavTabs('note'); renderNote(); }
 
 function openChapter(id){
@@ -716,6 +767,9 @@ function renderNote(){
 }
 
 function deleteNote(key){ delete savedCards[key]; renderNote(); }
+
+// 초기 배지 표시
+document.addEventListener('DOMContentLoaded', function(){ goHome(); });
 </script>
 </body>
 </html>
