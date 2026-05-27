@@ -489,787 +489,34 @@ html, body {
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('optimization')">학습하기</button>
         </div>
 
-      </div>
-      <div style="height:0.75rem"></div>
-    </div>
-  </div>
-
-  <!-- 카드 학습 페이지 -->
-  <div id="page-cards" class="page">
-    <div class="cards-page-inner">
-      <div class="cards-topbar">
-        <button class="back-btn" onclick="goHome()"><svg class="svg-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
-        <div class="cards-topbar-title" id="topbar-title">단원명</div>
-      </div>
-      <div class="cards-banner" id="cards-banner">
-        <div class="banner-shape1" id="bs1" style="width:90px;height:90px;right:10px;top:-20px;"></div>
-        <div class="banner-shape2" id="bs2" style="width:44px;height:44px;right:65px;bottom:5px;"></div>
-        <div class="banner-title" id="chapter-title">단원명</div>
-        <div class="banner-sub" id="chapter-sub">카드를 탭해서 예시 확인</div>
-      </div>
-      <div class="prog-wrap">
-        <div class="prog-row">
-          <span class="prog-txt">진행도</span>
-          <span class="prog-txt" id="progress-label">1 / 3</span>
-        </div>
-        <div class="prog-bg"><div class="prog-fill" id="progress-fill" style="width:33%"></div></div>
-      </div>
-      <div class="fc-wrap">
-        <div class="flashcard" id="flashcard" onclick="flipCard()">
-          <div class="card-face" id="card-front-face">
-            <div style="margin-bottom:auto">
-              <div class="card-keyword" id="card-keyword">ORDER BY</div>
-              <div class="card-desc" id="card-desc">결과 집합을 특정 열 기준으로 정렬하는 절</div>
-            </div>
-            <div class="card-hint"><svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg> 탭하면 예시를 볼 수 있어요</div>
+        <div class="chapter-card" onclick="openChapter('topn-hierarchy')">
+          <div class="cc-icon-wrap" style="background:#f0fdf4;">
+            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/><line x1="12" y1="21" x2="12" y2="9"/></svg>
           </div>
-          <div class="card-face card-back">
-            <div class="code-block" id="card-code"></div>
-            <div class="card-result-wrap" id="card-result"></div>
-          </div>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="act-btn" id="save-btn" onclick="toggleSave()">
-          <svg class="svg-icon" id="save-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-          <span id="save-label">저장하기</span>
-        </button>
-        <button class="act-btn" onclick="flipCard()">
-          <svg class="svg-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 뒤집기
-        </button>
-      </div>
-      <div class="nav-cards">
-        <button class="nav-card-btn" id="prev-btn" onclick="prevCard()"><svg class="svg-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> 이전</button>
-        <span class="card-counter" id="card-counter">1 / 3</span>
-        <button class="nav-card-btn" id="next-btn" onclick="nextCard()">다음 <svg class="svg-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 요약노트 페이지 -->
-  <div id="page-note" class="page">
-    <div style="padding:1rem 0;position:relative;z-index:1;">
-      <div class="note-banner">
-        <div class="note-shape1" style="background:#a5b4fc;"></div>
-        <div class="note-shape2" style="background:#6ee7b7;"></div>
-        <div class="note-title">나만의 요약노트</div>
-        <div class="note-sub" id="note-sub">저장한 카드를 편집할 수 있어요</div>
-      </div>
-      <div id="note-content" style="padding-bottom:1rem;"></div>
-    </div>
-  </div>
-
-  <!-- 하단 네비 -->
-  <div class="bottom-nav">
-    <button class="bnav-btn active" id="bnav-home" onclick="goHome()"><svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>홈</button>
-    <button class="bnav-btn" id="bnav-note" onclick="goNote()"><svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>요약노트</button>
-  </div>
-</div>
-
-<script>
-const CHAPTER_COLORS = {
-  'modeling-basic': {s1:'#c4b5f4', s2:'#f9a8d4', fill:'#7c3aed'},
-  'entity':         {s1:'#fde68a', s2:'#6ee7c0', fill:'#ca8a04'},
-  'relationship':   {s1:'#f9a8d4', s2:'#93c5fd', fill:'#be185d'},
-  'normalization':  {s1:'#93c5fd', s2:'#c4b5f4', fill:'#1d4ed8'},
-  'sql-basic':      {s1:'#6ee7c0', s2:'#fde68a', fill:'#065f46'},
-  'join':           {s1:'#fca5a5', s2:'#6ee7c0', fill:'#b91c1c'},
-  'group-func':     {s1:'#fde68a', s2:'#f9a8d4', fill:'#92400e'},
-  'optimization':   {s1:'#7dd3fc', s2:'#fde68a', fill:'#0369a1'},
-};
-
-const CHAPTERS = {
-  'modeling-basic':{title:'데이터 모델링의 기본',subject:'1과목',cards:[
-    {keyword:'데이터 모델링',desc:'현실 세계의 데이터를 추상화·단순화하여 DB 설계에 적합하게 표현하는 과정',code:'-- 3단계 진행 순서\n-- 1) 개념적 모델링: 업무 중심 ERD 도출\n-- 2) 논리적 모델링: 정규화, 관계 정의\n-- 3) 물리적 모델링: DBMS 맞춤 설계',result:'목적 ① 업무 이해/분석  ② DB 설계  ③ 시스템 개발'},
-    {keyword:'모델링 특성',desc:'데이터 모델링의 3가지 핵심 특성: 추상화·단순화·명확화',code:'-- 추상화: 현실을 일정 형식으로 표현\n-- 단순화: 복잡한 현실을 제약 없이 이해\n-- 명확화: 애매함 제거, 명확한 표현',result:'현실 → 모델(추상) → DB(물리) 순서로 구체화'},
-    {keyword:'스키마 3단계',desc:'외부·개념·내부 스키마로 데이터 독립성을 보장하는 구조',code:'-- 외부 스키마: 사용자/응용 프로그램 뷰\n-- 개념 스키마: 전체 논리적 구조 (1개)\n-- 내부 스키마: 물리적 저장 구조',result:'논리적 독립성(개념↔외부), 물리적 독립성(개념↔내부)'},
-    {keyword:'ERD',desc:'엔터티·속성·관계를 도식화한 Entity-Relationship Diagram',code:'사원 ──N:1── 부서\n주문 ──N:M── 상품\n\n-- Peter Chen 표기법 vs IE 표기법\n-- SQLD 시험은 IE 표기법 주로 출제',result:'업무 규칙과 데이터 구조를 시각적으로 표현'},
-    {keyword:'데이터 독립성',desc:'상위 스키마 변경이 하위에 영향을 주지 않는 성질',code:'-- 논리적 독립성:\n--   개념 스키마 변경 → 외부 스키마 불변\n-- 물리적 독립성:\n--   내부 스키마 변경 → 개념 스키마 불변',result:'응용 프로그램과 DB 구조의 결합도를 낮춤'},
-    {keyword:'이상 현상',desc:'정규화 미적용 시 발생하는 삽입·삭제·수정 이상',code:'-- 삽입 이상: 불필요한 데이터도 함께 삽입\n-- 삭제 이상: 의도치 않은 데이터 삭제\n-- 수정 이상: 일부만 수정되어 불일치 발생',result:'정규화로 이상 현상 예방 가능'},
-    {keyword:'DBMS',desc:'데이터베이스를 관리하는 소프트웨어 시스템',code:'-- DDL: CREATE, ALTER, DROP, TRUNCATE\n-- DML: SELECT, INSERT, UPDATE, DELETE\n-- DCL: GRANT, REVOKE\n-- TCL: COMMIT, ROLLBACK, SAVEPOINT',result:'Oracle, MySQL, PostgreSQL, SQL Server 등'},
-  ]},
-  'entity':{title:'엔터티와 속성',subject:'1과목',cards:[
-    {keyword:'기본 엔터티',desc:'업무에서 원래부터 존재하며 다른 엔터티에 종속되지 않는 독립 엔터티',code:'-- 예시: 사원, 부서, 고객, 상품\n-- 독자적으로 생성 가능\n-- 주식별자는 타 엔터티 참조 없이 자체 생성',result:'키 엔터티(Key Entity)라고도 함'},
-    {keyword:'중심 엔터티',desc:'기본 엔터티로부터 발생하며 업무의 중심 역할을 하는 엔터티',code:'-- 예시: 주문, 계약, 수강신청\n-- 기본 엔터티 없이는 존재 불가\n-- 비즈니스 로직의 핵심을 담당',result:'많은 속성을 가지며 다른 엔터티 생성의 기반이 됨'},
-    {keyword:'행위 엔터티',desc:'두 개 이상의 부모 엔터티로부터 발생하며 자주 변하는 엔터티',code:'-- 예시: 주문상세, 수강이력, 로그인이력\n-- 업무 행위로 인해 생성\n-- 상세/이력/내역 유형이 대표적',result:'데이터가 가장 많이 쌓이는 엔터티 유형'},
-    {keyword:'속성 유형',desc:'속성을 성격에 따라 기본·설계·파생 속성으로 분류',code:'기본 속성: 원래 업무에서 가져온 값\n   (사원명, 생년월일)\n설계 속성: 설계 과정에서 만든 값\n   (코드, 일련번호)\n파생 속성: 다른 속성에서 계산\n   (나이, 합계금액)',result:'파생 속성은 가능한 최소화 권장'},
-    {keyword:'단일값·다중값 속성',desc:'속성이 하나의 값인지 여럿의 값인지에 따른 구분',code:'-- 단일값: 사원번호, 성별 (한 개의 값)\n-- 다중값: 취미, 연락처\n   → 다중값은 별도 엔터티로 분리!\n   사원 ──1:N── 사원연락처',result:'다중값 속성이 있으면 정규화 대상(1NF)'},
-    {keyword:'식별자 분류',desc:'엔터티에서 인스턴스를 유일하게 구분하는 속성의 종류',code:'-- 주식별자: 기본키(PK), 유일·불변·존재\n-- 보조식별자: 후보키(UK)\n-- 외부식별자: 외래키(FK)\n-- 복합식별자: 2개 이상 속성 조합',result:'주식별자 조건: 유일성·최소성·불변성·존재성'},
-    {keyword:'강한/약한 엔터티',desc:'다른 엔터티 존재에 종속 여부로 구분',code:'-- 강한 엔터티: 독립 존재 (사원, 부서)\n-- 약한 엔터티: 부모 엔터티 없이 존재 불가\n   예) 주문상세 (주문 없으면 존재 불가)\n   → 식별 관계로 연결됨',result:'약한 엔터티는 부모 PK를 자신의 PK로 포함'},
-  ]},
-  'relationship':{title:'관계와 식별자',subject:'1과목',cards:[
-    {keyword:'관계 카디널리티',desc:'두 엔터티 사이 인스턴스의 수적 관계 표현',code:'1:1  사원 ── 사원증\n1:N  부서 ──< 사원\nN:M  학생 >──< 강좌\n\n-- N:M은 반드시 연결 엔터티로 분해!',result:'수강신청 = 학생 + 강좌를 연결하는 엔터티'},
-    {keyword:'관계 참여도',desc:'엔터티 인스턴스의 관계 참여가 필수인지 선택인지',code:'-- 필수 참여(|): 반드시 관계 존재\n   사원은 반드시 부서에 소속\n-- 선택 참여(O): 관계 없어도 됨\n   부서는 사원이 없어도 존재 가능',result:'IE 표기법: || (필수) vs |O (선택)'},
-    {keyword:'식별 관계',desc:'부모 엔터티의 PK가 자식 엔터티의 PK(FK 포함)로 전이되는 관계',code:'-- 주문(주문번호 PK)\n--   └ 주문상세(주문번호+상품코드 PK)\n-- 자식의 PK에 부모 PK 포함\n-- ERD에서 실선으로 표현',result:'부모가 없으면 자식도 존재 불가'},
-    {keyword:'비식별 관계',desc:'부모 엔터티의 PK가 자식 엔터티의 일반 속성(FK)으로만 전이되는 관계',code:'-- 사원(사원번호 PK)\n-- 급여이력(이력번호 PK, 사원번호 FK)\n-- 자식의 PK에 부모 PK 미포함\n-- ERD에서 점선으로 표현',result:'부모 없이도 자식 존재 가능 (선택 참여 시)'},
-    {keyword:'반정규화',desc:'성능 향상을 위해 의도적으로 정규화 규칙을 위반하는 기법',code:'-- 테이블 통합/분할\n-- 중복 컬럼 추가 (부서명을 사원 테이블에)\n-- 파생 컬럼 추가 (주문합계금액)\n-- 이력 테이블 추가',result:'조회 성능↑ / 데이터 정합성 관리 부담↑'},
-    {keyword:'NULL 처리',desc:'값이 없음을 나타내는 특수한 상태로 0이나 공백과 다름',code:'-- NULL과 연산하면 결과도 NULL\n   NULL + 100 = NULL\n-- NVL(컬럼, 대체값)   -- Oracle\n-- ISNULL(컬럼, 대체값) -- SQL Server\n-- COALESCE(a,b,c) -- 첫 번째 비NULL',result:'NULL 비교는 = 아닌 IS NULL / IS NOT NULL 사용'},
-  ]},
-  'normalization':{title:'정규화와 성능',subject:'1과목',cards:[
-    {keyword:'함수 종속',desc:'속성 A가 결정되면 B가 유일하게 결정되는 관계 (A → B)',code:'완전 함수 종속: PK 전체에 종속\n   (주문번호,상품코드) → 수량\n부분 함수 종속: PK 일부에만 종속\n   (주문번호,상품코드) → 주문일자\n이행 함수 종속: A→B→C',result:'이상 현상의 근본 원인'},
-    {keyword:'1NF',desc:'제1정규형: 모든 속성값이 원자값(더 이상 분해 불가)이어야 함',code:'-- 위반 예: 취미 = "독서,영화,여행"\n-- 해결: 취미 테이블 별도 분리\n   사원(사원번호, 이름)\n   사원취미(사원번호, 취미) ← 분리',result:'다중값·반복 속성 제거'},
-    {keyword:'2NF',desc:'제2정규형: 1NF + 모든 비키 속성이 PK 전체에 완전 함수 종속',code:'-- 위반 예: 복합PK(주문번호,상품코드)\n--   주문일자는 주문번호에만 종속 (부분)\n-- 해결:\n   주문(주문번호, 주문일자)  ← 분리\n   주문상세(주문번호, 상품코드, 수량)',result:'부분 함수 종속 제거 (복합PK 테이블 점검 필수)'},
-    {keyword:'3NF',desc:'제3정규형: 2NF + 이행 함수 종속 제거',code:'-- 위반 예: 사원번호→부서코드→부서명\n   (이행 종속: 사원번호→부서명)\n-- 해결:\n   사원(사원번호, 이름, 부서코드)\n   부서(부서코드, 부서명)  ← 분리',result:'이행 함수 종속 제거'},
-    {keyword:'BCNF',desc:'Boyce-Codd 정규형: 3NF + 모든 결정자가 후보키여야 함',code:'-- 위반 예: 후보키 아닌 속성이 결정자\n   수강(학번, 과목, 교수)\n   교수 → 과목 (교수는 PK 아님)\n-- 해결: 강의(교수, 과목) + 수강(학번, 교수)',result:'3NF보다 엄격, 실무에서는 3NF까지 주로 적용'},
-    {keyword:'성능 모델링',desc:'조회 성능을 고려하여 모델링 단계부터 반정규화를 적용하는 설계',code:'-- 정규화 → 성능 검토 → 반정규화 결정\n-- 인덱스 컬럼 선정\n-- 파티셔닝 고려\n-- 클러스터링 팩터 고려',result:'정규화 → 반정규화 → 인덱스 설계 순서'},
-    {keyword:'수직/수평 분할',desc:'대용량 테이블을 행(수평) 또는 열(수직) 기준으로 분리하는 기법',code:'-- 수평 분할: 행 기준\n   파티션 (날짜별, 지역별)\n-- 수직 분할: 열 기준\n   자주 조회하는 컬럼 vs 대용량 컬럼 분리\n   (사원기본정보 / 사원상세정보)',result:'대용량 테이블 I/O 성능 개선에 효과적'},
-  ]},
-  'sql-basic':{title:'SQL 기본',subject:'2과목',cards:[
-    {keyword:'SELECT 구문',desc:'테이블에서 원하는 데이터를 조회하는 기본 SQL 명령어',code:'SELECT 사원명, 부서코드, 급여\nFROM   사원\nWHERE  급여 >= 3000000\nORDER BY 급여 DESC;',result:'실행 순서: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY'},
-    {keyword:'WHERE 조건',desc:'조회 결과를 필터링하는 절로 다양한 연산자 사용 가능',code:'-- 비교: =, >, <, >=, <=, <>(!=)\nWHERE 급여 BETWEEN 2000000 AND 4000000\nWHERE 부서코드 IN (\'D01\',\'D02\')\nWHERE 사원명 LIKE \'김%\'\nWHERE 퇴직일 IS NULL',result:'LIKE: % (0개 이상), _ (1개) 와일드카드'},
-    {keyword:'ORDER BY',desc:'결과 집합을 특정 열 기준으로 정렬하는 절',code:'SELECT 이름, 점수\nFROM   성적\nORDER BY 점수 DESC,\n         이름 ASC;\n-- 컬럼 번호도 사용 가능\nORDER BY 2 DESC, 1 ASC;',result:'NULL: Oracle은 마지막, SQL Server는 처음'},
-    {keyword:'GROUP BY / HAVING',desc:'행을 그룹화하고 그룹 조건을 필터링하는 절',code:'SELECT 부서코드,\n       COUNT(*) AS 인원수,\n       AVG(급여) AS 평균급여\nFROM   사원\nGROUP BY 부서코드\nHAVING AVG(급여) >= 3000000;',result:'WHERE는 개별 행 필터, HAVING은 그룹 필터'},
-    {keyword:'집계 함수',desc:'그룹 내 행들을 집계하는 함수들',code:'SELECT COUNT(*),      -- NULL 포함\n       COUNT(컬럼),   -- NULL 제외\n       SUM(급여),\n       AVG(급여),     -- NULL 제외 평균\n       MAX(급여),\n       MIN(급여)\nFROM 사원;',result:'COUNT(*)는 NULL 포함 / COUNT(컬럼)은 NULL 제외'},
-    {keyword:'DDL',desc:'데이터 정의어: 테이블 구조를 생성·변경·삭제하는 명령어',code:'CREATE TABLE 사원 (\n  사원번호 NUMBER PRIMARY KEY,\n  사원명   VARCHAR2(50) NOT NULL,\n  입사일   DATE\n);\nALTER TABLE 사원 ADD 부서코드 VARCHAR2(10);\nDROP TABLE 사원;\nTRUNCATE TABLE 사원; -- 데이터만 전체 삭제',result:'DDL은 AUTO COMMIT (롤백 불가)'},
-    {keyword:'DML',desc:'데이터 조작어: 데이터를 삽입·수정·삭제하는 명령어',code:'INSERT INTO 사원(사원번호, 사원명)\n  VALUES (1001, \'홍길동\');\n\nUPDATE 사원\n  SET 급여 = 급여 * 1.1\n  WHERE 부서코드 = \'D01\';\n\nDELETE FROM 사원\n  WHERE 사원번호 = 1001;',result:'DML은 COMMIT 전까지 롤백 가능'},
-    {keyword:'TCL',desc:'트랜잭션 제어어: COMMIT·ROLLBACK·SAVEPOINT',code:'-- COMMIT: 변경 내용 영구 저장\nCOMMIT;\n\n-- ROLLBACK: 마지막 COMMIT 이전으로 복원\nROLLBACK;\n\n-- SAVEPOINT: 중간 저장 지점 설정\nSAVEPOINT sp1;\nROLLBACK TO sp1;',result:'ACID: 원자성·일관성·격리성·지속성'},
-    {keyword:'CASE 표현식',desc:'조건에 따라 다른 값을 반환하는 SQL 표현식',code:'SELECT 사원명,\n  CASE WHEN 급여 >= 5000000 THEN \'고연봉\'\n       WHEN 급여 >= 3000000 THEN \'중연봉\'\n       ELSE \'저연봉\'\n  END AS 급여등급\nFROM 사원;',result:'DECODE(Oracle)와 유사하지만 표준 SQL은 CASE'},
-    {keyword:'내장 함수',desc:'문자·숫자·날짜 처리를 위한 단일행 함수',code:'-- 문자: UPPER, LOWER, SUBSTR, LENGTH\n-- 숫자: ROUND, TRUNC, MOD, ABS\n-- 날짜: SYSDATE, ADD_MONTHS, MONTHS_BETWEEN\n-- 변환: TO_CHAR, TO_DATE, TO_NUMBER\nSELECT UPPER(\'hello\'),\n       ROUND(3.456, 1) FROM DUAL;',result:'단일행 함수: 행마다 적용 / 집계 함수: 그룹에 적용'},
-  ]},
-  'join':{title:'JOIN과 서브쿼리',subject:'2과목',cards:[
-    {keyword:'INNER JOIN',desc:'두 테이블에서 조인 조건이 일치하는 행만 반환',code:'SELECT e.사원명, d.부서명\nFROM   사원 e\n  INNER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;\n-- 구식 표기 (WHERE 절 조인)\nSELECT e.사원명, d.부서명\nFROM   사원 e, 부서 d\nWHERE  e.부서코드 = d.부서코드;',result:'양쪽에 값이 있는 행만 결과에 포함'},
-    {keyword:'LEFT OUTER JOIN',desc:'왼쪽 테이블 전체 + 오른쪽 일치 행 반환 (불일치는 NULL)',code:'SELECT e.사원명, d.부서명\nFROM   사원 e\n  LEFT OUTER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;\n-- Oracle 구식: WHERE e.부서코드 = d.부서코드(+)',result:'부서 없는 사원도 조회됨 (부서명 → NULL)'},
-    {keyword:'RIGHT / FULL OUTER JOIN',desc:'오른쪽 전체 또는 양쪽 전체를 포함하는 외부 조인',code:'-- RIGHT: 오른쪽 테이블 전체 유지\nSELECT e.사원명, d.부서명\nFROM   사원 e\n  RIGHT OUTER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;\n-- FULL: 양쪽 전체 포함',result:'사원 없는 부서도 조회됨 / FULL은 양방향 NULL 허용'},
-    {keyword:'CROSS JOIN',desc:'두 테이블의 모든 행을 조합한 카티션 곱 반환',code:'SELECT 색상.색상명, 크기.크기명\nFROM   색상\n  CROSS JOIN 크기;\n-- 결과 행수 = 색상 행수 × 크기 행수\n-- 3색 × 3크기 = 9행',result:'WHERE 절 없는 구식 조인도 카티션 곱 발생'},
-    {keyword:'SELF JOIN',desc:'같은 테이블을 두 번 조인하여 계층 관계를 표현',code:'SELECT e.사원명 AS 사원,\n       m.사원명 AS 관리자\nFROM   사원 e\n  LEFT JOIN 사원 m\n    ON e.관리자번호 = m.사원번호;',result:'조직도·계층 구조 데이터 조회에 사용'},
-    {keyword:'스칼라 서브쿼리',desc:'SELECT 절에 사용하는 단일 값을 반환하는 서브쿼리',code:'SELECT 사원명,\n  (SELECT 부서명\n   FROM   부서\n   WHERE  부서코드 = e.부서코드\n  ) AS 부서명\nFROM 사원 e;',result:'반드시 1행 1열 반환해야 함, 외부 쿼리와 상관'},
-    {keyword:'중첩 서브쿼리',desc:'WHERE/HAVING 절에서 조건 값으로 사용하는 서브쿼리',code:'-- 단일행 서브쿼리 (=, >, < 등)\nSELECT 사원명 FROM 사원\nWHERE  급여 > (SELECT AVG(급여) FROM 사원);\n-- 다중행 서브쿼리 (IN, ANY, ALL)\nWHERE  부서코드 IN\n  (SELECT 부서코드 FROM 부서\n   WHERE  지역 = \'서울\');',result:'단일행↔단일행 연산자 / 다중행↔IN,ANY,ALL'},
-    {keyword:'인라인 뷰',desc:'FROM 절에 사용하는 서브쿼리로 가상 테이블 역할',code:'SELECT a.사원명, a.급여\nFROM (\n  SELECT 사원명, 급여,\n    RANK() OVER (ORDER BY 급여 DESC) AS rn\n  FROM 사원\n) a\nWHERE a.rn <= 3;',result:'TOP-N 조회에 자주 활용 / 별칭 필수'},
-    {keyword:'UNION / UNION ALL',desc:'두 SELECT 결과를 합치는 집합 연산자',code:'-- UNION: 중복 제거 (정렬 발생)\nSELECT 사원명 FROM 정규직\nUNION\nSELECT 사원명 FROM 계약직;\n\n-- UNION ALL: 중복 포함 (빠름)\nSELECT 사원명 FROM 정규직\nUNION ALL\nSELECT 사원명 FROM 계약직;',result:'INTERSECT(교집합), MINUS/EXCEPT(차집합)도 있음'},
-  ]},
-  'group-func':{title:'그룹·윈도우 함수',subject:'2과목',cards:[
-    {keyword:'ROLLUP',desc:'계층적 소계·합계를 자동 생성하는 그룹 함수',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY ROLLUP(부서, 직급);\n-- 결과: 직급별 소계 + 부서별 소계 + 전체합계',result:'ROLLUP(A,B): (A,B)→(A)→() 순서로 집계'},
-    {keyword:'CUBE',desc:'모든 조합의 소계를 생성하는 그룹 함수',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY CUBE(부서, 직급);\n-- (부서,직급) + (부서) + (직급) + (전체)',result:'ROLLUP보다 더 많은 조합 생성 (2^n 조합)'},
-    {keyword:'GROUPING SETS',desc:'원하는 소계 조합만 선택적으로 생성하는 그룹 함수',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY GROUPING SETS\n  ((부서, 직급), (부서), ());',result:'필요한 소계만 지정 → ROLLUP/CUBE보다 유연'},
-    {keyword:'GROUPING()',desc:'소계 행인지 일반 행인지를 구분하는 함수',code:'SELECT 부서,\n       GROUPING(부서) AS is_subtotal,\n       SUM(급여)\nFROM   사원\nGROUP BY ROLLUP(부서);\n-- 소계 행이면 1, 아니면 0 반환',result:'NULL 소계 행과 실제 NULL 값을 구별할 때 사용'},
-    {keyword:'RANK / DENSE_RANK',desc:'순위를 매기는 윈도우 함수, 동순위 처리 방식이 다름',code:'SELECT 사원명, 급여,\n  RANK()       OVER (ORDER BY 급여 DESC) AS 순위1,\n  DENSE_RANK() OVER (ORDER BY 급여 DESC) AS 순위2,\n  ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS 순위3\nFROM 사원;',result:'동률 2명: RANK=1,1,3 / DENSE_RANK=1,1,2 / ROW_NUMBER=1,2,3'},
-    {keyword:'PARTITION BY',desc:'윈도우 함수에서 그룹을 나누는 기준 절 (GROUP BY와 다름)',code:'SELECT 사원명, 부서코드, 급여,\n  RANK() OVER\n    (PARTITION BY 부서코드\n     ORDER BY 급여 DESC) AS 부서내순위\nFROM 사원;\n-- 부서별로 독립적인 순위 부여',result:'PARTITION BY 생략 시 전체가 하나의 파티션'},
-    {keyword:'LAG / LEAD',desc:'현재 행 기준으로 이전(LAG)·이후(LEAD) 행 값을 참조',code:'SELECT 날짜, 매출,\n  LAG(매출, 1, 0) OVER\n    (ORDER BY 날짜) AS 전일매출,\n  LEAD(매출, 1, 0) OVER\n    (ORDER BY 날짜) AS 익일매출\nFROM 일별매출;',result:'LAG/LEAD(값, 오프셋, 기본값) / 시계열 분석에 활용'},
-    {keyword:'SUM·AVG (누적)',desc:'윈도우 함수로 사용하는 누적 합계·평균',code:'SELECT 날짜, 매출,\n  SUM(매출) OVER\n    (ORDER BY 날짜\n     ROWS BETWEEN UNBOUNDED PRECEDING\n     AND CURRENT ROW) AS 누적매출\nFROM 일별매출;',result:'ROWS BETWEEN: 물리적 행 범위 / RANGE: 논리적 범위'},
-    {keyword:'FIRST_VALUE / LAST_VALUE',desc:'파티션 내 첫 번째·마지막 값을 반환하는 윈도우 함수',code:'SELECT 부서코드, 사원명, 급여,\n  FIRST_VALUE(사원명)\n    OVER (PARTITION BY 부서코드\n          ORDER BY 급여 DESC) AS 최고연봉자\nFROM 사원;',result:'LAST_VALUE는 기본 프레임 주의 → ROWS BETWEEN ... UNBOUNDED FOLLOWING 명시 필요'},
-  ]},
-  'optimization':{title:'SQL 최적화 기본',subject:'2과목',cards:[
-    {keyword:'옵티마이저',desc:'SQL을 가장 효율적으로 실행하기 위한 실행 계획을 수립하는 엔진',code:'-- RBO (규칙 기반): 우선순위 규칙 적용\n-- CBO (비용 기반): 통계 정보로 비용 계산\n--   (현재 대부분 CBO 사용)\n-- 실행 계획 확인:\nEXPLAIN PLAN FOR SELECT ...\nSELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);',result:'CBO는 테이블 통계(행 수, 분포, 블록 수)를 기반으로 판단'},
-    {keyword:'인덱스 구조',desc:'테이블 검색 속도를 향상시키기 위한 B-Tree 기반 자료구조',code:'CREATE INDEX idx_사원_부서\n  ON 사원(부서코드);\n-- 복합 인덱스\nCREATE INDEX idx_사원_복합\n  ON 사원(부서코드, 급여 DESC);\n-- 인덱스 삭제\nDROP INDEX idx_사원_부서;',result:'조회 성능↑ / INSERT·UPDATE·DELETE 성능↓'},
-    {keyword:'인덱스 스캔 종류',desc:'인덱스를 사용하는 방식에 따른 스캔 유형 구분',code:'-- INDEX UNIQUE SCAN: PK/UK 조건 (=)\n-- INDEX RANGE SCAN: 범위 조건 (>, BETWEEN)\n-- INDEX FULL SCAN: 인덱스 전체 순차 스캔\n-- INDEX FAST FULL SCAN: 멀티블록 I/O\n-- INDEX SKIP SCAN: 복합 인덱스 선두 미사용',result:'INDEX SKIP SCAN: 선두 컬럼 없어도 가능 (Oracle)'},
-    {keyword:'인덱스 미사용 패턴',desc:'인덱스가 있어도 활용되지 않는 SQL 패턴',code:'-- 1. 인덱스 컬럼 변형\nWHERE SUBSTR(사원명,1,1) = \'홍\'\n-- 2. 부정형 조건\nWHERE 부서코드 <> \'D01\'\n-- 3. IS NOT NULL\nWHERE 퇴직일 IS NOT NULL\n-- 4. LIKE 앞쪽 와일드카드\nWHERE 사원명 LIKE \'%길동\'',result:'인덱스 컬럼은 가공 없이 그대로 사용해야 함'},
-    {keyword:'실행 계획',desc:'SQL 처리 시 옵티마이저가 선택한 접근 방법의 순서와 방식',code:'EXPLAIN PLAN FOR\nSELECT * FROM 사원\nWHERE  부서코드 = \'D01\';\n-- 주요 오퍼레이션:\n-- TABLE ACCESS FULL\n-- TABLE ACCESS BY INDEX ROWID\n-- INDEX RANGE SCAN\n-- HASH JOIN / NESTED LOOPS',result:'Cost·Rows·Bytes로 효율성 판단'},
-    {keyword:'조인 수행 원리',desc:'두 테이블을 조인할 때 사용하는 알고리즘 유형',code:'-- Nested Loop Join:\n--   외부 테이블 루프 → 내부 인덱스 조회\n--   소량 데이터·인덱스 있을 때 유리\n-- Sort Merge Join:\n--   양쪽 정렬 후 병합, 범위 조건에 유리\n-- Hash Join:\n--   해시 테이블 생성, 대용량 동등 조인에 유리',result:'SQLD 시험: Nested Loop·Hash Join 개념 위주 출제'},
-    {keyword:'힌트(Hint)',desc:'옵티마이저의 실행 계획을 강제로 지정하는 지시자',code:'-- 인덱스 강제 사용\nSELECT /*+ INDEX(e idx_사원_부서) */\n       사원명\nFROM   사원 e\nWHERE  부서코드 = \'D01\';\n-- 조인 방법 지정\nSELECT /*+ USE_NL(e d) */ ...',result:'힌트는 주석 형태 /*+ */ / 잘못된 힌트는 무시됨'},
-    {keyword:'SQL 파싱 과정',desc:'SQL이 실행되기까지의 내부 처리 단계',code:'① SQL 파싱 (구문 분석)\n   → 파스 트리 생성\n② 최적화 (Optimization)\n   → 실행 계획 수립 (옵티마이저)\n③ 로우 소스 생성\n   → 실행 가능한 코드 생성\n④ SQL 실행',result:'라이브러리 캐시 히트 시 파싱 생략 가능 (소프트 파싱)'},
-  ]},
-};
-
-let currentChapter=null, currentCardIdx=0, isFlipped=false, savedCards={};
-
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-function setNavTabs(active){
-  ['home','note'].forEach(t=>{
-    document.getElementById('tab-'+t).classList.toggle('active', active===t);
-    document.getElementById('bnav-'+t).classList.toggle('active', active===t);
-  });
-}
-function goHome(){
-  showPage('page-home'); setNavTabs('home');
-  // 카드 수 배지 동적 삽입
-  document.querySelectorAll('.chapter-card[onclick]').forEach(card=>{
-    const match = card.getAttribute('onclick').match(/openChapter\('([^']+)'\)/);
-    if(!match) return;
-    const id = match[1];
-    const count = CHAPTERS[id] ? CHAPTERS[id].cards.length : 0;
-    let badge = card.querySelector('.cc-badge');
-    if(!badge){ badge = document.createElement('div'); badge.className='cc-badge'; card.appendChild(badge); }
-    badge.textContent = count+'장';
-  });
-}
-function goNote(){ showPage('page-note'); setNavTabs('note'); renderNote(); }
-
-function openChapter(id){
-  currentChapter=id; currentCardIdx=0; isFlipped=false;
-  const ch=CHAPTERS[id], col=CHAPTER_COLORS[id];
-  document.getElementById('topbar-title').textContent=ch.title;
-  document.getElementById('chapter-title').textContent=ch.title;
-  document.getElementById('chapter-sub').textContent=ch.subject+' · 카드를 탭해서 예시 확인';
-  document.getElementById('bs1').style.background=col.s1;
-  document.getElementById('bs2').style.background=col.s2;
-  document.getElementById('progress-fill').style.background=col.fill;
-  showPage('page-cards'); setNavTabs('');
-  renderCard();
-}
-
-function highlightSQL(code){
-  // -- 주석 줄 제거 후 plain text로만 표시
-  return code
-    .split('\n')
-    .filter(line => !/^\s*--/.test(line))
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
-    // 괄호 그룹 사이 공백 → 줄바꿈
-    .replace(/(\))\s{2,}(\()/g, '$1\n$2')
-    .trim()
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-function renderCard(){
-  const ch=CHAPTERS[currentChapter], card=ch.cards[currentCardIdx], total=ch.cards.length;
-  const col=CHAPTER_COLORS[currentChapter];
-  document.getElementById('card-keyword').textContent=card.keyword;
-  document.getElementById('card-keyword').style.color=col.fill;
-  document.getElementById('card-desc').textContent=card.desc;
-  document.getElementById('card-code').innerHTML=highlightSQL(card.code);
-  document.getElementById('card-result').textContent=card.result
-    .replace(/\s*([①②③④⑤⑥⑦⑧⑨])/g,'\n$1')
-    .replace(/,\s*([\uAC00-\uD7A3])/g,'\n$1');
-  const pct=Math.round((currentCardIdx+1)/total*100);
-  document.getElementById('progress-fill').style.width=pct+'%';
-  document.getElementById('progress-label').textContent=(currentCardIdx+1)+' / '+total;
-  document.getElementById('card-counter').textContent=(currentCardIdx+1)+' / '+total;
-  document.getElementById('prev-btn').disabled=currentCardIdx===0;
-  document.getElementById('next-btn').disabled=currentCardIdx===total-1;
-  const key=currentChapter+'_'+currentCardIdx, isSaved=!!savedCards[key];
-  document.getElementById('save-btn').className='act-btn'+(isSaved?' saved':'');
-  document.getElementById('save-label').textContent=isSaved?'저장됨':'저장하기';
-  document.getElementById('flashcard').classList.remove('flipped');
-  isFlipped=false;
-}
-
-function flipCard(){ isFlipped=!isFlipped; document.getElementById('flashcard').classList.toggle('flipped',isFlipped); }
-function prevCard(){ if(currentCardIdx>0){ currentCardIdx--; renderCard(); } }
-function nextCard(){ const ch=CHAPTERS[currentChapter]; if(currentCardIdx<ch.cards.length-1){ currentCardIdx++; renderCard(); } }
-
-function toggleSave(){
-  const key=currentChapter+'_'+currentCardIdx;
-  const card=CHAPTERS[currentChapter].cards[currentCardIdx];
-  const ch=CHAPTERS[currentChapter];
-  if(savedCards[key]){ delete savedCards[key]; }
-  else { savedCards[key]={keyword:card.keyword,desc:card.desc,code:card.code,chapter:ch.title,note:card.desc}; }
-  renderCard();
-}
-
-function renderNote(){
-  const keys=Object.keys(savedCards);
-  document.getElementById('note-sub').textContent=keys.length+'개의 카드가 저장되어 있어요';
-  const content=document.getElementById('note-content');
-  if(keys.length===0){
-    content.innerHTML='<div class="note-empty"><svg class="svg-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 12px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><p>아직 저장한 카드가 없어요.<br>학습하면서 중요한 카드를 저장해보세요!</p></div>';
-    return;
-  }
-  content.innerHTML='';
-  keys.forEach(key=>{
-    const s=savedCards[key];
-    const div=document.createElement('div');
-    div.className='note-card';
-    div.innerHTML=`<div class="note-card-header"><span class="note-kw">${s.keyword}</span><span class="note-tag">${s.chapter}</span><button class="note-del" onclick="deleteNote('${key}')"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="note-divider"></div><div class="note-body"><textarea class="note-edit" rows="3" placeholder="나만의 메모를 적어보세요..." data-key="${key}">${s.note||''}</textarea></div>`;
-    content.appendChild(div);
-  });
-  document.querySelectorAll('.note-edit').forEach(ta=>{
-    ta.style.height=ta.scrollHeight+'px';
-    ta.addEventListener('input',function(){
-      if(savedCards[this.dataset.key]) savedCards[this.dataset.key].note=this.value;
-      this.style.height='auto'; this.style.height=this.scrollHeight+'px';
-    });
-  });
-}
-
-function deleteNote(key){ delete savedCards[key]; renderNote(); }
-
-// 초기 배지 표시
-document.addEventListener('DOMContentLoaded', function(){ goHome(); });
-</script>
-</body>
-</html><!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-.svg-icon { display:inline-block; vertical-align:middle; }
-</style>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap');
-
-*{box-sizing:border-box;margin:0;padding:0;}
-html, body {
-  min-height:100%;
-  background: linear-gradient(160deg, #eef2f8 0%, #e8eef8 30%, #dce6f4 60%, #d4e0f0 100%);
-  background-attachment: fixed;
-}
-
-#app{
-  font-family:'Noto Sans KR',sans-serif;
-  /* 아주 연한 네이비 그라데이션 - 사진처럼 거의 흰색에 가까운 연한 블루-그레이 */
-  background: linear-gradient(160deg, #eef2f8 0%, #e8eef8 30%, #dce6f4 60%, #d4e0f0 100%);
-  min-height:100vh;
-  color:#1e293b;
-  position:relative;
-  overflow:hidden;
-}
-
-.page{display:none;}
-.page.active{display:block;}
-
-/* 배경 블롭 - 아주 연하게 */
-.bg-blob{
-  position:absolute;border-radius:50%;
-  filter:blur(80px);opacity:0.18;
-  pointer-events:none;z-index:0;
-}
-
-/* ─── 상단 NAV ─── */
-.top-nav{
-  display:flex;align-items:center;gap:10px;
-  padding:14px 20px;
-  background:rgba(255,255,255,0.75);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(180,200,230,0.3);
-  box-shadow:0 2px 16px rgba(100,130,180,0.1);
-  position:relative;z-index:10;
-}
-.nav-logo{font-size:16px;font-weight:900;letter-spacing:-0.5px;flex:1;color:#1e3a6e;}
-.nav-tab{
-  font-size:12px;color:#64748b;background:none;border:none;
-  cursor:pointer;padding:6px 12px;border-radius:20px;
-  font-family:'Noto Sans KR',sans-serif;transition:all 0.15s;
-}
-.nav-tab:hover{background:rgba(59,130,246,0.08);color:#2563eb;}
-.nav-tab.active{background:rgba(59,130,246,0.1);color:#2563eb;font-weight:700;}
-
-/* ─── 하단 NAV ─── */
-.bottom-nav{
-  display:flex;
-  background:rgba(255,255,255,0.8);
-  backdrop-filter:blur(20px);
-  border-top:1px solid rgba(180,200,230,0.3);
-  box-shadow:0 -2px 16px rgba(100,130,180,0.1);
-  position:fixed;bottom:0;left:0;right:0;z-index:10;
-}
-#app{padding-bottom:60px;}
-.bnav-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;
-  gap:3px;padding:10px 0;cursor:pointer;border:none;
-  background:none;color:#94a3b8;font-size:10px;
-  font-family:'Noto Sans KR',sans-serif;transition:color 0.2s;
-}
-.bnav-btn i{font-size:20px;}
-.bnav-btn.active{color:#2563eb;font-weight:700;}
-
-/* ─── HOME ─── */
-.home-inner{position:relative;z-index:1;}
-.home-header{padding:1.5rem 1.25rem 0.75rem;}
-.home-title{font-size:26px;font-weight:900;letter-spacing:-0.8px;line-height:1.2;color:#1e3a6e;}
-.home-sub{font-size:12px;color:#7b9cc8;margin-top:5px;}
-
-/* 과목 구분선 */
-.subj-header{
-  display:flex;align-items:center;gap:8px;
-  padding:0.5rem 1.25rem 0.75rem;
-}
-.subj-pill{
-  font-size:11px;font-weight:700;padding:5px 14px;
-  border-radius:20px;display:flex;align-items:center;gap:5px;
-  background:rgba(255,255,255,0.85);
-  border:1px solid rgba(180,200,230,0.5);
-  color:#3b5fa8;
-  box-shadow:0 2px 8px rgba(100,130,180,0.1);
-}
-.subj-line{flex:1;height:1px;background:rgba(100,140,200,0.2);}
-
-/* ─── 챕터 카드 그리드 ─── */
-.chapter-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:8px;padding:0 1.25rem 1rem;
-}
-
-/* 흰색 카드 */
-.chapter-card{
-  background:#ffffff;
-  border:1px solid rgba(220,230,245,0.8);
-  border-radius:16px;
-  padding:18px 10px 18px;
-  cursor:pointer;
-  transition:all 0.22s;
-  position:relative;
-  overflow:hidden;
-  box-shadow:0 4px 20px rgba(100,130,180,0.12), 0 1px 4px rgba(100,130,180,0.08);
-}
-.chapter-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 32px rgba(100,130,180,0.2), 0 2px 8px rgba(100,130,180,0.1);
-}
-
-/* 카드 배지 (개수) */
-.cc-badge{
-  position:absolute;top:16px;right:14px;
-  font-size:9px;font-weight:600;padding:3px 8px;
-  border-radius:20px;background:#f1f5f9;color:#64748b;
-}
-
-/* 아이콘 래퍼 - 사진처럼 연한 컬러 배경의 둥근 박스 */
-.cc-icon-wrap{
-  width:32px;height:32px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:8px;
-  font-size:16px;
-}
-
-.cc-name{font-size:14px;font-weight:700;line-height:1.3;margin-bottom:2px;color:#1e293b;}
-.cc-meta{font-size:11px;color:#94a3b8;margin-bottom:6px;}
-.cc-keywords{
-  display:flex;flex-wrap:wrap;gap:3px;
-  margin-bottom:38px;
-}
-.cc-kw-tag{
-  font-size:11px;color:#64748b;
-  background:#f1f5f9;border-radius:6px;
-  padding:3px 7px;white-space:nowrap;
-}
-
-/* 학습하기 버튼 - 사진처럼 회색 박스 스타일 */
-.cc-learn-btn{
-  position:absolute;bottom:10px;left:10px;right:10px;
-  display:flex;align-items:center;justify-content:center;
-  padding:5px 8px;border-radius:10px;
-  background:#f1f5f9;
-  border:1px solid #e2e8f0;
-  color:#475569;
-  font-size:10px;font-weight:600;
-  font-family:'Noto Sans KR',sans-serif;
-  cursor:pointer;transition:all 0.15s;
-  gap:3px;
-}
-.cc-learn-btn:hover{background:#e2e8f0;color:#1e293b;}
-
-/* 연필 아이콘 (우측 상단 - 사진 스타일) */
-.cc-edit{
-  position:absolute;top:14px;right:40px;
-  color:#cbd5e1;font-size:14px;
-}
-
-/* ─── 카드 학습 페이지 ─── */
-.cards-page-inner{position:relative;z-index:1;}
-.cards-topbar{display:flex;align-items:center;gap:10px;padding:12px 1.25rem;}
-
-.back-btn{
-  width:34px;height:34px;border-radius:50%;
-  background:rgba(255,255,255,0.85);
-  border:1px solid rgba(180,200,230,0.5);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:16px;color:#2563eb;
-  box-shadow:0 2px 8px rgba(100,130,180,0.12);
-  transition:background 0.15s;
-}
-.back-btn:hover{background:#fff;}
-.cards-topbar-title{font-size:15px;font-weight:700;flex:1;color:#1e3a6e;}
-
-.cards-banner{
-  margin:0 1.25rem 1rem;
-  background:#ffffff;
-  border:1px solid rgba(220,230,245,0.8);
-  border-radius:24px;padding:1.25rem;
-  position:relative;overflow:hidden;min-height:100px;
-  box-shadow:0 4px 20px rgba(100,130,180,0.12);
-}
-.banner-shape1{position:absolute;border-radius:50%;opacity:0.3;}
-.banner-shape2{position:absolute;border-radius:12px;opacity:0.2;transform:rotate(20deg);}
-.banner-title{font-size:18px;font-weight:900;position:relative;z-index:1;line-height:1.3;color:#1e293b;}
-.banner-sub{font-size:11px;color:#64748b;margin-top:4px;position:relative;z-index:1;}
-
-.prog-wrap{padding:0 1.25rem 0.75rem;}
-.prog-row{display:flex;justify-content:space-between;margin-bottom:5px;}
-.prog-txt{font-size:11px;color:#7b9cc8;}
-.prog-bg{height:6px;background:rgba(100,140,200,0.12);border-radius:6px;overflow:hidden;}
-.prog-fill{height:100%;border-radius:6px;transition:width 0.35s;}
-
-.fc-wrap{padding:0 1.25rem 0.75rem;perspective:1200px;display:flex;justify-content:center;}
-.flashcard{
-  width:50%;min-height:230px;position:relative;
-  cursor:pointer;transform-style:preserve-3d;
-  transition:transform 0.55s cubic-bezier(0.4,0,0.2,1);
-}
-.flashcard.flipped{transform:rotateY(180deg);}
-.card-face{
-  position:absolute;width:100%;min-height:230px;
-  backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  border-radius:24px;padding:1.5rem;
-  display:flex;flex-direction:column;
-  background:#ffffff;
-  border:1px solid rgba(220,230,245,0.8);
-  box-shadow:0 6px 24px rgba(100,130,180,0.14);
-}
-.card-back{transform:rotateY(180deg);}
-.card-keyword{
-  font-size:28px;font-weight:900;letter-spacing:-1px;
-  font-family:'JetBrains Mono',monospace;line-height:1.1;
-  margin-bottom:10px;
-}
-.card-desc{font-size:17px;line-height:1.65;color:#475569;flex:1;word-break:keep-all;overflow-wrap:break-word;}
-.card-hint{
-  font-size:11px;color:#94a3b8;
-  margin-top:auto;padding-top:0.75rem;
-  display:flex;align-items:center;gap:4px;
-}
-.ex-label{font-size:10px;font-weight:700;letter-spacing:0.08em;margin-bottom:8px;color:#94a3b8;}
-.code-block{
-  background:none;
-  border:none;
-  border-radius:0;
-  padding:0;
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:17px;
-  line-height:1.85;
-  white-space:pre-wrap;
-  overflow-x:auto;
-  color:#334155;
-  margin-bottom:10px;
-  letter-spacing:0;
-}
-.cm  { color:#64748b; font-style:normal; }
-.kw  { color:#2563eb; font-weight:700; }
-.fn  { color:#7c3aed; font-weight:600; }
-.str { color:#16a34a; }
-.num { color:#ea580c; }
-.op  { color:#0369a1; }
-.card-result{font-size:15px;color:#64748b;line-height:1.8;white-space:pre-line;}
-.card-result-wrap{
-  margin-top:auto;
-  padding:12px 16px;
-  background:rgba(37,99,235,0.06);
-  border-left:3px solid #2563eb;
-  border-radius:0 10px 10px 0;
-  color:#1e3a6e;
-  font-size:15px;
-  line-height:1.8;
-  white-space:pre-line;
-  font-weight:500;
-}
-
-.card-actions{display:flex;gap:6px;padding:0 1.25rem 0.5rem;justify-content:center;}
-.act-btn{
-  display:flex;align-items:center;justify-content:center;
-  gap:4px;padding:7px 16px;border-radius:12px;
-  border:1px solid #e2e8f0;cursor:pointer;
-  font-size:11px;font-family:'Noto Sans KR',sans-serif;font-weight:600;
-  background:#ffffff;color:#475569;
-  transition:all 0.15s;
-  box-shadow:0 2px 6px rgba(100,130,180,0.08);
-}
-.act-btn:hover{background:#f8fafc;border-color:#cbd5e1;}
-.act-btn.saved{background:#ede9fe;border-color:#c4b5f4;color:#7c3aed;}
-.act-btn i{font-size:12px;}
-
-.nav-cards{
-  display:flex;align-items:center;
-  justify-content:space-between;padding:0 1.25rem 0.75rem;
-}
-.nav-card-btn{
-  display:flex;align-items:center;gap:5px;
-  padding:8px 16px;border-radius:14px;
-  border:1px solid #e2e8f0;
-  background:#ffffff;
-  cursor:pointer;font-size:13px;
-  font-family:'Noto Sans KR',sans-serif;font-weight:500;color:#475569;
-  box-shadow:0 2px 6px rgba(100,130,180,0.08);
-}
-.nav-card-btn:disabled{opacity:0.35;cursor:default;}
-.card-counter{font-size:13px;color:#7b9cc8;font-weight:500;}
-
-/* ─── 요약노트 ─── */
-.note-banner{
-  margin:0 1.25rem 1rem;
-  background:#ffffff;
-  border:1px solid rgba(220,230,245,0.8);
-  border-radius:24px;padding:1.25rem;
-  position:relative;overflow:hidden;
-  box-shadow:0 4px 20px rgba(100,130,180,0.12);
-}
-.note-shape1{position:absolute;width:80px;height:80px;border-radius:50%;right:20px;top:-20px;opacity:0.2;}
-.note-shape2{position:absolute;width:40px;height:40px;border-radius:50%;right:70px;bottom:-10px;opacity:0.15;}
-.note-title{font-size:20px;font-weight:900;position:relative;z-index:1;color:#1e293b;}
-.note-sub{font-size:12px;color:#64748b;margin-top:4px;position:relative;z-index:1;}
-
-.note-empty{text-align:center;padding:3rem 1.5rem;color:#94a3b8;}
-.note-empty i{font-size:44px;margin-bottom:12px;display:block;color:#cbd5e1;}
-.note-empty p{font-size:13px;line-height:1.7;}
-
-.note-card{
-  margin:0 1.25rem 10px;
-  background:#ffffff;
-  border:1px solid rgba(220,230,245,0.8);
-  border-radius:20px;overflow:hidden;
-  box-shadow:0 3px 14px rgba(100,130,180,0.1);
-}
-.note-card-header{padding:12px 14px;display:flex;align-items:center;gap:8px;}
-.note-kw{font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace;flex:1;color:#1e293b;}
-.note-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:#f1f5f9;color:#64748b;}
-.note-del{background:none;border:none;cursor:pointer;color:#cbd5e1;font-size:18px;padding:2px;}
-.note-del:hover{color:#f43f5e;}
-.note-divider{height:1px;background:#f1f5f9;margin:0 14px;}
-.note-body{padding:12px 14px;}
-.note-edit{
-  width:100%;border:none;background:none;
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:13px;color:#475569;line-height:1.7;
-  resize:none;outline:none;min-height:60px;
-}
-</style>
-</head>
-<body>
-
-<div id="app">
-  <!-- 아주 연한 배경 블롭 -->
-  <div class="bg-blob" style="width:280px;height:280px;background:#93c5fd;top:-100px;right:-80px;"></div>
-  <div class="bg-blob" style="width:220px;height:220px;background:#a5b4fc;bottom:150px;left:-80px;"></div>
-  <div class="bg-blob" style="width:180px;height:180px;background:#c4b5f4;bottom:80px;right:20px;opacity:0.12;"></div>
-
-  <!-- 상단 네비 -->
-  <div class="top-nav">
-    <div class="nav-logo">SQLD </div>
-    <button class="nav-tab active" id="tab-home" onclick="goHome()">홈</button>
-    <button class="nav-tab" id="tab-note" onclick="goNote()">요약노트</button>
-  </div>
-
-  <!-- 홈 페이지 -->
-  <div id="page-home" class="page active">
-    <div class="home-inner">
-      <div class="home-header">
-        <div class="home-title">SQLD <br>자격증 준비</div>
-      </div>
-
-      <!-- 1과목 -->
-      <div class="subj-header">
-        <span class="subj-pill">
-          <svg class="svg-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>1과목 · 데이터 모델링
-        </span>
-        <div class="subj-line"></div>
-      </div>
-      <div class="chapter-grid">
-
-        <div class="chapter-card" onclick="openChapter('modeling-basic')">
-          <div class="cc-icon-wrap" style="background:#ede9fe;">
-            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-          </div>
-          <div class="cc-name">데이터 모델링의 기본</div>
-          <div class="cc-meta">1과목 1단원</div>
+          <div class="cc-name">TOP N·계층형 질의</div>
+          <div class="cc-meta">2과목 5단원</div>
           <div class="cc-keywords">
-            <span class="cc-kw-tag">모델링</span>
-            <span class="cc-kw-tag">스키마</span>
-            <span class="cc-kw-tag">ERD</span>
-            <span class="cc-kw-tag">DBMS</span>
+            <span class="cc-kw-tag">ROWNUM</span>
+            <span class="cc-kw-tag">CONNECT BY</span>
+            <span class="cc-kw-tag">PIVOT</span>
           </div>
-          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('modeling-basic')">학습하기</button>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('topn-hierarchy')">학습하기</button>
         </div>
 
-        <div class="chapter-card" onclick="openChapter('entity')">
-          <div class="cc-icon-wrap" style="background:#fef9c3;">
-            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ca8a04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <div class="chapter-card" onclick="openChapter('orderby-regex')">
+          <div class="cc-icon-wrap" style="background:#fff7ed;">
+            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="15" y2="18"/></svg>
           </div>
-          <div class="cc-name">엔터티와 속성</div>
-          <div class="cc-meta">1과목 2단원</div>
+          <div class="cc-name">정렬·정규표현식</div>
+          <div class="cc-meta">2과목 6단원</div>
           <div class="cc-keywords">
-            <span class="cc-kw-tag">기본/중심/행위</span>
-            <span class="cc-kw-tag">속성 유형</span>
-            <span class="cc-kw-tag">식별자</span>
+            <span class="cc-kw-tag">ORDER BY 특징</span>
+            <span class="cc-kw-tag">NULL 정렬</span>
+            <span class="cc-kw-tag">REGEXP</span>
           </div>
-          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('entity')">학습하기</button>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('orderby-regex')">학습하기</button>
         </div>
 
-        <div class="chapter-card" onclick="openChapter('relationship')">
-          <div class="cc-icon-wrap" style="background:#fce7f3;">
-            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
-          </div>
-          <div class="cc-name">관계와 식별자</div>
-          <div class="cc-meta">1과목 3단원</div>
-          <div class="cc-keywords">
-            <span class="cc-kw-tag">카디널리티</span>
-            <span class="cc-kw-tag">식별/비식별</span>
-            <span class="cc-kw-tag">NULL</span>
-          </div>
-          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('relationship')">학습하기</button>
-        </div>
-
-        <div class="chapter-card" onclick="openChapter('normalization')">
-          <div class="cc-icon-wrap" style="background:#dbeafe;">
-            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="4"/><rect x="2" y="17" width="6" height="4"/><rect x="16" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-4a6 6 0 0 1 12 0v4"/></svg>
-          </div>
-          <div class="cc-name">정규화와 성능</div>
-          <div class="cc-meta">1과목 4단원</div>
-          <div class="cc-keywords">
-            <span class="cc-kw-tag">1/2/3NF</span>
-            <span class="cc-kw-tag">BCNF</span>
-            <span class="cc-kw-tag">반정규화</span>
-          </div>
-          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('normalization')">학습하기</button>
-        </div>
-
-      </div>
-
-      <!-- 2과목 -->
-      <div class="subj-header">
-        <span class="subj-pill">
-          <svg class="svg-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>2과목 · SQL 활용
-        </span>
-        <div class="subj-line"></div>
-      </div>
-      <div class="chapter-grid">
-
-        <div class="chapter-card" onclick="openChapter('sql-basic')">
-          <div class="cc-icon-wrap" style="background:#d1fae5;">
-            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#065f46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-          </div>
-          <div class="cc-name">SQL 기본</div>
-          <div class="cc-meta">2과목 1단원</div>
-          <div class="cc-keywords">
-            <span class="cc-kw-tag">SELECT/WHERE</span>
-            <span class="cc-kw-tag">DDL/DML/TCL</span>
-            <span class="cc-kw-tag">CASE</span>
-          </div>
-          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('sql-basic')">학습하기</button>
-        </div>
-
-        <div class="chapter-card" onclick="openChapter('join')">
-          <div class="cc-icon-wrap" style="background:#fee2e2;">
-            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b91c1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h5l4 5 4-5h5"/><path d="M3 17h5l4-5 4 5h5"/></svg>
-          </div>
-          <div class="cc-name">JOIN과 서브쿼리</div>
-          <div class="cc-meta">2과목 2단원</div>
-          <div class="cc-keywords">
-            <span class="cc-kw-tag">INNER/OUTER</span>
-            <span class="cc-kw-tag">서브쿼리</span>
-            <span class="cc-kw-tag">UNION</span>
-          </div>
-          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('join')">학습하기</button>
-        </div>
-
-        <div class="chapter-card" onclick="openChapter('group-func')">
-          <div class="cc-icon-wrap" style="background:#fef3c7;">
-            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
-          </div>
-          <div class="cc-name">그룹·윈도우 함수</div>
-          <div class="cc-meta">2과목 3단원</div>
-          <div class="cc-keywords">
-            <span class="cc-kw-tag">ROLLUP/CUBE</span>
-            <span class="cc-kw-tag">RANK</span>
-            <span class="cc-kw-tag">LAG/LEAD</span>
-          </div>
-          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('group-func')">학습하기</button>
-        </div>
-
-        <div class="chapter-card" onclick="openChapter('optimization')">
-          <div class="cc-icon-wrap" style="background:#e0f2fe;">
-            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-          </div>
-          <div class="cc-name">SQL 최적화 기본</div>
-          <div class="cc-meta">2과목 4단원</div>
-          <div class="cc-keywords">
-            <span class="cc-kw-tag">옵티마이저</span>
-            <span class="cc-kw-tag">인덱스 스캔</span>
-            <span class="cc-kw-tag">조인 원리</span>
-          </div>
-          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('optimization')">학습하기</button>
-        </div>
 
       </div>
       <div style="height:0.75rem"></div>
@@ -1358,6 +605,8 @@ const CHAPTER_COLORS = {
   'join':           {s1:'#fca5a5', s2:'#6ee7c0', fill:'#b91c1c'},
   'group-func':     {s1:'#fde68a', s2:'#f9a8d4', fill:'#92400e'},
   'optimization':   {s1:'#7dd3fc', s2:'#fde68a', fill:'#0369a1'},
+  'topn-hierarchy': {s1:'#bbf7d0', s2:'#6ee7b7', fill:'#15803d'},
+  'orderby-regex':  {s1:'#fed7aa', s2:'#fde68a', fill:'#c2410c'},
 };
 
 const CHAPTERS = {
@@ -1418,6 +667,12 @@ const CHAPTERS = {
     {keyword:'중첩 서브쿼리',desc:'WHERE/HAVING 절에서 조건 값으로 사용하는 서브쿼리',code:'-- 단일행 서브쿼리 (=, >, < 등)\nSELECT 사원명 FROM 사원\nWHERE  급여 > (SELECT AVG(급여) FROM 사원);\n-- 다중행 서브쿼리 (IN, ANY, ALL)\nWHERE  부서코드 IN\n  (SELECT 부서코드 FROM 부서\n   WHERE  지역 = \'서울\');',result:'단일행↔단일행 연산자 / 다중행↔IN,ANY,ALL'},
     {keyword:'인라인 뷰',desc:'FROM 절에 사용하는 서브쿼리로 가상 테이블 역할',code:'SELECT a.사원명, a.급여\nFROM (\n  SELECT 사원명, 급여,\n    RANK() OVER (ORDER BY 급여 DESC) AS rn\n  FROM 사원\n) a\nWHERE a.rn <= 3;',result:'TOP-N 조회에 자주 활용 / 별칭 필수'},
     {keyword:'UNION / UNION ALL',desc:'두 SELECT 결과를 합치는 집합 연산자',code:'-- UNION: 중복 제거 (정렬 발생)\nSELECT 사원명 FROM 정규직\nUNION\nSELECT 사원명 FROM 계약직;\n\n-- UNION ALL: 중복 포함 (빠름)\nSELECT 사원명 FROM 정규직\nUNION ALL\nSELECT 사원명 FROM 계약직;',result:'INTERSECT(교집합), MINUS/EXCEPT(차집합)도 있음'},
+    {keyword:'INTERSECT / MINUS',desc:'두 SELECT 결과의 교집합·차집합을 반환하는 집합 연산자',code:'-- INTERSECT: 두 쿼리에 모두 존재하는 행\nSELECT 사원번호 FROM 정규직\nINTERSECT\nSELECT 사원번호 FROM 수상자;\n\n-- MINUS(Oracle) / EXCEPT(ANSI): 차집합\nSELECT 사원번호 FROM 정규직\nMINUS\nSELECT 사원번호 FROM 징계자;',result:'컬럼 수·순서·타입 일치 필수 / UNION과 동일 제약'},
+    {keyword:'NATURAL JOIN',desc:'두 테이블의 동일한 컬럼명 전체에 자동으로 EQUAL JOIN 수행',code:'SELECT 사원명, 부서명\nFROM 사원\nNATURAL JOIN 부서;\n-- ON, USING 사용 불가\n-- 동일 컬럼은 한 번만 출력됨\n-- 동일 컬럼에 테이블 별칭 사용 불가',result:'공통 컬럼명이 여러 개면 전부 조인 조건으로 사용'},
+    {keyword:'USING / ON 조건절',desc:'조인 컬럼을 명시적으로 지정하는 조건절',code:'-- USING: 컬럼명이 같을 때 선택적 지정\nSELECT 사원명, 부서명\nFROM 사원 JOIN 부서 USING (부서코드);\n\n-- ON: 컬럼명이 달라도 조인 가능\nSELECT e.사원명, d.부서명\nFROM 사원 e JOIN 부서 d\n  ON e.dept_id = d.부서코드;',result:'USING 절에서는 해당 컬럼에 테이블 별칭 사용 불가'},
+    {keyword:'상호연관 서브쿼리',desc:'외부 쿼리의 각 행에 대해 서브쿼리가 반복 실행되는 서브쿼리',code:'SELECT 사원명, 급여\nFROM 사원 e\nWHERE 급여 > (\n  SELECT AVG(급여)\n  FROM 사원\n  WHERE 부서코드 = e.부서코드\n);\n-- 외부 e.부서코드가 서브쿼리에 전달됨',result:'행마다 서브쿼리 실행 → 성능 주의'},
+    {keyword:'EXISTS / NOT EXISTS',desc:'서브쿼리 결과의 존재 여부로 조건을 판별하는 연산자',code:'-- EXISTS: 서브쿼리 결과가 1행이라도 존재하면 TRUE\nSELECT 부서명\nFROM 부서 d\nWHERE EXISTS (\n  SELECT 1 FROM 사원\n  WHERE 부서코드 = d.부서코드\n);\n-- NOT EXISTS: 결과가 없으면 TRUE',result:'IN보다 EXISTS가 성능상 유리한 경우 많음'},
+    {keyword:'다중열 서브쿼리',desc:'서브쿼리가 두 개 이상의 컬럼을 반환하는 서브쿼리',code:'SELECT 사원명, 부서코드, 급여\nFROM 사원\nWHERE (부서코드, 급여) IN (\n  SELECT 부서코드, MAX(급여)\n  FROM 사원\n  GROUP BY 부서코드\n);',result:'부서별 최고 급여자 조회에 활용 / 컬럼 순서·타입 일치 필수'},
   ]},
   'group-func':{title:'그룹·윈도우 함수',subject:'2과목',cards:[
     {keyword:'ROLLUP',desc:'계층적 소계·합계를 자동 생성하는 그룹 함수',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY ROLLUP(부서, 직급);\n-- 결과: 직급별 소계 + 부서별 소계 + 전체합계',result:'ROLLUP(A,B): (A,B)→(A)→() 순서로 집계'},
@@ -1429,6 +684,9 @@ const CHAPTERS = {
     {keyword:'LAG / LEAD',desc:'현재 행 기준으로 이전(LAG)·이후(LEAD) 행 값을 참조',code:'SELECT 날짜, 매출,\n  LAG(매출, 1, 0) OVER\n    (ORDER BY 날짜) AS 전일매출,\n  LEAD(매출, 1, 0) OVER\n    (ORDER BY 날짜) AS 익일매출\nFROM 일별매출;',result:'LAG/LEAD(값, 오프셋, 기본값) / 시계열 분석에 활용'},
     {keyword:'SUM·AVG (누적)',desc:'윈도우 함수로 사용하는 누적 합계·평균',code:'SELECT 날짜, 매출,\n  SUM(매출) OVER\n    (ORDER BY 날짜\n     ROWS BETWEEN UNBOUNDED PRECEDING\n     AND CURRENT ROW) AS 누적매출\nFROM 일별매출;',result:'ROWS BETWEEN: 물리적 행 범위 / RANGE: 논리적 범위'},
     {keyword:'FIRST_VALUE / LAST_VALUE',desc:'파티션 내 첫 번째·마지막 값을 반환하는 윈도우 함수',code:'SELECT 부서코드, 사원명, 급여,\n  FIRST_VALUE(사원명)\n    OVER (PARTITION BY 부서코드\n          ORDER BY 급여 DESC) AS 최고연봉자\nFROM 사원;',result:'LAST_VALUE는 기본 프레임 주의 → ROWS BETWEEN ... UNBOUNDED FOLLOWING 명시 필요'},
+    {keyword:'ROWS / RANGE BETWEEN',desc:'윈도우 함수의 계산 범위를 지정하는 프레임 절',code:'SELECT 날짜, 매출,\n  SUM(매출) OVER (\n    ORDER BY 날짜\n    ROWS BETWEEN UNBOUNDED PRECEDING\n         AND CURRENT ROW) AS 누적합계,\n  SUM(매출) OVER (\n    ORDER BY 날짜\n    RANGE BETWEEN UNBOUNDED PRECEDING\n          AND CURRENT ROW) AS 동값포함합계\nFROM 일별매출;',result:'ROWS: 물리적 행 단위 / RANGE: 같은 값 묶어서 계산 / 생략 시 RANGE UNBOUNDED PRECEDING ~ CURRENT ROW'},
+    {keyword:'NTILE / CUME_DIST',desc:'데이터를 n등분하거나 누적 백분율을 구하는 비율 함수',code:'SELECT 사원명, 급여,\n  NTILE(4) OVER (ORDER BY 급여 DESC) AS 분위,\n  CUME_DIST() OVER (ORDER BY 급여) AS 누적비율\nFROM 사원;\n-- NTILE(4): 1~4 그룹 (4분위)',result:'NTILE: n등분 그룹 번호 / CUME_DIST: 현재까지 누적 비율 (0~1)'},
+    {keyword:'PERCENT_RANK / RATIO_TO_REPORT',desc:'백분위 순위와 전체 대비 비율을 구하는 비율 함수',code:'SELECT 사원명, 급여,\n  PERCENT_RANK() OVER (ORDER BY 급여) AS 백분위순위,\n  RATIO_TO_REPORT(급여)\n    OVER () AS 급여비율\nFROM 사원;',result:'PERCENT_RANK: (순위-1)/(전체-1) / RATIO_TO_REPORT: 개별값/전체합계 (부분/전체)'},
   ]},
   'optimization':{title:'SQL 최적화 기본',subject:'2과목',cards:[
     {keyword:'옵티마이저',desc:'SQL을 가장 효율적으로 실행하기 위한 실행 계획을 수립하는 엔진',code:'-- RBO (규칙 기반): 우선순위 규칙 적용\n-- CBO (비용 기반): 통계 정보로 비용 계산\n--   (현재 대부분 CBO 사용)\n-- 실행 계획 확인:\nEXPLAIN PLAN FOR SELECT ...\nSELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);',result:'CBO는 테이블 통계(행 수, 분포, 블록 수)를 기반으로 판단'},
@@ -1439,6 +697,22 @@ const CHAPTERS = {
     {keyword:'조인 수행 원리',desc:'두 테이블을 조인할 때 사용하는 알고리즘 유형',code:'-- Nested Loop Join:\n--   외부 테이블 루프 → 내부 인덱스 조회\n--   소량 데이터·인덱스 있을 때 유리\n-- Sort Merge Join:\n--   양쪽 정렬 후 병합, 범위 조건에 유리\n-- Hash Join:\n--   해시 테이블 생성, 대용량 동등 조인에 유리',result:'SQLD 시험: Nested Loop·Hash Join 개념 위주 출제'},
     {keyword:'힌트(Hint)',desc:'옵티마이저의 실행 계획을 강제로 지정하는 지시자',code:'-- 인덱스 강제 사용\nSELECT /*+ INDEX(e idx_사원_부서) */\n       사원명\nFROM   사원 e\nWHERE  부서코드 = \'D01\';\n-- 조인 방법 지정\nSELECT /*+ USE_NL(e d) */ ...',result:'힌트는 주석 형태 /*+ */ / 잘못된 힌트는 무시됨'},
     {keyword:'SQL 파싱 과정',desc:'SQL이 실행되기까지의 내부 처리 단계',code:'① SQL 파싱 (구문 분석)\n   → 파스 트리 생성\n② 최적화 (Optimization)\n   → 실행 계획 수립 (옵티마이저)\n③ 로우 소스 생성\n   → 실행 가능한 코드 생성\n④ SQL 실행',result:'라이브러리 캐시 히트 시 파싱 생략 가능 (소프트 파싱)'},
+  ]},
+  'topn-hierarchy':{title:'TOP N·계층형 질의',subject:'2과목',cards:[
+    {keyword:'TOP N 쿼리 (ROWNUM)',desc:'Oracle에서 ROWNUM 가상컬럼을 이용한 상위 N개 데이터 추출',code:'-- ROWNUM은 WHERE 처리 시 부여되므로\n-- 서브쿼리(인라인 뷰)로 감싸야 정확한 TOP-N 가능\nSELECT * FROM (\n  SELECT 사원명, 급여\n  FROM 사원\n  ORDER BY 급여 DESC\n) WHERE ROWNUM <= 5;\n-- ROWNUM = 1은 사용 가능\n-- ROWNUM > 1, ROWNUM = 2 등은 사용 불가',result:'ROWNUM은 실행 결과에 순차 번호를 부여하는 가상 컬럼'},
+    {keyword:'TOP N 쿼리 (TOP)',desc:'SQL Server에서 TOP 구문으로 상위 N개 데이터 추출',code:'-- SQL Server 기본\nSELECT TOP 5 사원명, 급여\nFROM 사원\nORDER BY 급여 DESC;\n\n-- WITH TIES: 동일 순위 포함\nSELECT TOP 3 WITH TIES 사원명, 급여\nFROM 사원\nORDER BY 급여 DESC;',result:'ORDER BY 필수 (없으면 랜덤) / WITH TIES로 동순위 함께 출력'},
+    {keyword:'계층형 질의 기본',desc:'부모-자식 관계의 계층 데이터를 탐색하는 Oracle 전용 기능',code:'SELECT LEVEL, 사원번호, 사원명, 관리자번호\nFROM 사원\nSTART WITH 관리자번호 IS NULL\nCONNECT BY PRIOR 사원번호 = 관리자번호;\n-- LEVEL: 계층 깊이 (루트=1)\n-- PRIOR 자식=부모: 순방향(부모→자식)',result:'START WITH: 루트 지정 / CONNECT BY: 부모-자식 관계 정의'},
+    {keyword:'CONNECT BY 옵션',desc:'계층형 질의에서 사용하는 추가 키워드들',code:'-- NOCYCLE: 순환 구조 무한루프 방지\nCONNECT BY NOCYCLE PRIOR 사원번호 = 관리자번호\n-- ORDER SIBLINGS BY: 같은 레벨 내 정렬\nORDER SIBLINGS BY 사원명\n-- SYS_CONNECT_BY_PATH: 루트~현재 경로\nSELECT SYS_CONNECT_BY_PATH(사원명, \'/\') AS 경로\n-- CONNECT_BY_ROOT: 최상위 루트값\n-- CONNECT_BY_ISLEAF: 리프노드=1, 아니면=0',result:'CONNECT_BY_ISCYCLE: 순환 존재=1 (NOCYCLE과 함께 사용)'},
+    {keyword:'PIVOT 절',desc:'행 데이터를 특정 컬럼 기준으로 열 방향으로 재구성 (LONG→WIDE)',code:'SELECT *\nFROM (\n  SELECT 부서코드, 직급, 급여 FROM 사원\n)\nPIVOT (\n  SUM(급여)\n  FOR 직급 IN (\'과장\' AS 과장, \'대리\' AS 대리,\n               \'사원\' AS 사원)\n);',result:'LONG DATA(행이 많음)를 WIDE DATA(열이 많음)로 변환'},
+    {keyword:'UNPIVOT 절',desc:'열 데이터를 행으로 변환 (WIDE→LONG)',code:'SELECT 부서코드, 직급, 급여\nFROM 부서별급여현황\nUNPIVOT (\n  급여 FOR 직급 IN (과장, 대리, 사원)\n);',result:'PIVOT의 반대 / WIDE DATA를 LONG DATA로 변환'},
+    {keyword:'셀프 조인',desc:'같은 테이블에 대해 두 번 조인하여 계층·비교 관계 표현',code:'SELECT e.사원명 AS 사원,\n       m.사원명 AS 관리자\nFROM 사원 e\n  LEFT JOIN 사원 m\n    ON e.관리자번호 = m.사원번호;\n-- 반드시 별칭(Alias) 사용 필수',result:'조직도·카테고리 계층·이전값 비교 등에 활용'},
+  ]},
+  'orderby-regex':{title:'정렬·정규표현식',subject:'2과목',cards:[
+    {keyword:'ORDER BY 수행 특징',desc:'ORDER BY 절의 실행 시점과 사용 가능한 표현에 관한 특징',code:'-- SELECT보다 나중에 수행\n-- → SELECT 절의 별칭(Alias) 사용 가능\nSELECT 급여 * 12 AS 연봉\nFROM 사원\nORDER BY 연봉 DESC;\n\n-- GROUP BY보다 나중에 수행\n-- → 집계 함수 사용 가능\nORDER BY COUNT(*) DESC',result:'실행 순서: FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY'},
+    {keyword:'NULL 정렬 규칙',desc:'NULL 값이 포함된 컬럼을 정렬할 때 DBMS별 처리 방식',code:'-- Oracle: NULL을 최댓값으로 처리\n-- ASC  정렬 시 NULL이 마지막\n-- DESC 정렬 시 NULL이 처음\n\n-- SQL Server: NULL을 최솟값으로 처리\n-- ASC  정렬 시 NULL이 처음\n-- DESC 정렬 시 NULL이 마지막\n\n-- NULLS FIRST / NULLS LAST로 명시 가능 (Oracle)',result:'Oracle과 SQL Server의 NULL 정렬 방향이 반대임에 주의'},
+    {keyword:'데이터 타입별 정렬',desc:'오름차순 기준 데이터 타입에 따른 정렬 순서',code:'-- 숫자형: 작은 수 → 큰 수\n-- 1, 10, 100, 1000\n\n-- 문자형: 사전순 (ASCII 코드 순)\n-- \' \', \'A\', \'B\', \'a\', \'b\', \'가\', \'나\'\n\n-- 날짜형: 과거 → 미래\n-- 2020-01-01 < 2024-12-31',result:'문자형은 대문자가 소문자보다 앞에 정렬 (ASCII 기준)'},
+    {keyword:'정규표현식 기본',desc:'문자와 기호를 조합하여 특정 패턴을 검색하거나 일치 여부를 확인',code:'-- . : 임의의 한 문자\n-- ^ : 문자열의 시작\n-- $ : 문자열의 끝\n-- * : 앞 문자가 0번 이상 반복\n-- + : 앞 문자가 1번 이상 반복\n-- ? : 앞 문자가 0 또는 1번\n-- [] : 괄호 안 문자 중 하나\n-- | : OR (a|b)',result:'LIKE보다 강력한 패턴 매칭 가능'},
+    {keyword:'REGEXP_LIKE / REGEXP_SUBSTR',desc:'Oracle 정규표현식 함수를 이용한 패턴 검색',code:'-- REGEXP_LIKE: 조건 일치 여부\nSELECT 사원명 FROM 사원\nWHERE REGEXP_LIKE(전화번호, \'\\^\\d{3}-\\d{4}-\\d{4}$\');\n\n-- REGEXP_SUBSTR: 패턴 일치 부분 추출\nSELECT REGEXP_SUBSTR(\'abc123\', \'[0-9]+\')\nFROM DUAL;\n-- 결과: 123',result:'REGEXP_REPLACE(치환), REGEXP_INSTR(위치) 함수도 있음'},
   ]},
 };
 
