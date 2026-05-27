@@ -8,6 +8,7 @@
 </style>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html, body {
@@ -219,11 +220,12 @@ html, body {
 }
 .card-back{transform:rotateY(180deg);}
 .card-keyword{
-  font-size:28px;font-weight:900;letter-spacing:-1px;
-  font-family:'JetBrains Mono',monospace;line-height:1.1;
+  font-size:24px;font-weight:600;letter-spacing:-0.5px;word-spacing:-6px;
+  font-family:'Pretendard','JetBrains Mono',sans-serif;line-height:1.1;
   margin-bottom:10px;
 }
-.card-desc{font-size:17px;line-height:1.65;color:#475569;flex:1;word-break:keep-all;overflow-wrap:break-word;}
+.card-keyword .kw-en{letter-spacing:0.5px;}
+.card-desc{font-size:15px;line-height:1.65;color:#475569;flex:1;word-break:keep-all;overflow-wrap:break-word;}
 .card-hint{
   font-size:11px;color:#94a3b8;
   margin-top:auto;padding-top:0.75rem;
@@ -280,7 +282,7 @@ html, body {
 
 .nav-cards{
   display:flex;align-items:center;
-  justify-content:space-between;padding:0 1.25rem 0.75rem;
+  justify-content:space-between;padding:0 1.25rem 0.75rem;margin-top:1rem;
 }
 .nav-card-btn{
   display:flex;align-items:center;gap:5px;
@@ -320,7 +322,7 @@ html, body {
   box-shadow:0 3px 14px rgba(100,130,180,0.1);
 }
 .note-card-header{padding:12px 14px;display:flex;align-items:center;gap:8px;}
-.note-kw{font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace;flex:1;color:#1e293b;}
+.note-kw{font-size:14px;font-weight:700;font-family:'Pretendard','JetBrains Mono',sans-serif;flex:1;color:#1e293b;}
 .note-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:#f1f5f9;color:#64748b;}
 .note-del{background:none;border:none;cursor:pointer;color:#cbd5e1;font-size:18px;padding:2px;}
 .note-del:hover{color:#f43f5e;}
@@ -772,7 +774,7 @@ function highlightSQL(code){
 function renderCard(){
   const ch=CHAPTERS[currentChapter], card=ch.cards[currentCardIdx], total=ch.cards.length;
   const col=CHAPTER_COLORS[currentChapter];
-  document.getElementById('card-keyword').textContent=card.keyword;
+  document.getElementById('card-keyword').innerHTML=card.keyword.replace(/([A-Za-z0-9·\/\-\_\.]+)/g,'<span class="kw-en">$1</span>');
   document.getElementById('card-keyword').style.color=col.fill;
   document.getElementById('card-desc').textContent=card.desc;
   document.getElementById('card-code').innerHTML=highlightSQL(card.code);
