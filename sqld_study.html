@@ -236,7 +236,7 @@ html, body {
   border-radius:0;
   padding:0;
   font-family:'Noto Sans KR',sans-serif;
-  font-size:14px;
+  font-size:17px;
   line-height:1.85;
   white-space:pre-wrap;
   overflow-x:auto;
@@ -250,7 +250,19 @@ html, body {
 .str { color:#16a34a; }
 .num { color:#ea580c; }
 .op  { color:#0369a1; }
-.card-result{font-size:12px;color:#64748b;line-height:1.6;}
+.card-result{font-size:15px;color:#64748b;line-height:1.8;white-space:pre-line;}
+.card-result-wrap{
+  margin-top:auto;
+  padding:12px 16px;
+  background:rgba(37,99,235,0.06);
+  border-left:3px solid #2563eb;
+  border-radius:0 10px 10px 0;
+  color:#1e3a6e;
+  font-size:15px;
+  line-height:1.8;
+  white-space:pre-line;
+  font-weight:500;
+}
 
 .card-actions{display:flex;gap:6px;padding:0 1.25rem 0.5rem;justify-content:center;}
 .act-btn{
@@ -513,7 +525,7 @@ html, body {
           </div>
           <div class="card-face card-back">
             <div class="code-block" id="card-code"></div>
-            <div class="card-result" id="card-result"></div>
+            <div class="card-result-wrap" id="card-result"></div>
           </div>
         </div>
       </div>
@@ -580,7 +592,7 @@ const CHAPTERS = {
     {keyword:'기본 엔터티',desc:'업무에서 원래부터 존재하며 다른 엔터티에 종속되지 않는 독립 엔터티',code:'-- 예시: 사원, 부서, 고객, 상품\n-- 독자적으로 생성 가능\n-- 주식별자는 타 엔터티 참조 없이 자체 생성',result:'키 엔터티(Key Entity)라고도 함'},
     {keyword:'중심 엔터티',desc:'기본 엔터티로부터 발생하며 업무의 중심 역할을 하는 엔터티',code:'-- 예시: 주문, 계약, 수강신청\n-- 기본 엔터티 없이는 존재 불가\n-- 비즈니스 로직의 핵심을 담당',result:'많은 속성을 가지며 다른 엔터티 생성의 기반이 됨'},
     {keyword:'행위 엔터티',desc:'두 개 이상의 부모 엔터티로부터 발생하며 자주 변하는 엔터티',code:'-- 예시: 주문상세, 수강이력, 로그인이력\n-- 업무 행위로 인해 생성\n-- 상세/이력/내역 유형이 대표적',result:'데이터가 가장 많이 쌓이는 엔터티 유형'},
-    {keyword:'속성 유형',desc:'속성을 성격에 따라 기본·설계·파생 속성으로 분류',code:'-- 기본 속성: 원래 업무에서 가져온 값\n   (사원명, 생년월일)\n-- 설계 속성: 설계 과정에서 만든 값\n   (코드, 일련번호)\n-- 파생 속성: 다른 속성에서 계산\n   (나이, 합계금액)',result:'파생 속성은 가능한 최소화 권장'},
+    {keyword:'속성 유형',desc:'속성을 성격에 따라 기본·설계·파생 속성으로 분류',code:'기본 속성: 원래 업무에서 가져온 값\n   (사원명, 생년월일)\n설계 속성: 설계 과정에서 만든 값\n   (코드, 일련번호)\n파생 속성: 다른 속성에서 계산\n   (나이, 합계금액)',result:'파생 속성은 가능한 최소화 권장'},
     {keyword:'단일값·다중값 속성',desc:'속성이 하나의 값인지 여럿의 값인지에 따른 구분',code:'-- 단일값: 사원번호, 성별 (한 개의 값)\n-- 다중값: 취미, 연락처\n   → 다중값은 별도 엔터티로 분리!\n   사원 ──1:N── 사원연락처',result:'다중값 속성이 있으면 정규화 대상(1NF)'},
     {keyword:'식별자 분류',desc:'엔터티에서 인스턴스를 유일하게 구분하는 속성의 종류',code:'-- 주식별자: 기본키(PK), 유일·불변·존재\n-- 보조식별자: 후보키(UK)\n-- 외부식별자: 외래키(FK)\n-- 복합식별자: 2개 이상 속성 조합',result:'주식별자 조건: 유일성·최소성·불변성·존재성'},
     {keyword:'강한/약한 엔터티',desc:'다른 엔터티 존재에 종속 여부로 구분',code:'-- 강한 엔터티: 독립 존재 (사원, 부서)\n-- 약한 엔터티: 부모 엔터티 없이 존재 불가\n   예) 주문상세 (주문 없으면 존재 불가)\n   → 식별 관계로 연결됨',result:'약한 엔터티는 부모 PK를 자신의 PK로 포함'},
@@ -594,7 +606,7 @@ const CHAPTERS = {
     {keyword:'NULL 처리',desc:'값이 없음을 나타내는 특수한 상태로 0이나 공백과 다름',code:'-- NULL과 연산하면 결과도 NULL\n   NULL + 100 = NULL\n-- NVL(컬럼, 대체값)   -- Oracle\n-- ISNULL(컬럼, 대체값) -- SQL Server\n-- COALESCE(a,b,c) -- 첫 번째 비NULL',result:'NULL 비교는 = 아닌 IS NULL / IS NOT NULL 사용'},
   ]},
   'normalization':{title:'정규화와 성능',subject:'1과목',cards:[
-    {keyword:'함수 종속',desc:'속성 A가 결정되면 B가 유일하게 결정되는 관계 (A → B)',code:'-- 완전 함수 종속: PK 전체에 종속\n   (주문번호,상품코드) → 수량\n-- 부분 함수 종속: PK 일부에만 종속\n   (주문번호,상품코드) → 주문일자\n-- 이행 함수 종속: A→B→C',result:'이상 현상의 근본 원인'},
+    {keyword:'함수 종속',desc:'속성 A가 결정되면 B가 유일하게 결정되는 관계 (A → B)',code:'완전 함수 종속: PK 전체에 종속\n   (주문번호,상품코드) → 수량\n부분 함수 종속: PK 일부에만 종속\n   (주문번호,상품코드) → 주문일자\n이행 함수 종속: A→B→C',result:'이상 현상의 근본 원인'},
     {keyword:'1NF',desc:'제1정규형: 모든 속성값이 원자값(더 이상 분해 불가)이어야 함',code:'-- 위반 예: 취미 = "독서,영화,여행"\n-- 해결: 취미 테이블 별도 분리\n   사원(사원번호, 이름)\n   사원취미(사원번호, 취미) ← 분리',result:'다중값·반복 속성 제거'},
     {keyword:'2NF',desc:'제2정규형: 1NF + 모든 비키 속성이 PK 전체에 완전 함수 종속',code:'-- 위반 예: 복합PK(주문번호,상품코드)\n--   주문일자는 주문번호에만 종속 (부분)\n-- 해결:\n   주문(주문번호, 주문일자)  ← 분리\n   주문상세(주문번호, 상품코드, 수량)',result:'부분 함수 종속 제거 (복합PK 테이블 점검 필수)'},
     {keyword:'3NF',desc:'제3정규형: 2NF + 이행 함수 종속 제거',code:'-- 위반 예: 사원번호→부서코드→부서명\n   (이행 종속: 사원번호→부서명)\n-- 해결:\n   사원(사원번호, 이름, 부서코드)\n   부서(부서코드, 부서명)  ← 분리',result:'이행 함수 종속 제거'},
@@ -689,22 +701,16 @@ function openChapter(id){
 }
 
 function highlightSQL(code){
-  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  return esc(code)
-    // 주석 (--)
-    .replace(/(--[^\n]*)/g,'<span class="cm">$1</span>')
-    // SQL 키워드
-    .replace(/\b(SELECT|FROM|WHERE|ORDER\s+BY|GROUP\s+BY|HAVING|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER|JOIN|INNER\s+JOIN|LEFT\s+OUTER\s+JOIN|LEFT\s+JOIN|RIGHT\s+JOIN|FULL\s+JOIN|ON|AS|IN|NOT|NULL|AND|OR|IS|DISTINCT|LIMIT|UNION|ALL|PARTITION\s+BY|OVER|BY|INTO|SET|VALUES|INDEX|FOR|EXPLAIN\s+PLAN)\b/gi,
-      '<span class="kw">$1</span>')
-    // 함수
-    .replace(/\b(COUNT|SUM|AVG|MAX|MIN|RANK|DENSE_RANK|ROW_NUMBER|LAG|LEAD|ROLLUP|CUBE|GROUPING\s+SETS|COALESCE|NVL|DECODE|CASE|WHEN|THEN|ELSE|END|PLAN)\b/gi,
-      '<span class="fn">$1</span>')
-    // 문자열
-    .replace(/'([^']*)'/g,"<span class=\"str\">'$1'</span>")
-    // 숫자
-    .replace(/\b(\d+(?:\.\d+)?)\b/g,'<span class="num">$1</span>')
-    // 연산자
-    .replace(/(>=|<=|<>|!=|=|&gt;|&lt;)/g,'<span class="op">$1</span>');
+  // -- 주석 줄 제거 후 plain text로만 표시
+  return code
+    .split('\n')
+    .filter(line => !/^\s*--/.test(line))
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    // 괄호 그룹 사이 공백 → 줄바꿈
+    .replace(/(\))\s{2,}(\()/g, '$1\n$2')
+    .trim()
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 function renderCard(){
@@ -714,7 +720,9 @@ function renderCard(){
   document.getElementById('card-keyword').style.color=col.fill;
   document.getElementById('card-desc').textContent=card.desc;
   document.getElementById('card-code').innerHTML=highlightSQL(card.code);
-  document.getElementById('card-result').textContent=card.result;
+  document.getElementById('card-result').textContent=card.result
+    .replace(/\s*([①②③④⑤⑥⑦⑧⑨])/g,'\n$1')
+    .replace(/,\s*([\uAC00-\uD7A3])/g,'\n$1');
   const pct=Math.round((currentCardIdx+1)/total*100);
   document.getElementById('progress-fill').style.width=pct+'%';
   document.getElementById('progress-label').textContent=(currentCardIdx+1)+' / '+total;
