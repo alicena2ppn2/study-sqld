@@ -334,6 +334,177 @@ html, body {
   font-size:13px;color:#475569;line-height:1.7;
   resize:none;outline:none;min-height:60px;
 }
+
+/* ─── 노트 만들기 버튼 ─── */
+.make-note-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin:0 1.25rem 12px;
+  padding:13px 20px;border-radius:16px;
+  background:#ffcba4;
+  color:#c2623a;font-size:14px;font-weight:700;
+  font-family:'Noto Sans KR',sans-serif;
+  border:none;cursor:pointer;
+  box-shadow:0 4px 14px rgba(255,180,140,0.35);
+  transition:all 0.2s;
+  width:calc(100% - 2.5rem);
+}
+.make-note-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(255,180,140,0.5);}
+.make-note-btn:active{transform:translateY(0);}
+
+/* ─── 노트 페이퍼 모달 ─── */
+.note-modal-overlay{
+  display:none;position:fixed;inset:0;z-index:100;
+  background:rgba(15,23,42,0.7);backdrop-filter:blur(8px);
+  overflow-y:auto;padding:24px 0 48px;
+}
+.note-modal-overlay.open{display:block;}
+.note-paper-container{
+  max-width:440px;margin:0 auto;padding:0 16px;
+}
+.note-paper-actions{
+  display:flex;gap:10px;margin-bottom:16px;justify-content:center;
+}
+.npa-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:10px 20px;border-radius:12px;
+  font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;
+  cursor:pointer;border:none;transition:all 0.15s;
+}
+.npa-btn.close{background:#fff;color:#64748b;}
+.npa-btn.pdf{background:linear-gradient(135deg,#dc2626,#f87171);color:#fff;box-shadow:0 4px 14px rgba(220,38,38,0.35);}
+.npa-btn.pdf:hover{transform:translateY(-1px);}
+
+/* 노트 페이퍼 — 크래프트 노트 감성 */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap');
+
+.note-paper{
+  background:#fffef9;
+  border-radius:2px;
+  box-shadow:0 24px 64px rgba(0,0,0,0.32),0 2px 8px rgba(0,0,0,0.12), 4px 4px 0 #e8e0d0;
+  position:relative;overflow:hidden;
+  font-family:'Noto Sans KR',sans-serif;
+  min-height:520px;
+  margin-bottom:24px;
+}
+
+/* 왼쪽 스파이럴 바인더 */
+.paper-rings{
+  position:absolute;left:0;top:0;bottom:0;width:28px;
+  background:linear-gradient(to right,#d4d0c8,#e8e4dc);
+  border-right:1.5px solid #c8c4bc;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:space-around;padding:28px 0;
+  z-index:2;
+}
+.paper-ring{
+  width:16px;height:16px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#d4d0c8,#909090);
+  border:1.5px solid #787878;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,0.25),0 1px 2px rgba(255,255,255,0.4);
+}
+
+/* 내용 영역 */
+.paper-inner{
+  margin-left:32px;
+  padding:22px 18px 26px 18px;
+  position:relative;
+}
+
+/* 가로줄 — 연한 세피아 */
+.paper-inner::before{
+  content:'';position:absolute;
+  left:0;right:0;top:0;bottom:0;
+  background-image:repeating-linear-gradient(
+    transparent, transparent 28px, #e8e2d4 28px, #e8e2d4 29px
+  );
+  pointer-events:none;z-index:0;
+}
+/* 세로 핑크줄 */
+.paper-inner::after{
+  content:'';position:absolute;
+  left:36px;top:0;bottom:0;width:1px;
+  background:rgba(220,100,100,0.28);
+  pointer-events:none;z-index:0;
+}
+
+/* 헤더 */
+.paper-header{
+  position:relative;z-index:1;
+  padding-bottom:12px;margin-bottom:14px;
+  border-bottom:1.5px solid #d4ccc0;
+}
+.paper-logo-area{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:4px;
+  font-family:'Caveat',cursive;
+  font-size:11px;color:#b0a898;letter-spacing:0.05em;
+}
+.paper-main-title{
+  font-family:'Caveat',cursive;
+  font-size:20px;font-weight:700;
+  color:#3d3228;
+  letter-spacing:0.02em;
+  line-height:1.2;
+}
+.paper-sub-title{
+  font-family:'Caveat',cursive;
+  font-size:12px;color:#9a8e82;margin-top:1px;
+}
+
+/* 키워드 리스트 — 깔끔한 손필기 스타일 */
+.paper-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;position:relative;z-index:1;
+  margin-left:40px;
+}
+.paper-kw-item{
+  padding:5px 8px 5px 0;
+  border-bottom:1px dashed #ddd6cc;
+}
+.paper-kw-item:nth-child(odd){
+  border-right:1px dashed #ddd6cc;
+  padding-right:10px;
+}
+.paper-kw-name{
+  font-family:'Caveat',cursive;
+  font-size:14px;font-weight:600;
+  color:#2d2520;line-height:1.25;
+}
+.paper-kw-desc{
+  font-family:'Caveat',cursive;
+  font-size:11px;color:#8a7d72;
+  line-height:1.35;margin-top:1px;
+}
+
+/* 페이지 번호 */
+.paper-page-divider{
+  text-align:center;
+  font-family:'Caveat',cursive;
+  font-size:11px;color:#c4bbb0;
+  margin:18px 0 14px;position:relative;z-index:1;
+}
+.paper-page-num{
+  font-family:'Caveat',cursive;
+  font-size:11px;color:#b0a898;
+  text-align:center;margin-top:14px;
+  padding-top:8px;border-top:1px solid #e0d8cc;
+  position:relative;z-index:1;
+  letter-spacing:0.05em;
+}
+
+/* 빈 노트 안내 */
+.paper-empty{
+  text-align:center;padding:60px 20px;color:#b0a898;
+  position:relative;z-index:1;margin-left:28px;
+  font-family:'Caveat',cursive;
+}
+.paper-empty p{font-size:15px;line-height:1.7;}
+
+@media print{
+  .note-paper-actions{display:none;}
+  .note-modal-overlay{position:static;background:none;backdrop-filter:none;}
+  .note-paper{box-shadow:none;}
+}
 </style>
 </head>
 <body>
@@ -519,6 +690,20 @@ html, body {
           <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('orderby-regex')">학습하기</button>
         </div>
 
+        <div class="chapter-card" onclick="openChapter('null-func')">
+          <div class="cc-icon-wrap" style="background:#fce7f3;">
+            <svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9d174d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </div>
+          <div class="cc-name">NULL·조건 함수</div>
+          <div class="cc-meta">2과목 7단원</div>
+          <div class="cc-keywords">
+            <span class="cc-kw-tag">NVL/NVL2</span>
+            <span class="cc-kw-tag">NULLIF/ISNULL</span>
+            <span class="cc-kw-tag">COALESCE/DECODE</span>
+          </div>
+          <button class="cc-learn-btn" onclick="event.stopPropagation();openChapter('null-func')">학습하기</button>
+        </div>
+
 
       </div>
       <div style="height:0.75rem"></div>
@@ -586,7 +771,28 @@ html, body {
         <div class="note-title">나만의 요약노트</div>
         <div class="note-sub" id="note-sub">저장한 카드를 편집할 수 있어요</div>
       </div>
-      <div id="note-content" style="padding-bottom:1rem;"></div>
+      <div id="note-content" style="padding-bottom:0.5rem;"></div>
+      <!-- 노트 만들기 버튼 -->
+      <button class="make-note-btn" onclick="openNoteModal()">
+        <svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        노트 만들기
+      </button>
+      <div style="height:1rem;"></div>
+    </div>
+  </div>
+
+  <!-- 노트 페이퍼 모달 -->
+  <div class="note-modal-overlay" id="noteModal" onclick="closeNoteModalOutside(event)">
+    <div class="note-paper-container" id="noteModalInner">
+      <div class="note-paper-actions">
+        <button class="npa-btn close" onclick="closeNoteModal()">
+          <svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>닫기
+        </button>
+        <button class="npa-btn pdf" onclick="savePDF()">
+          <svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>PDF 저장
+        </button>
+      </div>
+      <div id="note-paper-pages"></div>
     </div>
   </div>
 
@@ -609,6 +815,7 @@ const CHAPTER_COLORS = {
   'optimization':   {s1:'#7dd3fc', s2:'#fde68a', fill:'#0369a1'},
   'topn-hierarchy': {s1:'#bbf7d0', s2:'#6ee7b7', fill:'#15803d'},
   'orderby-regex':  {s1:'#fed7aa', s2:'#fde68a', fill:'#c2410c'},
+  'null-func':      {s1:'#fce7f3', s2:'#fbcfe8', fill:'#9d174d'},
 };
 
 const CHAPTERS = {
@@ -637,6 +844,9 @@ const CHAPTERS = {
     {keyword:'비식별 관계',desc:'부모 엔터티의 PK가 자식 엔터티의 일반 속성(FK)으로만 전이되는 관계',code:'-- 사원(사원번호 PK)\n-- 급여이력(이력번호 PK, 사원번호 FK)\n-- 자식의 PK에 부모 PK 미포함\n-- ERD에서 점선으로 표현',result:'부모 없이도 자식 존재 가능 (선택 참여 시)'},
     {keyword:'반정규화',desc:'성능 향상을 위해 의도적으로 정규화 규칙을 위반하는 기법',code:'-- 테이블 통합/분할\n-- 중복 컬럼 추가 (부서명을 사원 테이블에)\n-- 파생 컬럼 추가 (주문합계금액)\n-- 이력 테이블 추가',result:'조회 성능↑ / 데이터 정합성 관리 부담↑'},
     {keyword:'NULL 처리',desc:'값이 없음을 나타내는 특수한 상태로 0이나 공백과 다름',code:'-- NULL과 연산하면 결과도 NULL\n   NULL + 100 = NULL\n-- NVL(컬럼, 대체값)   -- Oracle\n-- ISNULL(컬럼, 대체값) -- SQL Server\n-- COALESCE(a,b,c) -- 첫 번째 비NULL',result:'NULL 비교는 = 아닌 IS NULL / IS NOT NULL 사용'},
+    {keyword:'상호배타적 관계',desc:'어느 한 시점에 하나의 엔터티와만 관계를 맺는 배타적 관계',code:'-- 예: 계약은 개인 또는 법인 중 하나와만 관계\n   개인계약 OR 법인계약 (동시 불가)\n-- Arc 관계(배타적 관계) 표기\n-- 두 관계 중 반드시 하나만 선택',result:'동시에 두 엔터티와 관계를 맺을 수 없음'},
+    {keyword:'식별/비식별 관계 선택 기준',desc:'식별 vs 비식별 관계를 결정하는 주요 기준',code:'-- 식별 관계:\n   부모·자식 생명주기 동일\n   자식이 부모 없이 존재 불가\n   강한 결합\n-- 비식별 관계:\n   생명주기가 다를 때\n   자식이 독립 존재 가능\n   약한 결합',result:'생명주기가 같으면 식별, 다르면 비식별 관계'},
+    {keyword:'도메인 (Domain)',desc:'릴레이션 속성이 가질 수 있는 허용된 값의 범위',code:'-- 성별 도메인: {\'M\', \'F\'}\n-- 점수 도메인: 0 ~ 100 정수\n-- 이메일 도메인: 이메일 형식의 문자열\n\n-- 특징\n-- 속성명과 도메인명은 동일하지 않아도 됨\n-- 모든 속성의 도메인은 원자값이어야 함',result:'원자값: 더 이상 분해할 수 없는 단일 값'},
   ]},
   'normalization':{title:'정규화와 성능',subject:'1과목',cards:[
     {keyword:'함수 종속',desc:'속성 A가 결정되면 B가 유일하게 결정되는 관계 (A → B)',code:'완전 함수 종속: PK 전체에 종속\n   (주문번호,상품코드) → 수량\n부분 함수 종속: PK 일부에만 종속\n   (주문번호,상품코드) → 주문일자\n이행 함수 종속: A→B→C',result:'이상 현상의 근본 원인'},
@@ -644,7 +854,8 @@ const CHAPTERS = {
     {keyword:'2NF',desc:'제2정규형: 1NF + 모든 비키 속성이 PK 전체에 완전 함수 종속',code:'-- 위반 예: 복합PK(주문번호,상품코드)\n--   주문일자는 주문번호에만 종속 (부분)\n-- 해결:\n   주문(주문번호, 주문일자)  ← 분리\n   주문상세(주문번호, 상품코드, 수량)',result:'부분 함수 종속 제거 (복합PK 테이블 점검 필수)'},
     {keyword:'3NF',desc:'제3정규형: 2NF + 이행 함수 종속 제거',code:'-- 위반 예: 사원번호→부서코드→부서명\n   (이행 종속: 사원번호→부서명)\n-- 해결:\n   사원(사원번호, 이름, 부서코드)\n   부서(부서코드, 부서명)  ← 분리',result:'이행 함수 종속 제거'},
     {keyword:'BCNF',desc:'Boyce-Codd 정규형: 3NF + 모든 결정자가 후보키여야 함',code:'-- 위반 예: 후보키 아닌 속성이 결정자\n   수강(학번, 과목, 교수)\n   교수 → 과목 (교수는 PK 아님)\n-- 해결: 강의(교수, 과목) + 수강(학번, 교수)',result:'3NF보다 엄격, 실무에서는 3NF까지 주로 적용'},
-    {keyword:'성능 모델링',desc:'조회 성능을 고려하여 모델링 단계부터 반정규화를 적용하는 설계',code:'-- 정규화 → 성능 검토 → 반정규화 결정\n-- 인덱스 컬럼 선정\n-- 파티셔닝 고려\n-- 클러스터링 팩터 고려',result:'정규화 → 반정규화 → 인덱스 설계 순서'},
+    {keyword:'성능 모델링 순서',desc:'성능을 고려한 데이터 모델링의 단계별 절차',code:'1. 정규화 정확히 수행\n2. 데이터베이스 용량 산정\n3. DB 트랜잭션 유형 파악\n4. 용량·트랜잭션 유형에 따라 반정규화\n5. 이력모델·PK/FK·슈퍼/서브타입 조정\n6. 성능 관점 데이터 모델 검증',result:'정규화 → 용량 파악 → 반정규화 순서'},
+    {keyword:'트랜잭션 원자성',desc:'트랜잭션의 작업이 전부 반영되거나 전혀 반영되지 않아야 한다는 원칙',code:'-- ACID 중 원자성(Atomicity)\n-- 작업 전부 성공 → COMMIT\n-- 일부라도 실패 → 전체 ROLLBACK\n\nBEGIN TRANSACTION;\n  UPDATE 계좌 SET 잔액 = 잔액 - 10000;\n  UPDATE 계좌 SET 잔액 = 잔액 + 10000;\nCOMMIT; -- 또는 ROLLBACK',result:'원자성·일관성·격리성·지속성 = ACID'},
     {keyword:'수직/수평 분할',desc:'대용량 테이블을 행(수평) 또는 열(수직) 기준으로 분리하는 기법',code:'-- 수평 분할: 행 기준\n   파티션 (날짜별, 지역별)\n-- 수직 분할: 열 기준\n   자주 조회하는 컬럼 vs 대용량 컬럼 분리\n   (사원기본정보 / 사원상세정보)',result:'대용량 테이블 I/O 성능 개선에 효과적'},
   ]},
   'sql-basic':{title:'SQL 기본',subject:'2과목',cards:[
@@ -658,6 +869,8 @@ const CHAPTERS = {
     {keyword:'TCL',desc:'트랜잭션 제어어: COMMIT·ROLLBACK·SAVEPOINT',code:'-- COMMIT: 변경 내용 영구 저장\nCOMMIT;\n\n-- ROLLBACK: 마지막 COMMIT 이전으로 복원\nROLLBACK;\n\n-- SAVEPOINT: 중간 저장 지점 설정\nSAVEPOINT sp1;\nROLLBACK TO sp1;',result:'ACID: 원자성·일관성·격리성·지속성'},
     {keyword:'CASE 표현식',desc:'조건에 따라 다른 값을 반환하는 SQL 표현식',code:'SELECT 사원명,\n  CASE WHEN 급여 >= 5000000 THEN \'고연봉\'\n       WHEN 급여 >= 3000000 THEN \'중연봉\'\n       ELSE \'저연봉\'\n  END AS 급여등급\nFROM 사원;',result:'DECODE(Oracle)와 유사하지만 표준 SQL은 CASE'},
     {keyword:'내장 함수',desc:'문자·숫자·날짜 처리를 위한 단일행 함수',code:'-- 문자: UPPER, LOWER, SUBSTR, LENGTH\n-- 숫자: ROUND, TRUNC, MOD, ABS\n-- 날짜: SYSDATE, ADD_MONTHS, MONTHS_BETWEEN\n-- 변환: TO_CHAR, TO_DATE, TO_NUMBER\nSELECT UPPER(\'hello\'),\n       ROUND(3.456, 1) FROM DUAL;',result:'단일행 함수: 행마다 적용 / 집계 함수: 그룹에 적용'},
+    {keyword:'STDDEV / COUNT 특이사항',desc:'표준편차 및 COUNT 함수의 NULL 처리',code:'-- COUNT(*): NULL 포함 전체 행 수 반환\nSELECT COUNT(*) FROM 사원;   -- 10행\n\n-- COUNT(컬럼): NULL 제외\nSELECT COUNT(보너스) FROM 사원; -- NULL 제외\n\n-- STDDEV(): 표준편차 반환\nSELECT STDDEV(급여) FROM 사원;',result:'COUNT(*)과 COUNT(컬럼)의 NULL 처리 차이 주의'},
+    {keyword:'ROWS BETWEEN 프레임',desc:'윈도우 함수의 ROWS BETWEEN을 이용한 이동 계산',code:'-- 이전행 + 현재행 + 다음행\nSUM(매출) OVER (\n  ORDER BY 날짜\n  ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING\n)\n-- UNBOUNDED PRECEDING: 파티션 처음\n-- CURRENT ROW: 현재 행\n-- UNBOUNDED FOLLOWING: 파티션 끝',result:'ROWS: 물리적 행 / RANGE: 논리적 동일값 범위'},
   ]},
   'join':{title:'JOIN과 서브쿼리',subject:'2과목',cards:[
     {keyword:'INNER JOIN',desc:'두 테이블에서 조인 조건이 일치하는 행만 반환',code:'SELECT e.사원명, d.부서명\nFROM   사원 e\n  INNER JOIN 부서 d\n    ON e.부서코드 = d.부서코드;\n-- 구식 표기 (WHERE 절 조인)\nSELECT e.사원명, d.부서명\nFROM   사원 e, 부서 d\nWHERE  e.부서코드 = d.부서코드;',result:'양쪽에 값이 있는 행만 결과에 포함'},
@@ -681,6 +894,7 @@ const CHAPTERS = {
     {keyword:'CUBE',desc:'모든 조합의 소계를 생성하는 그룹 함수',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY CUBE(부서, 직급);\n-- (부서,직급) + (부서) + (직급) + (전체)',result:'ROLLUP보다 더 많은 조합 생성 (2^n 조합)'},
     {keyword:'GROUPING SETS',desc:'원하는 소계 조합만 선택적으로 생성하는 그룹 함수',code:'SELECT 부서, 직급, SUM(급여)\nFROM   사원\nGROUP BY GROUPING SETS\n  ((부서, 직급), (부서), ());',result:'필요한 소계만 지정 → ROLLUP/CUBE보다 유연'},
     {keyword:'GROUPING()',desc:'소계 행인지 일반 행인지를 구분하는 함수',code:'SELECT 부서,\n       GROUPING(부서) AS is_subtotal,\n       SUM(급여)\nFROM   사원\nGROUP BY ROLLUP(부서);\n-- 소계 행이면 1, 아니면 0 반환',result:'NULL 소계 행과 실제 NULL 값을 구별할 때 사용'},
+    {keyword:'카테시안 곱 (Cartesian Product)',desc:'조인 조건이 없거나 CROSS JOIN 시 두 테이블 모든 행 조합 반환',code:'-- 조인 조건 누락 시 의도치 않은 카테시안 곱 발생\nSELECT * FROM 사원, 부서;\n-- 사원 10행 × 부서 5행 = 50행\n\n-- 명시적 CROSS JOIN\nSELECT * FROM 사원 CROSS JOIN 부서;',result:'WHERE 절 조인 조건 누락 시 주의 / 행 수 = 두 테이블 행수의 곱'},
     {keyword:'RANK / DENSE_RANK',desc:'순위를 매기는 윈도우 함수, 동순위 처리 방식이 다름',code:'SELECT 사원명, 급여,\n  RANK()       OVER (ORDER BY 급여 DESC) AS 순위1,\n  DENSE_RANK() OVER (ORDER BY 급여 DESC) AS 순위2,\n  ROW_NUMBER() OVER (ORDER BY 급여 DESC) AS 순위3\nFROM 사원;',result:'동률 2명: RANK=1,1,3 / DENSE_RANK=1,1,2 / ROW_NUMBER=1,2,3'},
     {keyword:'PARTITION BY',desc:'윈도우 함수에서 그룹을 나누는 기준 절 (GROUP BY와 다름)',code:'SELECT 사원명, 부서코드, 급여,\n  RANK() OVER\n    (PARTITION BY 부서코드\n     ORDER BY 급여 DESC) AS 부서내순위\nFROM 사원;\n-- 부서별로 독립적인 순위 부여',result:'PARTITION BY 생략 시 전체가 하나의 파티션'},
     {keyword:'LAG / LEAD',desc:'현재 행 기준으로 이전(LAG)·이후(LEAD) 행 값을 참조',code:'SELECT 날짜, 매출,\n  LAG(매출, 1, 0) OVER\n    (ORDER BY 날짜) AS 전일매출,\n  LEAD(매출, 1, 0) OVER\n    (ORDER BY 날짜) AS 익일매출\nFROM 일별매출;',result:'LAG/LEAD(값, 오프셋, 기본값) / 시계열 분석에 활용'},
@@ -697,6 +911,9 @@ const CHAPTERS = {
     {keyword:'인덱스 미사용 패턴',desc:'인덱스가 있어도 활용되지 않는 SQL 패턴',code:'-- 1. 인덱스 컬럼 변형\nWHERE SUBSTR(사원명,1,1) = \'홍\'\n-- 2. 부정형 조건\nWHERE 부서코드 <> \'D01\'\n-- 3. IS NOT NULL\nWHERE 퇴직일 IS NOT NULL\n-- 4. LIKE 앞쪽 와일드카드\nWHERE 사원명 LIKE \'%길동\'',result:'인덱스 컬럼은 가공 없이 그대로 사용해야 함'},
     {keyword:'실행 계획',desc:'SQL 처리 시 옵티마이저가 선택한 접근 방법의 순서와 방식',code:'EXPLAIN PLAN FOR\nSELECT * FROM 사원\nWHERE  부서코드 = \'D01\';\n-- 주요 오퍼레이션:\n-- TABLE ACCESS FULL\n-- TABLE ACCESS BY INDEX ROWID\n-- INDEX RANGE SCAN\n-- HASH JOIN / NESTED LOOPS',result:'Cost·Rows·Bytes로 효율성 판단'},
     {keyword:'조인 수행 원리',desc:'두 테이블을 조인할 때 사용하는 알고리즘 유형',code:'-- Nested Loop Join:\n--   외부 테이블 루프 → 내부 인덱스 조회\n--   소량 데이터·인덱스 있을 때 유리\n-- Sort Merge Join:\n--   양쪽 정렬 후 병합, 범위 조건에 유리\n-- Hash Join:\n--   해시 테이블 생성, 대용량 동등 조인에 유리',result:'SQLD 시험: Nested Loop·Hash Join 개념 위주 출제'},
+    {keyword:'해시 조인 (Hash Join)',desc:'해시 함수를 사용해 두 테이블을 결합하는 대용량 조인 방식',code:'-- 1단계: 작은 테이블(Build) → 해시 테이블 생성\n-- 2단계: 큰 테이블(Probe) → 해시 테이블 검색\n-- 동등(=) 조인에서만 사용 가능\n-- 범위 조건(>, <, BETWEEN) 사용 불가',result:'대용량·인덱스 없을 때 유리 / 메모리 사용량 주의'},
+    {keyword:'중첩 루프 조인 vs 해시 조인',desc:'두 대표 조인 방식의 특성과 적합 상황 비교',code:'-- Nested Loop:\n   선행 테이블 건수 × 후행 인덱스 탐색\n   소량, 인덱스 있을 때 유리\n   Random Access 위주\n-- Hash Join:\n   Build 입력 → 해시 테이블 → Probe\n   대용량, 인덱스 없을 때 유리\n   메모리 사용 多',result:'Sort Merge: 인덱스 없고 범위 조건 → 양쪽 정렬 후 병합'},
+    {keyword:'MERGE INTO',desc:'레코드가 있으면 UPDATE, 없으면 INSERT를 수행하는 UPSERT 구문',code:'MERGE INTO 사원 t\nUSING 신입사원 s\n  ON (t.사원번호 = s.사원번호)\nWHEN MATCHED THEN\n  UPDATE SET t.급여 = s.급여\nWHEN NOT MATCHED THEN\n  INSERT (사원번호, 사원명, 급여)\n  VALUES (s.사원번호, s.사원명, s.급여);',result:'UPSERT: UPDATE + INSERT 를 한 번에 처리'},
     {keyword:'힌트(Hint)',desc:'옵티마이저의 실행 계획을 강제로 지정하는 지시자',code:'-- 인덱스 강제 사용\nSELECT /*+ INDEX(e idx_사원_부서) */\n       사원명\nFROM   사원 e\nWHERE  부서코드 = \'D01\';\n-- 조인 방법 지정\nSELECT /*+ USE_NL(e d) */ ...',result:'힌트는 주석 형태 /*+ */ / 잘못된 힌트는 무시됨'},
     {keyword:'SQL 파싱 과정',desc:'SQL이 실행되기까지의 내부 처리 단계',code:'① SQL 파싱 (구문 분석)\n   → 파스 트리 생성\n② 최적화 (Optimization)\n   → 실행 계획 수립 (옵티마이저)\n③ 로우 소스 생성\n   → 실행 가능한 코드 생성\n④ SQL 실행',result:'라이브러리 캐시 히트 시 파싱 생략 가능 (소프트 파싱)'},
   ]},
@@ -716,9 +933,22 @@ const CHAPTERS = {
     {keyword:'정규표현식 기본',desc:'문자와 기호를 조합하여 특정 패턴을 검색하거나 일치 여부를 확인',code:'-- . : 임의의 한 문자\n-- ^ : 문자열의 시작\n-- $ : 문자열의 끝\n-- * : 앞 문자가 0번 이상 반복\n-- + : 앞 문자가 1번 이상 반복\n-- ? : 앞 문자가 0 또는 1번\n-- [] : 괄호 안 문자 중 하나\n-- | : OR (a|b)',result:'LIKE보다 강력한 패턴 매칭 가능'},
     {keyword:'REGEXP_LIKE / REGEXP_SUBSTR',desc:'Oracle 정규표현식 함수를 이용한 패턴 검색',code:'-- REGEXP_LIKE: 조건 일치 여부\nSELECT 사원명 FROM 사원\nWHERE REGEXP_LIKE(전화번호, \'\\^\\d{3}-\\d{4}-\\d{4}$\');\n\n-- REGEXP_SUBSTR: 패턴 일치 부분 추출\nSELECT REGEXP_SUBSTR(\'abc123\', \'[0-9]+\')\nFROM DUAL;\n-- 결과: 123',result:'REGEXP_REPLACE(치환), REGEXP_INSTR(위치) 함수도 있음'},
   ]},
+  'null-func':{title:'NULL·조건 함수',subject:'2과목',cards:[
+    {keyword:'NVL(a, b)',desc:'a가 NULL이면 b 반환, NULL이 아니면 a 반환 (Oracle)',code:'NVL(a, b)\n\nSELECT NVL(보너스, 0) FROM 사원;\n-- 보너스가 NULL이면 0 반환\n-- 보너스가 NULL이 아니면 보너스 반환',result:'NULL을 다른 값으로 대체할 때 사용 / Oracle 전용'},
+    {keyword:'NVL2(a, b, c)',desc:'a가 NULL이면 c 반환, NULL이 아니면 b 반환 (Oracle)',code:'NVL2(a, b, c)\n\nSELECT NVL2(보너스, \'있음\', \'없음\') FROM 사원;\n-- 보너스가 NULL이 아니면 \'있음\' 반환\n-- 보너스가 NULL이면 \'없음\' 반환',result:'NVL과 달리 NULL이 아닌 경우에도 다른 값 지정 가능'},
+    {keyword:'NULLIF(a, b)',desc:'a = b이면 NULL 반환, a ≠ b이면 a 반환',code:'NULLIF(a, b)\n\nSELECT NULLIF(점수, 0) FROM 성적;\n-- 점수 = 0이면 NULL 반환\n-- 점수 ≠ 0이면 점수 반환',result:'두 값이 같으면 NULL로 만들어 예외 처리 시 활용'},
+    {keyword:'ISNULL(a, b)',desc:'a가 NULL이면 b 반환, NULL이 아니면 a 반환 (SQL Server)',code:'ISNULL(a, b)\n\nSELECT ISNULL(보너스, 0) FROM 사원;\n-- 보너스가 NULL이면 0 반환\n-- 보너스가 NULL이 아니면 보너스 반환',result:'Oracle의 NVL과 동일한 기능 / SQL Server 전용'},
+    {keyword:'COALESCE(a, b, c, ...)',desc:'인수들 중 가장 처음으로 NULL이 아닌 값 반환, 모두 NULL이면 NULL 반환',code:'COALESCE(a, b, c, ...)\n\nSELECT COALESCE(보너스, 수당, 기본급, 0)\nFROM 사원;\n-- 보너스→수당→기본급 순서로\n-- 처음 NULL이 아닌 값 반환',result:'인수 모두 NULL이면 NULL 반환 / 표준 SQL (모든 DBMS)'},
+    {keyword:'DECODE(대상, 값1, 리턴1, ...)',desc:'대상과 값을 비교해 일치하면 해당 리턴값 반환, 없으면 ELSE 반환 (Oracle)',code:'DECODE(대상, 값1, 리턴1, 값2, 리턴2, ..., ELSE값)\n\nDECODE(성별, \'M\', \'남성\', \'F\', \'여성\', \'기타\')\n-- 성별=M → \'남성\'\n-- 성별=F → \'여성\'\n-- 그 외 → \'기타\'',result:'ELSE 생략 시 NULL 반환 / Oracle 전용 (표준은 CASE)'},
+  ]},
 };
 
-let currentChapter=null, currentCardIdx=0, isFlipped=false, savedCards={};
+let currentChapter=null, currentCardIdx=0, isFlipped=false, savedCards={
+  'preset_grouping': {keyword:'GROUPING', chapter:'그룹·윈도우 함수', desc:'소계 행인지 일반 행인지를 구분하는 함수. 소계 행이면 1, 아니면 0 반환', note:'GROUPING(컬럼) → 소계 행=1, 일반 행=0\nROLLUP/CUBE와 함께 사용하여 NULL 소계와 실제 NULL 값을 구별'},
+  'preset_rollup':   {keyword:'ROLLUP',   chapter:'그룹·윈도우 함수', desc:'계층적 소계·합계를 자동 생성하는 그룹 함수', note:'GROUP BY ROLLUP(A, B)\n→ (A,B) 소계 + (A) 소계 + () 전체합계 순서로 집계'},
+  'preset_cube':     {keyword:'CUBE',     chapter:'그룹·윈도우 함수', desc:'모든 조합의 소계를 생성하는 그룹 함수 (2^n 조합)', note:'GROUP BY CUBE(A, B)\n→ (A,B) + (A) + (B) + () 전체\nROLLUP보다 더 많은 조합 생성'},
+  'preset_cartesian':{keyword:'카테시안 곱', chapter:'JOIN과 서브쿼리', desc:'조인 조건이 없을 때 두 테이블 모든 행의 조합이 반환됨', note:'행 수 = 테이블A 행수 × 테이블B 행수\nWHERE 절 조인 조건 누락 시 의도치 않게 발생 → 주의!'},
+};
 
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -833,6 +1063,153 @@ function renderNote(){
 }
 
 function deleteNote(key){ delete savedCards[key]; renderNote(); }
+
+/* ─── 노트 만들기 기능 ─── */
+function openNoteModal(){
+  const keys = Object.keys(savedCards);
+  const pages = document.getElementById('note-paper-pages');
+  pages.innerHTML = '';
+
+  if(keys.length === 0){
+    // 저장된 게 없으면 전체 카드 목록으로 대체
+    const allCards = [];
+    Object.entries(CHAPTERS).forEach(([chId, ch])=>{
+      ch.cards.forEach(card=>{ allCards.push({keyword:card.keyword, desc:card.desc, chapter:ch.title}); });
+    });
+    buildPaperPages(pages, allCards, '전체 용어 노트');
+  } else {
+    const cards = keys.map(k=>({
+      keyword: savedCards[k].keyword,
+      desc: savedCards[k].note || savedCards[k].desc,
+      chapter: savedCards[k].chapter,
+    }));
+    buildPaperPages(pages, cards, '나만의 SQLD 용어 노트');
+  }
+  document.getElementById('noteModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function buildPaperPages(container, cards, titleText){
+  const PER_PAGE = 28;
+  const totalPages = Math.max(1, Math.ceil(cards.length / PER_PAGE));
+  const today = new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit'});
+
+  for(let p = 0; p < totalPages; p++){
+    const pageCards = cards.slice(p * PER_PAGE, (p+1) * PER_PAGE);
+    const paper = document.createElement('div');
+    paper.className = 'note-paper';
+
+    // 링 바인더
+    let rings = '<div class="paper-rings">';
+    for(let i=0; i<10; i++) rings += '<div class="paper-ring"></div>';
+    rings += '</div>';
+
+    // 내용
+    let itemsHTML = '';
+    if(pageCards.length === 0){
+      itemsHTML = '<div class="paper-empty"><p>저장된 용어가 없습니다.<br>카드를 학습하며 저장해보세요!</p></div>';
+    } else {
+      itemsHTML = '<div class="paper-grid">';
+      pageCards.forEach(card=>{
+        const safeKw = card.keyword.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        const safeDesc = (card.desc||'').replace(/</g,'&lt;').replace(/>/g,'&gt;').slice(0,55);
+        itemsHTML += `<div class="paper-kw-item">
+          <div class="paper-kw-name">${safeKw}</div>
+          <div class="paper-kw-desc">${safeDesc}</div>
+        </div>`;
+      });
+      itemsHTML += '</div>';
+    }
+
+    paper.innerHTML = rings + `
+      <div class="paper-inner">
+        <div class="paper-header">
+          <div class="paper-logo-area">
+            <span>SQLD ✦ Study Note</span>
+            <span>${today}</span>
+          </div>
+          <div class="paper-main-title">${titleText}</div>
+          <div class="paper-sub-title">SQL Developer Certificate</div>
+        </div>
+        ${itemsHTML}
+        <div class="paper-page-num">— ${p+1} / ${totalPages} —</div>
+      </div>`;
+
+    container.appendChild(paper);
+
+    if(p < totalPages - 1){
+      const div = document.createElement('div');
+      div.className = 'paper-page-divider';
+      div.textContent = '✦  ✦  ✦';
+      container.appendChild(div);
+    }
+  }
+}
+
+function closeNoteModal(){
+  document.getElementById('noteModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeNoteModalOutside(e){
+  if(e.target === document.getElementById('noteModal')) closeNoteModal();
+}
+
+function savePDF(){
+  const btn = document.querySelector('.npa-btn.pdf');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '⏳ 준비 중...';
+  btn.disabled = true;
+
+  // html2canvas + jspdf 동적 로드
+  function loadScript(src, cb){
+    const s = document.createElement('script');
+    s.src = src; s.onload = cb; document.head.appendChild(s);
+  }
+
+  function doCapture(){
+    const pages = document.querySelectorAll('#note-paper-pages .note-paper');
+    if(!pages.length){ btn.innerHTML=orig; btn.disabled=false; return; }
+
+    // jsPDF 인스턴스
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
+    const pdfW = 210, pdfH = 297;
+    let done = 0;
+
+    const captureOne = (idx) => {
+      if(idx >= pages.length){
+        const today = new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace(/\./,'');
+        pdf.save(`SQLD_용어노트_${today}.pdf`);
+        btn.innerHTML = orig; btn.disabled = false;
+        return;
+      }
+      const el = pages[idx];
+      el.style.width = '460px';
+      window.html2canvas(el, { scale:2, useCORS:true, backgroundColor:'#fdfcfb', logging:false })
+        .then(canvas=>{
+          const imgData = canvas.toDataURL('image/jpeg', 0.92);
+          if(idx > 0) pdf.addPage();
+          const ratio = canvas.height / canvas.width;
+          const imgH = Math.min(pdfW * ratio, pdfH);
+          const offY = (pdfH - imgH) / 2;
+          pdf.addImage(imgData, 'JPEG', 0, offY, pdfW, imgH);
+          el.style.width = '';
+          captureOne(idx + 1);
+        });
+    };
+    captureOne(0);
+  }
+
+  if(window.html2canvas && window.jspdf){
+    doCapture();
+  } else {
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', ()=>{
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', ()=>{
+        doCapture();
+      });
+    });
+  }
+}
 
 // 초기 배지 표시
 document.addEventListener('DOMContentLoaded', function(){ goHome(); });
